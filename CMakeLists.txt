@@ -24,8 +24,8 @@ if (WIN32)
         set(ENV{platform} "win")
     endif()
 elseif(APPLE)
-    add_compile_options(-mmacosx-version-min=10.11)
-    add_link_options(-mmacosx-version-min=10.11)
+    add_compile_options(-mmacosx-version-min=10.12)
+    add_link_options(-mmacosx-version-min=10.12)
 endif()
 
 ################################################################################
@@ -102,8 +102,9 @@ endif()
 # Set include directories used by our code and dependencies.
 include_directories("${CMAKE_SOURCE_DIR}/inc")
 include_directories("${CMAKE_SOURCE_DIR}/lib")
-include_directories("${CMAKE_SOURCE_DIR}/lib/OpenGL")
 include_directories("${CMAKE_SOURCE_DIR}/lib/SDK/CHeaders/XPLM")
+include_directories("${CMAKE_SOURCE_DIR}/lib/XPMP2/XPMP2.framework/Versions/2.4/Headers")
+include_directories("${CMAKE_SOURCE_DIR}/lib/OpenGL")
 
 ################################################################################
 # Source files
@@ -111,7 +112,9 @@ include_directories("${CMAKE_SOURCE_DIR}/lib/SDK/CHeaders/XPLM")
 add_library(XPPlanes MODULE
     lib/OpenGL/SystemGL.h
     inc/Constants.h
+    inc/Utilities.h
     src/main.cpp
+    src/Utilities.cpp
 )
 
 ################################################################################
@@ -120,8 +123,13 @@ add_library(XPPlanes MODULE
 
 # Specify library search locations.
 if (APPLE)
+    list(APPEND CMAKE_FRAMEWORK_PATH "${CMAKE_CURRENT_SOURCE_DIR}/lib/XPMP2")
     list(APPEND CMAKE_FRAMEWORK_PATH "${CMAKE_CURRENT_SOURCE_DIR}/lib/SDK/Libraries/Mac")
+elseif (UNIX)
+    list(APPEND CMAKE_LIBRARY_PATH "${CMAKE_CURRENT_SOURCE_DIR}/lib/XPMP2/$ENV{platform}")
 elseif (WIN32)
+    list(APPEND CMAKE_LIBRARY_PATH "${CMAKE_CURRENT_SOURCE_DIR}/lib/CURL")
+    list(APPEND CMAKE_LIBRARY_PATH "${CMAKE_CURRENT_SOURCE_DIR}/lib/XPMP2/win")
     list(APPEND CMAKE_LIBRARY_PATH "${CMAKE_CURRENT_SOURCE_DIR}/lib/SDK/Libraries/Win")
 endif ()
 
@@ -131,16 +139,18 @@ find_package(OpenGL REQUIRED)  # apt install freeglut3-dev
 include_directories( ${OpenGL_INCLUDE_DIRS} )
 target_link_libraries( XPPlanes ${OpenGL_LIBRARIES} )
 
+# Link the XPMP2 library
+find_library(XPMP2_LIBRARY XPMP2 REQUIRED)
+message ("   XPMP2_LIBRARY = ${XPMP2_LIBRARY}")
+target_link_libraries(XPPlanes ${XPMP2_LIBRARY})
+
 # Link X-Plane plugin system libraries. They are only provided for OS X and Windows.
 if (WIN32 OR APPLE)
     # XPLM is needed for any X-Plane plugin
-    find_library(XPLM_LIBRARY NAMES XPLM XPLM_64.lib)
+    find_library(XPLM_LIBRARY NAMES XPLM XPLM_64.lib REQUIRED)
+    message ("   XPLM_LIBRARY  = ${XPLM_LIBRARY}")
     target_link_libraries(XPPlanes ${XPLM_LIBRARY} )
-    # XPWidgets is only needed if using X-Plane's widgets
-    find_library(XPWIDGETS_LIBRARY NAMES XPWidgets XPWidgets_64.lib)
-    target_link_libraries(XPPlanes ${XPWIDGETS_LIBRARY} )
 endif ()
-
 
 if (WIN32)
     # Link platform-specific libraries especially for networking

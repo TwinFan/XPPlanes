@@ -3,12 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2519AE2E28671C2E007F922C /* Utilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2519AE2D28671C2E007F922C /* Utilities.cpp */; };
+		2519AE312867AA40007F922C /* XPMP2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2519AE302867AA40007F922C /* XPMP2.framework */; };
 		2571279B27A56B960098F594 /* XPLM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2571279A27A56B960098F594 /* XPLM.framework */; };
-		2571279F27A56C180098F594 /* XPWidgets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2571279E27A56C180098F594 /* XPWidgets.framework */; };
 		257127A327A56C380098F594 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 257127A227A56C380098F594 /* main.cpp */; };
 		D6A7BDC116A1DEC000D1426A /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6A7BDC016A1DEC000D1426A /* CoreFoundation.framework */; };
 /* End PBXBuildFile section */
@@ -27,10 +28,38 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		254A9DBF28664AB30053CA12 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		2519AE1928671B73007F922C /* build.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = build.yml; sourceTree = "<group>"; };
+		2519AE1C28671B73007F922C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		2519AE1D28671B73007F922C /* action.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = action.yml; sourceTree = "<group>"; };
+		2519AE1F28671B73007F922C /* sign-notarize */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = "sign-notarize"; sourceTree = "<group>"; };
+		2519AE2028671B73007F922C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		2519AE2128671B73007F922C /* action.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = action.yml; sourceTree = "<group>"; };
+		2519AE2328671B73007F922C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		2519AE2428671B73007F922C /* action.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = action.yml; sourceTree = "<group>"; };
+		2519AE2628671B73007F922C /* build-win.cmd */ = {isa = PBXFileReference; lastKnownFileType = text; path = "build-win.cmd"; sourceTree = "<group>"; };
+		2519AE2728671B73007F922C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		2519AE2828671B73007F922C /* action.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = action.yml; sourceTree = "<group>"; };
+		2519AE2A28671B73007F922C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		2519AE2B28671B73007F922C /* action.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = action.yml; sourceTree = "<group>"; };
+		2519AE2D28671C2E007F922C /* Utilities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Utilities.cpp; sourceTree = "<group>"; };
+		2519AE302867AA40007F922C /* XPMP2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XPMP2.framework; path = lib/XPMP2/XPMP2.framework; sourceTree = SOURCE_ROOT; };
+		2519AE332867AE4C007F922C /* Utilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
+		2519AE342867AE4C007F922C /* XPPlanes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XPPlanes.h; sourceTree = "<group>"; };
+		2519AE352867AE4C007F922C /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		2519AE38286A57D4007F922C /* .image_focal */ = {isa = PBXFileReference; lastKnownFileType = text; path = .image_focal; sourceTree = "<group>"; };
+		2519AE39286A57D4007F922C /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		2519AE3A286A57D4007F922C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		2519AE3B286A57D4007F922C /* Toolchain-msvc-x86-64.cmake */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Toolchain-msvc-x86-64.cmake"; sourceTree = "<group>"; };
+		2519AE3C286A57D4007F922C /* build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
+		2519AE3D286A57D4007F922C /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		2519AE3E286A57D4007F922C /* Toolchain-ubuntu-osxcross.cmake */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Toolchain-ubuntu-osxcross.cmake"; sourceTree = "<group>"; };
+		2519AE3F286A57D4007F922C /* .image_bionic */ = {isa = PBXFileReference; lastKnownFileType = text; path = .image_bionic; sourceTree = "<group>"; };
+		2519AE40286A57D4007F922C /* Toolchain-mingw-w64-x86-64.cmake */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Toolchain-mingw-w64-x86-64.cmake"; sourceTree = "<group>"; };
+		2519AE41286A5858007F922C /* XPPlanes.doxygen */ = {isa = PBXFileReference; lastKnownFileType = text; name = XPPlanes.doxygen; path = docs/XPPlanes.doxygen; sourceTree = "<group>"; };
 		254A9DC1286659530053CA12 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
-		2571279A27A56B960098F594 /* XPLM.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XPLM.framework; path = lib/SDK/Libraries/Mac/XPLM.framework; sourceTree = "<group>"; };
-		2571279E27A56C180098F594 /* XPWidgets.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XPWidgets.framework; path = lib/SDK/Libraries/Mac/XPWidgets.framework; sourceTree = "<group>"; };
+		254A9DC228665B020053CA12 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		254A9DC328665B760053CA12 /* CMakeSettings.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CMakeSettings.json; sourceTree = "<group>"; };
+		2571279A27A56B960098F594 /* XPLM.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XPLM.framework; path = lib/SDK/Libraries/Mac/XPLM.framework; sourceTree = SOURCE_ROOT; };
 		257127A227A56C380098F594 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		D607B19909A556E400699BC3 /* XPPlanes.xpl */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = XPPlanes.xpl; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6A7BDC016A1DEC000D1426A /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -41,26 +70,123 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2571279F27A56C180098F594 /* XPWidgets.framework in Frameworks */,
 				D6A7BDC116A1DEC000D1426A /* CoreFoundation.framework in Frameworks */,
 				2571279B27A56B960098F594 /* XPLM.framework in Frameworks */,
+				2519AE312867AA40007F922C /* XPMP2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		254A9DBE28664AB30053CA12 /* inc */ = {
+		2519AE1728671B73007F922C /* .github */ = {
 			isa = PBXGroup;
 			children = (
-				254A9DBF28664AB30053CA12 /* Constants.h */,
+				2519AE1828671B73007F922C /* workflows */,
+				2519AE1A28671B73007F922C /* actions */,
+			);
+			path = .github;
+			sourceTree = "<group>";
+		};
+		2519AE1828671B73007F922C /* workflows */ = {
+			isa = PBXGroup;
+			children = (
+				2519AE1928671B73007F922C /* build.yml */,
+			);
+			path = workflows;
+			sourceTree = "<group>";
+		};
+		2519AE1A28671B73007F922C /* actions */ = {
+			isa = PBXGroup;
+			children = (
+				2519AE1B28671B73007F922C /* build-mac */,
+				2519AE1E28671B73007F922C /* sign-notarize */,
+				2519AE2228671B73007F922C /* build-lin */,
+				2519AE2528671B73007F922C /* build-win */,
+				2519AE2928671B73007F922C /* upload-plugin */,
+			);
+			path = actions;
+			sourceTree = "<group>";
+		};
+		2519AE1B28671B73007F922C /* build-mac */ = {
+			isa = PBXGroup;
+			children = (
+				2519AE1C28671B73007F922C /* README.md */,
+				2519AE1D28671B73007F922C /* action.yml */,
+			);
+			path = "build-mac";
+			sourceTree = "<group>";
+		};
+		2519AE1E28671B73007F922C /* sign-notarize */ = {
+			isa = PBXGroup;
+			children = (
+				2519AE1F28671B73007F922C /* sign-notarize */,
+				2519AE2028671B73007F922C /* README.md */,
+				2519AE2128671B73007F922C /* action.yml */,
+			);
+			path = "sign-notarize";
+			sourceTree = "<group>";
+		};
+		2519AE2228671B73007F922C /* build-lin */ = {
+			isa = PBXGroup;
+			children = (
+				2519AE2328671B73007F922C /* README.md */,
+				2519AE2428671B73007F922C /* action.yml */,
+			);
+			path = "build-lin";
+			sourceTree = "<group>";
+		};
+		2519AE2528671B73007F922C /* build-win */ = {
+			isa = PBXGroup;
+			children = (
+				2519AE2628671B73007F922C /* build-win.cmd */,
+				2519AE2728671B73007F922C /* README.md */,
+				2519AE2828671B73007F922C /* action.yml */,
+			);
+			path = "build-win";
+			sourceTree = "<group>";
+		};
+		2519AE2928671B73007F922C /* upload-plugin */ = {
+			isa = PBXGroup;
+			children = (
+				2519AE2A28671B73007F922C /* README.md */,
+				2519AE2B28671B73007F922C /* action.yml */,
+			);
+			path = "upload-plugin";
+			sourceTree = "<group>";
+		};
+		2519AE322867AE4C007F922C /* inc */ = {
+			isa = PBXGroup;
+			children = (
+				2519AE332867AE4C007F922C /* Utilities.h */,
+				2519AE342867AE4C007F922C /* XPPlanes.h */,
+				2519AE352867AE4C007F922C /* Constants.h */,
 			);
 			path = inc;
+			sourceTree = "<group>";
+		};
+		2519AE37286A57D4007F922C /* docker */ = {
+			isa = PBXGroup;
+			children = (
+				2519AE3D286A57D4007F922C /* .gitignore */,
+				2519AE3F286A57D4007F922C /* .image_bionic */,
+				2519AE38286A57D4007F922C /* .image_focal */,
+				2519AE3C286A57D4007F922C /* build.sh */,
+				2519AE39286A57D4007F922C /* Makefile */,
+				2519AE3A286A57D4007F922C /* README.md */,
+				2519AE40286A57D4007F922C /* Toolchain-mingw-w64-x86-64.cmake */,
+				2519AE3B286A57D4007F922C /* Toolchain-msvc-x86-64.cmake */,
+				2519AE3E286A57D4007F922C /* Toolchain-ubuntu-osxcross.cmake */,
+			);
+			path = docker;
 			sourceTree = "<group>";
 		};
 		254A9DC0286659450053CA12 /* build */ = {
 			isa = PBXGroup;
 			children = (
+				2519AE41286A5858007F922C /* XPPlanes.doxygen */,
+				254A9DC328665B760053CA12 /* CMakeSettings.json */,
+				254A9DC228665B020053CA12 /* README.md */,
 				254A9DC1286659530053CA12 /* CMakeLists.txt */,
 			);
 			name = build;
@@ -69,6 +195,7 @@
 		257127A127A56C380098F594 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				2519AE2D28671C2E007F922C /* Utilities.cpp */,
 				257127A227A56C380098F594 /* main.cpp */,
 			);
 			path = src;
@@ -77,11 +204,13 @@
 		D607B15F09A5563000699BC3 = {
 			isa = PBXGroup;
 			children = (
+				2519AE1728671B73007F922C /* .github */,
 				254A9DC0286659450053CA12 /* build */,
-				254A9DBE28664AB30053CA12 /* inc */,
-				257127A127A56C380098F594 /* src */,
+				2519AE37286A57D4007F922C /* docker */,
 				D6A7BDAD16A1DEA700D1426A /* Frameworks */,
+				2519AE322867AE4C007F922C /* inc */,
 				D607B19A09A556E400699BC3 /* Products */,
+				257127A127A56C380098F594 /* src */,
 			);
 			sourceTree = "<group>";
 		};
@@ -96,9 +225,9 @@
 		D6A7BDAD16A1DEA700D1426A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2571279E27A56C180098F594 /* XPWidgets.framework */,
-				2571279A27A56B960098F594 /* XPLM.framework */,
 				D6A7BDC016A1DEC000D1426A /* CoreFoundation.framework */,
+				2571279A27A56B960098F594 /* XPLM.framework */,
+				2519AE302867AA40007F922C /* XPMP2.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -113,6 +242,7 @@
 				D607B19609A556E400699BC3 /* Sources */,
 				D607B19709A556E400699BC3 /* Frameworks */,
 				2571279D27A56B960098F594 /* Embed Frameworks */,
+				2519AE36286A4B3C007F922C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -149,11 +279,34 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2519AE36286A4B3C007F922C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Find and output TODO/FIXME for display as warnings\nTAGS=\"TODO:|FIXME:\"\necho \"Searching ${SRCROOT} for ${TAGS}\"\nfind \"${SRCROOT}\" \\( -name \"*.cpp\" -or -name \"*.h\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D607B19609A556E400699BC3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2519AE2E28671C2E007F922C /* Utilities.cpp in Sources */,
 				257127A327A56C380098F594 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -178,7 +331,7 @@
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -193,7 +346,10 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				EXECUTABLE_EXTENSION = xpl;
-				FRAMEWORK_SEARCH_PATHS = "$(XPSDK_ROOT)/Libraries/Mac";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(XPSDK_ROOT)/Libraries/Mac",
+					lib/XPMP2,
+				);
 				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -218,14 +374,14 @@
 				GCC_WARN_UNUSED_PARAMETER = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"$(XPSDK_ROOT)/CHeaders/Widgets",
 					"$(XPSDK_ROOT)/CHeaders/XPLM",
+					lib/XPMP2/XPMP2.framework/Headers,
 					lib,
 					"$(HEADER_SEARCH_PATHS)",
 				);
 				INSTALL_PATH = mac_x64;
 				MACH_O_TYPE = mh_bundle;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
@@ -264,7 +420,7 @@
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = NO;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -276,7 +432,10 @@
 				DYLIB_CURRENT_VERSION = "";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				EXECUTABLE_EXTENSION = xpl;
-				FRAMEWORK_SEARCH_PATHS = "$(XPSDK_ROOT)/Libraries/Mac";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(XPSDK_ROOT)/Libraries/Mac",
+					lib/XPMP2,
+				);
 				GCC_C_LANGUAGE_STANDARD = c11;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -301,14 +460,14 @@
 				GCC_WARN_UNUSED_PARAMETER = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					"$(XPSDK_ROOT)/CHeaders/Widgets",
 					"$(XPSDK_ROOT)/CHeaders/XPLM",
+					lib/XPMP2/XPMP2.framework/Headers,
 					lib,
 					"$(HEADER_SEARCH_PATHS)",
 				);
 				INSTALL_PATH = mac_x64;
 				MACH_O_TYPE = mh_bundle;
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				OTHER_LDFLAGS = (
 					"$(OTHER_LDFLAGS)",
 					"-Wl,-exported_symbol",
@@ -337,6 +496,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib/SDK/Libraries/Mac",
+					"$(PROJECT_DIR)/lib/XPMP2",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"APL=1",
@@ -373,6 +533,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib/SDK/Libraries/Mac",
+					"$(PROJECT_DIR)/lib/XPMP2",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"APL=1",
