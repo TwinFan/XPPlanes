@@ -21,8 +21,8 @@
 
 #include "XPPlanes.h"
 
-/// The one global object for global variables
-GlobVars glob;
+PLUGIN_API int  XPluginEnable(void);
+PLUGIN_API void XPluginDisable(void);
 
 //
 // MARK: XPMP2 Preferences
@@ -35,7 +35,7 @@ int CBIntPrefsFunc (const char *, [[maybe_unused]] const char * item, int defaul
     // We always want to replace dataRefs and textures upon load to make the most out of the .obj files
     if (!strcmp(item, XPMP_CFG_ITM_REPLDATAREFS))   return glob.bObjReplDataRefs;           // replace dataRefs in object files?
     if (!strcmp(item, XPMP_CFG_ITM_REPLTEXTURE))    return glob.bObjReplTextures;           // replace textures in object files=
-    if (!strcmp(item, XPMP_CFG_ITM_CLAMPALL))       return 1;                               // never hide planes below the ground
+    if (!strcmp(item, XPMP_CFG_ITM_CLAMPALL))       return glob.bClampAll;                  // never hide planes below the ground?
     if (!strcmp(item, XPMP_CFG_ITM_HANDLE_DUP_ID))  return 0;                               // don't expect duplicate ids
     if (!strcmp(item, XPMP_CFG_ITM_SUPPORT_REMOTE)) return -1;                              // We don't want this plugin to ever _send_ traffic!
     if (!strcmp(item, XPMP_CFG_ITM_LOGLEVEL))       return (int)glob.logLvl;                // logging level
@@ -146,7 +146,10 @@ int CmdCallback (XPLMCommandRef cmdRef, XPLMCommandPhase inPhase, void*)
         if (inPhase == xplm_CommandBegin) {
             if (cmdRef == CMD_MENU_DEF[MENU_ACTIVE].hCmd) {
                 // Toggle activation of plugin
-                // TODO: ClientToggleActive()
+                if (glob.eStatus == GlobVars::STATUS_INACTIVE)
+                    XPluginEnable();
+                else
+                    XPluginDisable();
             }
             else if (cmdRef == CMD_MENU_DEF[MENU_TCAS].hCmd) {
                 // Toggle TCAS/AI status
@@ -196,6 +199,7 @@ float FlightLoop_EverySecond(float, float, int, void*)
 // MARK: Plugin Callbacks
 //
 
+
 /// @brief X-Plane plugin standard startup function
 /// @see https://developer.x-plane.com/article/developing-plugins/#XPluginStart
 PLUGIN_API int XPluginStart(char *		outName,
@@ -205,6 +209,10 @@ PLUGIN_API int XPluginStart(char *		outName,
     // this is the XP main thread
     glob.ThisThreadIsXP();
     GetMiscNetwTime();
+    glob.ConfigFileLoad();              // Read configuration file
+#ifdef DEBUG
+    glob.logLvl = logDEBUG;
+#endif
     
     snprintf(outName, 100, XPPLANES " v%d.%d.%d", XPPLANES_VER_MAJOR, XPPLANES_VER_MINOR, XPPLANES_VER_PATCH);
     strcpy(outSig, "twinfan.plugin." XPPLANES);
@@ -246,6 +254,10 @@ PLUGIN_API int XPluginStart(char *		outName,
         if (res[0]) {
             LOG_MSG(logERR, "Error while loading CSL packages: %s", res);
         }
+        
+        // Set some generic configurations
+        XPMPSetAircraftLabelDist(glob.maxLabelDist, glob.bLabelCutOffAtVisibility);
+        XPMPEnableAircraftLabels(glob.bDrawLabels);
     }
     
     // *** Plugin's menu ***
@@ -284,6 +296,16 @@ PLUGIN_API int  XPluginEnable(void)
     if (XPMPGetNumberOfInstalledModels() <= 0) {
         return 1;
     }
+    
+    // Startup all modules, bail if one fails
+    if (!PlaneStartup() ||
+        !FlightDataStartup() ||
+        !ListenStartup())
+    {
+        LOG_MSG(logFATAL, "One of the modules didn't startup, can't run!");
+        XPluginDisable();
+        return 0;
+    }
 
     // Create a flight loop callback for some regular tasks, called every second
     XPLMCreateFlightLoop_t flParams = {
@@ -295,8 +317,7 @@ PLUGIN_API int  XPluginEnable(void)
     flId = XPLMCreateFlightLoop(&flParams);
     XPLMScheduleFlightLoop(flId, 1.0f, true);
     
-    // Activate the listener
-    // TODO: ClientToggleActive();
+    // Update the menus
     MenuUpdateCheckmarks();
     
     // Success
@@ -313,8 +334,16 @@ PLUGIN_API void XPluginDisable(void)
         XPLMDestroyFlightLoop(flId);
     flId = nullptr;
 
-    // Cleanup the client, also removes all planes
-    // TODO: ClientCleanup();
+    // Shutdown and cleanup all modules
+    ListenShutdown();
+    FlightDataShutdown();
+    PlaneShutdown();
+    
+    // Write config file
+    glob.ConfigFileSave();
+
+    // Update the menus
+    MenuUpdateCheckmarks();
 
     LOG_MSG(logINFO, "Disabled");
 }

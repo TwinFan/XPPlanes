@@ -112,11 +112,29 @@ include_directories("${CMAKE_SOURCE_DIR}/lib/OpenGL")
 add_library(XPPlanes MODULE
     lib/OpenGL/SystemGL.h
     inc/Constants.h
+    inc/FlightData.h
+    inc/Global.h
+    inc/Listener.h
+    inc/Network.h
+    inc/Plane.h
     inc/Utilities.h
+    inc/XPPlanes.h
+    src/FlightData.cpp
+    src/Global.cpp
+    src/Listener.cpp
     src/main.cpp
+    src/Network.cpp
+    src/Plane.cpp
     src/Utilities.cpp
 )
 
+################################################################################
+# Define pre-compiled header
+################################################################################
+
+target_precompile_headers(XPPlanes PUBLIC inc/XPPlanes.h)
+
+  
 ################################################################################
 # Link Libraries
 ################################################################################

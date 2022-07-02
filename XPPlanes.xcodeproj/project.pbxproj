@@ -11,6 +11,11 @@
 		2519AE312867AA40007F922C /* XPMP2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2519AE302867AA40007F922C /* XPMP2.framework */; };
 		2571279B27A56B960098F594 /* XPLM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2571279A27A56B960098F594 /* XPLM.framework */; };
 		257127A327A56C380098F594 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 257127A227A56C380098F594 /* main.cpp */; };
+		25DFEC1F286CE52C0082D4F2 /* Plane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25DFEC1D286CE52C0082D4F2 /* Plane.cpp */; };
+		25DFEC23286E2D230082D4F2 /* FlightData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25DFEC21286E2D230082D4F2 /* FlightData.cpp */; };
+		25DFEC26286F96A30082D4F2 /* Network.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25DFEC25286F96A30082D4F2 /* Network.cpp */; };
+		25DFEC29286F99F10082D4F2 /* Listener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25DFEC27286F99F10082D4F2 /* Listener.cpp */; };
+		25DFEC2C28705CA70082D4F2 /* Global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25DFEC2A28705CA70082D4F2 /* Global.cpp */; };
 		D6A7BDC116A1DEC000D1426A /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6A7BDC016A1DEC000D1426A /* CoreFoundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +66,18 @@
 		254A9DC328665B760053CA12 /* CMakeSettings.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CMakeSettings.json; sourceTree = "<group>"; };
 		2571279A27A56B960098F594 /* XPLM.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XPLM.framework; path = lib/SDK/Libraries/Mac/XPLM.framework; sourceTree = SOURCE_ROOT; };
 		257127A227A56C380098F594 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		25DFEC1D286CE52C0082D4F2 /* Plane.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Plane.cpp; sourceTree = "<group>"; };
+		25DFEC1E286CE52C0082D4F2 /* Plane.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Plane.h; sourceTree = "<group>"; };
+		25DFEC20286CE6510082D4F2 /* lib */ = {isa = PBXFileReference; lastKnownFileType = folder; path = lib; sourceTree = "<group>"; };
+		25DFEC21286E2D230082D4F2 /* FlightData.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FlightData.cpp; sourceTree = "<group>"; };
+		25DFEC22286E2D230082D4F2 /* FlightData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlightData.h; sourceTree = "<group>"; };
+		25DFEC24286F96950082D4F2 /* Network.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Network.h; sourceTree = "<group>"; };
+		25DFEC25286F96A30082D4F2 /* Network.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Network.cpp; sourceTree = "<group>"; };
+		25DFEC27286F99F10082D4F2 /* Listener.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Listener.cpp; sourceTree = "<group>"; };
+		25DFEC28286F99F10082D4F2 /* Listener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Listener.h; sourceTree = "<group>"; };
+		25DFEC2A28705CA70082D4F2 /* Global.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Global.cpp; sourceTree = "<group>"; };
+		25DFEC2B28705CA70082D4F2 /* Global.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Global.h; sourceTree = "<group>"; };
+		25DFEC2D2870858C0082D4F2 /* script */ = {isa = PBXFileReference; lastKnownFileType = folder; path = script; sourceTree = "<group>"; };
 		D607B19909A556E400699BC3 /* XPPlanes.xpl */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = XPPlanes.xpl; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6A7BDC016A1DEC000D1426A /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
@@ -158,9 +175,14 @@
 		2519AE322867AE4C007F922C /* inc */ = {
 			isa = PBXGroup;
 			children = (
+				2519AE352867AE4C007F922C /* Constants.h */,
+				25DFEC22286E2D230082D4F2 /* FlightData.h */,
+				25DFEC2B28705CA70082D4F2 /* Global.h */,
+				25DFEC28286F99F10082D4F2 /* Listener.h */,
+				25DFEC24286F96950082D4F2 /* Network.h */,
+				25DFEC1E286CE52C0082D4F2 /* Plane.h */,
 				2519AE332867AE4C007F922C /* Utilities.h */,
 				2519AE342867AE4C007F922C /* XPPlanes.h */,
-				2519AE352867AE4C007F922C /* Constants.h */,
 			);
 			path = inc;
 			sourceTree = "<group>";
@@ -195,8 +217,13 @@
 		257127A127A56C380098F594 /* src */ = {
 			isa = PBXGroup;
 			children = (
-				2519AE2D28671C2E007F922C /* Utilities.cpp */,
+				25DFEC21286E2D230082D4F2 /* FlightData.cpp */,
+				25DFEC2A28705CA70082D4F2 /* Global.cpp */,
+				25DFEC27286F99F10082D4F2 /* Listener.cpp */,
 				257127A227A56C380098F594 /* main.cpp */,
+				25DFEC25286F96A30082D4F2 /* Network.cpp */,
+				25DFEC1D286CE52C0082D4F2 /* Plane.cpp */,
+				2519AE2D28671C2E007F922C /* Utilities.cpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -204,6 +231,8 @@
 		D607B15F09A5563000699BC3 = {
 			isa = PBXGroup;
 			children = (
+				25DFEC2D2870858C0082D4F2 /* script */,
+				25DFEC20286CE6510082D4F2 /* lib */,
 				2519AE1728671B73007F922C /* .github */,
 				254A9DC0286659450053CA12 /* build */,
 				2519AE37286A57D4007F922C /* docker */,
@@ -306,8 +335,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25DFEC1F286CE52C0082D4F2 /* Plane.cpp in Sources */,
+				25DFEC29286F99F10082D4F2 /* Listener.cpp in Sources */,
+				25DFEC2C28705CA70082D4F2 /* Global.cpp in Sources */,
 				2519AE2E28671C2E007F922C /* Utilities.cpp in Sources */,
 				257127A327A56C380098F594 /* main.cpp in Sources */,
+				25DFEC26286F96A30082D4F2 /* Network.cpp in Sources */,
+				25DFEC23286E2D230082D4F2 /* FlightData.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -511,6 +545,7 @@
 					"XPPLANES_VER_MAJOR=$(XPPLANES_VER_MAJOR)",
 					"XPPLANES_VER_MINOR=$(XPPLANES_VER_MINOR)",
 					"XPPLANES_VER_PATCH=$(XPPLANES_VER_PATCH)",
+					"DEBUG=1",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -548,6 +583,7 @@
 					"XPPLANES_VER_MAJOR=$(XPPLANES_VER_MAJOR)",
 					"XPPLANES_VER_MINOR=$(XPPLANES_VER_MINOR)",
 					"XPPLANES_VER_PATCH=$(XPPLANES_VER_PATCH)",
+					"NDEBUG=1",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

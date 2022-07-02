@@ -64,6 +64,12 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:aa819c3adc31839a14c23afab211f52be"><td class="memItemLeft" align="right" valign="top">PLUGIN_API int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#aa819c3adc31839a14c23afab211f52be">XPluginEnable</a> (void)</td></tr>
+<tr class="memdesc:aa819c3adc31839a14c23afab211f52be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable actual functionality of the plugin.  <a href="main_8cpp.html#aa819c3adc31839a14c23afab211f52be">More...</a><br /></td></tr>
+<tr class="separator:aa819c3adc31839a14c23afab211f52be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55afbaabbad064e1794529cee35cc412"><td class="memItemLeft" align="right" valign="top">PLUGIN_API void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a55afbaabbad064e1794529cee35cc412">XPluginDisable</a> (void)</td></tr>
+<tr class="memdesc:a55afbaabbad064e1794529cee35cc412"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable functionality, cleanup runtime resources.  <a href="main_8cpp.html#a55afbaabbad064e1794529cee35cc412">More...</a><br /></td></tr>
+<tr class="separator:a55afbaabbad064e1794529cee35cc412"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:accfea755be3f58d51c57997005b7a114"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#accfea755be3f58d51c57997005b7a114">CBIntPrefsFunc</a> (const char *, [[maybe_unused]] const char *item, int defaultVal)</td></tr>
 <tr class="separator:accfea755be3f58d51c57997005b7a114"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c5fe00e682d6b47c20855241743fe22"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a9c5fe00e682d6b47c20855241743fe22">ClientTryGetAI</a> ()</td></tr>
@@ -85,12 +91,6 @@ Functions</h2></td></tr>
 <tr class="memitem:a3d7458933ac3c2c1c404fe5bfa8a83f1"><td class="memItemLeft" align="right" valign="top">PLUGIN_API int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a3d7458933ac3c2c1c404fe5bfa8a83f1">XPluginStart</a> (char *outName, char *outSig, char *outDesc)</td></tr>
 <tr class="memdesc:a3d7458933ac3c2c1c404fe5bfa8a83f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">X-Plane plugin standard startup function.  <a href="main_8cpp.html#a3d7458933ac3c2c1c404fe5bfa8a83f1">More...</a><br /></td></tr>
 <tr class="separator:a3d7458933ac3c2c1c404fe5bfa8a83f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa819c3adc31839a14c23afab211f52be"><td class="memItemLeft" align="right" valign="top">PLUGIN_API int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#aa819c3adc31839a14c23afab211f52be">XPluginEnable</a> (void)</td></tr>
-<tr class="memdesc:aa819c3adc31839a14c23afab211f52be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enable actual functionality of the plugin.  <a href="main_8cpp.html#aa819c3adc31839a14c23afab211f52be">More...</a><br /></td></tr>
-<tr class="separator:aa819c3adc31839a14c23afab211f52be"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a55afbaabbad064e1794529cee35cc412"><td class="memItemLeft" align="right" valign="top">PLUGIN_API void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a55afbaabbad064e1794529cee35cc412">XPluginDisable</a> (void)</td></tr>
-<tr class="memdesc:a55afbaabbad064e1794529cee35cc412"><td class="mdescLeft">&#160;</td><td class="mdescRight">Disable functionality, cleanup runtime resources.  <a href="main_8cpp.html#a55afbaabbad064e1794529cee35cc412">More...</a><br /></td></tr>
-<tr class="separator:a55afbaabbad064e1794529cee35cc412"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa2ca6f7aa08086e5a5f117398470be35"><td class="memItemLeft" align="right" valign="top">PLUGIN_API void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#aa2ca6f7aa08086e5a5f117398470be35">XPluginStop</a> (void)</td></tr>
 <tr class="memdesc:aa2ca6f7aa08086e5a5f117398470be35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Properly shutdown the plugin, cleanup last resources.  <a href="main_8cpp.html#aa2ca6f7aa08086e5a5f117398470be35">More...</a><br /></td></tr>
 <tr class="separator:aa2ca6f7aa08086e5a5f117398470be35"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -100,9 +100,6 @@ Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:ae6e590b5e09e0ae14114be6fe4c2698d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="struct_glob_vars.html">GlobVars</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ae6e590b5e09e0ae14114be6fe4c2698d">glob</a></td></tr>
-<tr class="memdesc:ae6e590b5e09e0ae14114be6fe4c2698d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The one global object for global variables.  <a href="main_8cpp.html#ae6e590b5e09e0ae14114be6fe4c2698d">More...</a><br /></td></tr>
-<tr class="separator:ae6e590b5e09e0ae14114be6fe4c2698d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a01f35c17d5fa447d85debe140ae1cb08"><td class="memItemLeft" align="right" valign="top">constexpr std::uintptr_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#a01f35c17d5fa447d85debe140ae1cb08">MENU_ACTIVE</a> = 0</td></tr>
 <tr class="separator:a01f35c17d5fa447d85debe140ae1cb08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae8bf1418c4c15243d1671d388c3923cf"><td class="memItemLeft" align="right" valign="top">constexpr std::uintptr_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="main_8cpp.html#ae8bf1418c4c15243d1671d388c3923cf">MENU_TCAS</a> = 1</td></tr>
@@ -196,7 +193,7 @@ menuName</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>This is a callback the XPMP2 calls regularly to learn about configuration settings. Only 3 are left, all of them integers. </p>
+<p>This is a callback the <a class="el" href="namespace_x_p_m_p2.html">XPMP2</a> calls regularly to learn about configuration settings. Only 3 are left, all of them integers. </p>
 
 </div>
 </div>
@@ -521,23 +518,6 @@ menuName</td>
 </div><div class="memdoc">
 
 <p>ID of our flight loop callback for regular tasks. </p>
-
-</div>
-</div>
-<a id="ae6e590b5e09e0ae14114be6fe4c2698d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae6e590b5e09e0ae14114be6fe4c2698d">&#9670;&nbsp;</a></span>glob</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="struct_glob_vars.html">GlobVars</a> glob</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The one global object for global variables. </p>
-<p>The one and only global variable structure. </p>
 
 </div>
 </div>

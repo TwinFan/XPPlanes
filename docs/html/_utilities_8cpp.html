@@ -72,13 +72,22 @@ Functions</h2></td></tr>
 <tr class="memitem:a82cbaebd31591d422eb27098d98b5232"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_utilities_8cpp.html#a82cbaebd31591d422eb27098d98b5232">GetPluginName</a> (XPLMPluginID who)</td></tr>
 <tr class="memdesc:a82cbaebd31591d422eb27098d98b5232"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a plugin's name.  <a href="_utilities_8cpp.html#a82cbaebd31591d422eb27098d98b5232">More...</a><br /></td></tr>
 <tr class="separator:a82cbaebd31591d422eb27098d98b5232"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa57c7468550f4b9fadb2dc3ef887a20f"><td class="memItemLeft" align="right" valign="top">std::istream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_utilities_8cpp.html#aa57c7468550f4b9fadb2dc3ef887a20f">safeGetline</a> (std::istream &amp;is, std::string &amp;t)</td></tr>
+<tr class="memdesc:aa57c7468550f4b9fadb2dc3ef887a20f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a text line, handling both Windows (CRLF) and Unix (LF) ending.  <a href="_utilities_8cpp.html#aa57c7468550f4b9fadb2dc3ef887a20f">More...</a><br /></td></tr>
+<tr class="separator:aa57c7468550f4b9fadb2dc3ef887a20f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9fd1c9062a6a78adb1a395e9a629227"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_utilities_8cpp.html#ad9fd1c9062a6a78adb1a395e9a629227">str_n</a> (const char *s, size_t max)</td></tr>
 <tr class="memdesc:ad9fd1c9062a6a78adb1a395e9a629227"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy <em>at most</em> <code>n</code> chars from location, or less if zero-terminated.  <a href="_utilities_8cpp.html#ad9fd1c9062a6a78adb1a395e9a629227">More...</a><br /></td></tr>
 <tr class="separator:ad9fd1c9062a6a78adb1a395e9a629227"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acb50ae3b57d4c13dd8e71c1b090940f3"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_utilities_8cpp.html#acb50ae3b57d4c13dd8e71c1b090940f3">LogGetString</a> (const char *szPath, int ln, const char *szFunc, <a class="el" href="_utilities_8h.html#a92cbe77160a577ab2ee606aede56b399">logLevelTy</a> lvl, const char *szMsg, va_list args)</td></tr>
+<tr class="memitem:a1094207309e9bbacdb5181baf6273b4c"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_utilities_8cpp.html#a1094207309e9bbacdb5181baf6273b4c">str_tokenize</a> (const std::string &amp;s, const std::string &amp;tokens, bool bSkipEmpty)</td></tr>
+<tr class="memdesc:a1094207309e9bbacdb5181baf6273b4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">separates string into tokens  <a href="_utilities_8cpp.html#a1094207309e9bbacdb5181baf6273b4c">More...</a><br /></td></tr>
+<tr class="separator:a1094207309e9bbacdb5181baf6273b4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad03e60fa7489b31edd7dc432d478117d"><td class="memItemLeft" align="right" valign="top">std::pair&lt; std::string, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_utilities_8cpp.html#ad03e60fa7489b31edd7dc432d478117d">str_split</a> (const std::string &amp;s, const std::string &amp;tokens)</td></tr>
+<tr class="memdesc:ad03e60fa7489b31edd7dc432d478117d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Split the string at the first of the tokens and return the two pieces.  <a href="_utilities_8cpp.html#ad03e60fa7489b31edd7dc432d478117d">More...</a><br /></td></tr>
+<tr class="separator:ad03e60fa7489b31edd7dc432d478117d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acb50ae3b57d4c13dd8e71c1b090940f3"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_utilities_8cpp.html#acb50ae3b57d4c13dd8e71c1b090940f3">LogGetString</a> (const char *szPath, int ln, const char *szFunc, <a class="el" href="_utilities_8h.html#af9756fb0e490680af11a06052249b86a">logLevelTy</a> lvl, const char *szMsg, va_list args)</td></tr>
 <tr class="memdesc:acb50ae3b57d4c13dd8e71c1b090940f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns ptr to static buffer filled with formatted log string.  <a href="_utilities_8cpp.html#acb50ae3b57d4c13dd8e71c1b090940f3">More...</a><br /></td></tr>
 <tr class="separator:acb50ae3b57d4c13dd8e71c1b090940f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab9d1eafd8b523e76b6f757c408e7a937"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_utilities_8cpp.html#ab9d1eafd8b523e76b6f757c408e7a937">LogMsg</a> (const char *szPath, int ln, const char *szFunc, <a class="el" href="_utilities_8h.html#a92cbe77160a577ab2ee606aede56b399">logLevelTy</a> lvl, const char *szMsg,...)</td></tr>
+<tr class="memitem:ab9d1eafd8b523e76b6f757c408e7a937"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_utilities_8cpp.html#ab9d1eafd8b523e76b6f757c408e7a937">LogMsg</a> (const char *szPath, int ln, const char *szFunc, <a class="el" href="_utilities_8h.html#af9756fb0e490680af11a06052249b86a">logLevelTy</a> lvl, const char *szMsg,...)</td></tr>
 <tr class="memdesc:ab9d1eafd8b523e76b6f757c408e7a937"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log Text to log file.  <a href="_utilities_8cpp.html#ab9d1eafd8b523e76b6f757c408e7a937">More...</a><br /></td></tr>
 <tr class="separator:ab9d1eafd8b523e76b6f757c408e7a937"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -222,7 +231,7 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="_utilities_8h.html#a92cbe77160a577ab2ee606aede56b399">logLevelTy</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="_utilities_8h.html#af9756fb0e490680af11a06052249b86a">logLevelTy</a>&#160;</td>
           <td class="paramname"><em>lvl</em>, </td>
         </tr>
         <tr>
@@ -276,7 +285,7 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="_utilities_8h.html#a92cbe77160a577ab2ee606aede56b399">logLevelTy</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="_utilities_8h.html#af9756fb0e490680af11a06052249b86a">logLevelTy</a>&#160;</td>
           <td class="paramname"><em>lvl</em>, </td>
         </tr>
         <tr>
@@ -300,6 +309,37 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 </div><div class="memdoc">
 
 <p>Log Text to log file. </p>
+
+</div>
+</div>
+<a id="aa57c7468550f4b9fadb2dc3ef887a20f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa57c7468550f4b9fadb2dc3ef887a20f">&#9670;&nbsp;</a></span>safeGetline()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::istream&amp; safeGetline </td>
+          <td>(</td>
+          <td class="paramtype">std::istream &amp;&#160;</td>
+          <td class="paramname"><em>is</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>t</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Read a text line, handling both Windows (CRLF) and Unix (LF) ending. </p>
+<p>Code makes use of the fact that in both cases LF is the terminal character. So we read from file until LF (<em>without</em> widening!). In case of CRLF files there then is a trailing CR, which we just remove. </p>
 
 </div>
 </div>
@@ -331,6 +371,72 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 
 <p>Copy <em>at most</em> <code>n</code> chars from location, or less if zero-terminated. </p>
 <p>Unlike std::string(char*, n) this will <em>not</em> copy null chars </p>
+
+</div>
+</div>
+<a id="ad03e60fa7489b31edd7dc432d478117d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad03e60fa7489b31edd7dc432d478117d">&#9670;&nbsp;</a></span>str_split()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt;std::string,std::string&gt; str_split </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>tokens</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Split the string at the first of the tokens and return the two pieces. </p>
+
+</div>
+</div>
+<a id="a1094207309e9bbacdb5181baf6273b4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1094207309e9bbacdb5181baf6273b4c">&#9670;&nbsp;</a></span>str_tokenize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::string&gt; str_tokenize </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>tokens</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>bSkipEmpty</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>separates string into tokens </p>
 
 </div>
 </div>

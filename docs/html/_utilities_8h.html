@@ -83,18 +83,18 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a92cbe77160a577ab2ee606aede56b399"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_utilities_8h.html#a92cbe77160a577ab2ee606aede56b399">logLevelTy</a> : std::uint8_t { <br />
-&#160;&#160;<a class="el" href="_utilities_8h.html#a92cbe77160a577ab2ee606aede56b399a1101ecfc407894ef3d771d6bda32053e">logDEBUG</a> = 0
-, <a class="el" href="_utilities_8h.html#a92cbe77160a577ab2ee606aede56b399a36b07a7dde9e15628d5c9711fe00bee9">logINFO</a>
-, <a class="el" href="_utilities_8h.html#a92cbe77160a577ab2ee606aede56b399a93fe802de5551f8190c6d2624bc95f29">logWARN</a>
-, <a class="el" href="_utilities_8h.html#a92cbe77160a577ab2ee606aede56b399acd66b16af88cf8ff2cd781bc4bf95b6d">logERR</a>
+<tr class="memitem:af9756fb0e490680af11a06052249b86a"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_utilities_8h.html#af9756fb0e490680af11a06052249b86a">logLevelTy</a> : int { <br />
+&#160;&#160;<a class="el" href="_utilities_8h.html#af9756fb0e490680af11a06052249b86aa1101ecfc407894ef3d771d6bda32053e">logDEBUG</a> = 0
+, <a class="el" href="_utilities_8h.html#af9756fb0e490680af11a06052249b86aa36b07a7dde9e15628d5c9711fe00bee9">logINFO</a>
+, <a class="el" href="_utilities_8h.html#af9756fb0e490680af11a06052249b86aa93fe802de5551f8190c6d2624bc95f29">logWARN</a>
+, <a class="el" href="_utilities_8h.html#af9756fb0e490680af11a06052249b86aacd66b16af88cf8ff2cd781bc4bf95b6d">logERR</a>
 , <br />
-&#160;&#160;<a class="el" href="_utilities_8h.html#a92cbe77160a577ab2ee606aede56b399aaabf19d72e557fb61fee02e5d0777a70">logFATAL</a>
-, <a class="el" href="_utilities_8h.html#a92cbe77160a577ab2ee606aede56b399ad40224fc55c2ab532d5d9071abd54997">logMSG</a>
+&#160;&#160;<a class="el" href="_utilities_8h.html#af9756fb0e490680af11a06052249b86aaaabf19d72e557fb61fee02e5d0777a70">logFATAL</a>
+, <a class="el" href="_utilities_8h.html#af9756fb0e490680af11a06052249b86aad40224fc55c2ab532d5d9071abd54997">logMSG</a>
 <br />
  }</td></tr>
-<tr class="memdesc:a92cbe77160a577ab2ee606aede56b399"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logging level.  <a href="_utilities_8h.html#a92cbe77160a577ab2ee606aede56b399">More...</a><br /></td></tr>
-<tr class="separator:a92cbe77160a577ab2ee606aede56b399"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:af9756fb0e490680af11a06052249b86a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Logging level.  <a href="_utilities_8h.html#af9756fb0e490680af11a06052249b86a">More...</a><br /></td></tr>
+<tr class="separator:af9756fb0e490680af11a06052249b86a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -110,13 +110,22 @@ Functions</h2></td></tr>
 <tr class="memitem:a82cbaebd31591d422eb27098d98b5232"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_utilities_8h.html#a82cbaebd31591d422eb27098d98b5232">GetPluginName</a> (XPLMPluginID who)</td></tr>
 <tr class="memdesc:a82cbaebd31591d422eb27098d98b5232"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return a plugin's name.  <a href="_utilities_8h.html#a82cbaebd31591d422eb27098d98b5232">More...</a><br /></td></tr>
 <tr class="separator:a82cbaebd31591d422eb27098d98b5232"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa57c7468550f4b9fadb2dc3ef887a20f"><td class="memItemLeft" align="right" valign="top">std::istream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_utilities_8h.html#aa57c7468550f4b9fadb2dc3ef887a20f">safeGetline</a> (std::istream &amp;is, std::string &amp;t)</td></tr>
+<tr class="memdesc:aa57c7468550f4b9fadb2dc3ef887a20f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a text line, handling both Windows (CRLF) and Unix (LF) ending.  <a href="_utilities_8h.html#aa57c7468550f4b9fadb2dc3ef887a20f">More...</a><br /></td></tr>
+<tr class="separator:aa57c7468550f4b9fadb2dc3ef887a20f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9fd1c9062a6a78adb1a395e9a629227"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_utilities_8h.html#ad9fd1c9062a6a78adb1a395e9a629227">str_n</a> (const char *s, size_t max)</td></tr>
 <tr class="memdesc:ad9fd1c9062a6a78adb1a395e9a629227"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy <em>at most</em> <code>n</code> chars from location, or less if zero-terminated.  <a href="_utilities_8h.html#ad9fd1c9062a6a78adb1a395e9a629227">More...</a><br /></td></tr>
 <tr class="separator:ad9fd1c9062a6a78adb1a395e9a629227"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a491495e8c815d99b78140a25cb26b0da"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_utilities_8h.html#a491495e8c815d99b78140a25cb26b0da">LogGetString</a> (const char *szFile, int ln, const char *szFunc, <a class="el" href="_utilities_8h.html#a92cbe77160a577ab2ee606aede56b399">logLevelTy</a> lvl, const char *szMsg, va_list args)</td></tr>
+<tr class="memitem:a848ca3b3b3079efcb70f8c4a6d9cb37e"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_utilities_8h.html#a848ca3b3b3079efcb70f8c4a6d9cb37e">str_tokenize</a> (const std::string &amp;s, const std::string &amp;tokens, bool bSkipEmpty=true)</td></tr>
+<tr class="memdesc:a848ca3b3b3079efcb70f8c4a6d9cb37e"><td class="mdescLeft">&#160;</td><td class="mdescRight">separates string into tokens  <a href="_utilities_8h.html#a848ca3b3b3079efcb70f8c4a6d9cb37e">More...</a><br /></td></tr>
+<tr class="separator:a848ca3b3b3079efcb70f8c4a6d9cb37e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad03e60fa7489b31edd7dc432d478117d"><td class="memItemLeft" align="right" valign="top">std::pair&lt; std::string, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_utilities_8h.html#ad03e60fa7489b31edd7dc432d478117d">str_split</a> (const std::string &amp;s, const std::string &amp;tokens)</td></tr>
+<tr class="memdesc:ad03e60fa7489b31edd7dc432d478117d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Split the string at the first of the tokens and return the two pieces.  <a href="_utilities_8h.html#ad03e60fa7489b31edd7dc432d478117d">More...</a><br /></td></tr>
+<tr class="separator:ad03e60fa7489b31edd7dc432d478117d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a491495e8c815d99b78140a25cb26b0da"><td class="memItemLeft" align="right" valign="top">const char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_utilities_8h.html#a491495e8c815d99b78140a25cb26b0da">LogGetString</a> (const char *szFile, int ln, const char *szFunc, <a class="el" href="_utilities_8h.html#af9756fb0e490680af11a06052249b86a">logLevelTy</a> lvl, const char *szMsg, va_list args)</td></tr>
 <tr class="memdesc:a491495e8c815d99b78140a25cb26b0da"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns ptr to static buffer filled with formatted log string.  <a href="_utilities_8h.html#a491495e8c815d99b78140a25cb26b0da">More...</a><br /></td></tr>
 <tr class="separator:a491495e8c815d99b78140a25cb26b0da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5456996fe3973d17aaf0b656f5e42487"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_utilities_8h.html#a5456996fe3973d17aaf0b656f5e42487">LogMsg</a> (const char *szFile, int ln, const char *szFunc, <a class="el" href="_utilities_8h.html#a92cbe77160a577ab2ee606aede56b399">logLevelTy</a> lvl, const char *szMsg,...) <a class="el" href="_utilities_8h.html#a014fd29f5adb9660ec401b9f23a1e3c4">XPPLANES_FMTARGS</a>(5)</td></tr>
+<tr class="memitem:a5456996fe3973d17aaf0b656f5e42487"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_utilities_8h.html#a5456996fe3973d17aaf0b656f5e42487">LogMsg</a> (const char *szFile, int ln, const char *szFunc, <a class="el" href="_utilities_8h.html#af9756fb0e490680af11a06052249b86a">logLevelTy</a> lvl, const char *szMsg,...) <a class="el" href="_utilities_8h.html#a014fd29f5adb9660ec401b9f23a1e3c4">XPPLANES_FMTARGS</a>(5)</td></tr>
 <tr class="memdesc:a5456996fe3973d17aaf0b656f5e42487"><td class="mdescLeft">&#160;</td><td class="mdescRight">Log Text to log file.  <a href="_utilities_8h.html#a5456996fe3973d17aaf0b656f5e42487">More...</a><br /></td></tr>
 <tr class="separator:a5456996fe3973d17aaf0b656f5e42487"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -208,12 +217,12 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
       </table>
 </div><div class="memdoc">
 <b>Value:</b><div class="fragment"><div class="line">    {                                         \</div>
-<div class="line">    if (lvl &gt;= <a class="code" href="_x_p_planes_8h.html#ae6e590b5e09e0ae14114be6fe4c2698d">glob</a>.<a class="code" href="struct_glob_vars.html#ae8d1cfa0b0e1ad8a7083d142c6a8ccb2">logLvl</a>)                                         \</div>
+<div class="line">    if (lvl &gt;= <a class="code" href="_global_8h.html#ae6e590b5e09e0ae14114be6fe4c2698d">glob</a>.<a class="code" href="struct_glob_vars.html#ae8d1cfa0b0e1ad8a7083d142c6a8ccb2">logLvl</a>)                                         \</div>
 <div class="line">    {<a class="code" href="_utilities_8h.html#a5456996fe3973d17aaf0b656f5e42487">LogMsg</a>(__FILE__, __LINE__, __func__, lvl, __VA_ARGS__);}       \</div>
 <div class="line">}</div>
-<div class="ttc" id="a_utilities_8h_html_a5456996fe3973d17aaf0b656f5e42487"><div class="ttname"><a href="_utilities_8h.html#a5456996fe3973d17aaf0b656f5e42487">LogMsg</a></div><div class="ttdeci">void LogMsg(const char *szFile, int ln, const char *szFunc, logLevelTy lvl, const char *szMsg,...) XPPLANES_FMTARGS(5)</div><div class="ttdoc">Log Text to log file.</div><div class="ttdef"><b>Definition:</b> Utilities.cpp:131</div></div>
-<div class="ttc" id="a_x_p_planes_8h_html_ae6e590b5e09e0ae14114be6fe4c2698d"><div class="ttname"><a href="_x_p_planes_8h.html#ae6e590b5e09e0ae14114be6fe4c2698d">glob</a></div><div class="ttdeci">GlobVars glob</div><div class="ttdoc">The one and only global variable structure.</div><div class="ttdef"><b>Definition:</b> main.cpp:25</div></div>
-<div class="ttc" id="astruct_glob_vars_html_ae8d1cfa0b0e1ad8a7083d142c6a8ccb2"><div class="ttname"><a href="struct_glob_vars.html#ae8d1cfa0b0e1ad8a7083d142c6a8ccb2">GlobVars::logLvl</a></div><div class="ttdeci">logLevelTy logLvl</div><div class="ttdoc">Logging level.</div><div class="ttdef"><b>Definition:</b> XPPlanes.h:77</div></div>
+<div class="ttc" id="a_global_8h_html_ae6e590b5e09e0ae14114be6fe4c2698d"><div class="ttname"><a href="_global_8h.html#ae6e590b5e09e0ae14114be6fe4c2698d">glob</a></div><div class="ttdeci">GlobVars glob</div><div class="ttdoc">The one and only global variable structure.</div><div class="ttdef"><b>Definition:</b> Global.cpp:24</div></div>
+<div class="ttc" id="a_utilities_8h_html_a5456996fe3973d17aaf0b656f5e42487"><div class="ttname"><a href="_utilities_8h.html#a5456996fe3973d17aaf0b656f5e42487">LogMsg</a></div><div class="ttdeci">void LogMsg(const char *szFile, int ln, const char *szFunc, logLevelTy lvl, const char *szMsg,...) XPPLANES_FMTARGS(5)</div><div class="ttdoc">Log Text to log file.</div><div class="ttdef"><b>Definition:</b> Utilities.cpp:182</div></div>
+<div class="ttc" id="astruct_glob_vars_html_ae8d1cfa0b0e1ad8a7083d142c6a8ccb2"><div class="ttname"><a href="struct_glob_vars.html#ae8d1cfa0b0e1ad8a7083d142c6a8ccb2">GlobVars::logLvl</a></div><div class="ttdeci">logLevelTy logLvl</div><div class="ttdoc">Logging level.</div><div class="ttdef"><b>Definition:</b> Global.h:30</div></div>
 </div><!-- fragment -->
 <p>Log a message if lvl is greater or equal currently defined log level. </p>
 <dl class="section note"><dt>Note</dt><dd>First parameter after lvl must be the message text, which can be a format string with its parameters following like in sprintf </dd></dl>
@@ -301,31 +310,31 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 </div>
 </div>
 <h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="a92cbe77160a577ab2ee606aede56b399"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a92cbe77160a577ab2ee606aede56b399">&#9670;&nbsp;</a></span>logLevelTy</h2>
+<a id="af9756fb0e490680af11a06052249b86a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9756fb0e490680af11a06052249b86a">&#9670;&nbsp;</a></span>logLevelTy</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="_utilities_8h.html#a92cbe77160a577ab2ee606aede56b399">logLevelTy</a> : std::uint8_t</td>
+          <td class="memname">enum <a class="el" href="_utilities_8h.html#af9756fb0e490680af11a06052249b86a">logLevelTy</a> : int</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Logging level. </p>
 <table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a92cbe77160a577ab2ee606aede56b399a1101ecfc407894ef3d771d6bda32053e"></a>logDEBUG&#160;</td><td class="fielddoc"><p>Debug, highest level of detail. </p>
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="af9756fb0e490680af11a06052249b86aa1101ecfc407894ef3d771d6bda32053e"></a>logDEBUG&#160;</td><td class="fielddoc"><p>Debug, highest level of detail. </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a92cbe77160a577ab2ee606aede56b399a36b07a7dde9e15628d5c9711fe00bee9"></a>logINFO&#160;</td><td class="fielddoc"><p>regular info messages </p>
+<tr><td class="fieldname"><a id="af9756fb0e490680af11a06052249b86aa36b07a7dde9e15628d5c9711fe00bee9"></a>logINFO&#160;</td><td class="fielddoc"><p>regular info messages </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a92cbe77160a577ab2ee606aede56b399a93fe802de5551f8190c6d2624bc95f29"></a>logWARN&#160;</td><td class="fielddoc"><p>warnings, i.e. unexpected, but uncritical events, maybe leading to unwanted display, but still: display of aircraft </p>
+<tr><td class="fieldname"><a id="af9756fb0e490680af11a06052249b86aa93fe802de5551f8190c6d2624bc95f29"></a>logWARN&#160;</td><td class="fielddoc"><p>warnings, i.e. unexpected, but uncritical events, maybe leading to unwanted display, but still: display of aircraft </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a92cbe77160a577ab2ee606aede56b399acd66b16af88cf8ff2cd781bc4bf95b6d"></a>logERR&#160;</td><td class="fielddoc"><p>errors mean, aircraft can potentially not be displayed </p>
+<tr><td class="fieldname"><a id="af9756fb0e490680af11a06052249b86aacd66b16af88cf8ff2cd781bc4bf95b6d"></a>logERR&#160;</td><td class="fielddoc"><p>errors mean, aircraft can potentially not be displayed </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a92cbe77160a577ab2ee606aede56b399aaabf19d72e557fb61fee02e5d0777a70"></a>logFATAL&#160;</td><td class="fielddoc"><p>fatal is shortly before a crash </p>
+<tr><td class="fieldname"><a id="af9756fb0e490680af11a06052249b86aaaabf19d72e557fb61fee02e5d0777a70"></a>logFATAL&#160;</td><td class="fielddoc"><p>fatal is shortly before a crash </p>
 </td></tr>
-<tr><td class="fieldname"><a id="a92cbe77160a577ab2ee606aede56b399ad40224fc55c2ab532d5d9071abd54997"></a>logMSG&#160;</td><td class="fielddoc"><p>will always be output, no matter what has been configured, cannot be suppressed </p>
+<tr><td class="fieldname"><a id="af9756fb0e490680af11a06052249b86aad40224fc55c2ab532d5d9071abd54997"></a>logMSG&#160;</td><td class="fielddoc"><p>will always be output, no matter what has been configured, cannot be suppressed </p>
 </td></tr>
 </table>
 
@@ -489,7 +498,7 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="_utilities_8h.html#a92cbe77160a577ab2ee606aede56b399">logLevelTy</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="_utilities_8h.html#af9756fb0e490680af11a06052249b86a">logLevelTy</a>&#160;</td>
           <td class="paramname"><em>lvl</em>, </td>
         </tr>
         <tr>
@@ -543,7 +552,7 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="_utilities_8h.html#a92cbe77160a577ab2ee606aede56b399">logLevelTy</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="_utilities_8h.html#af9756fb0e490680af11a06052249b86a">logLevelTy</a>&#160;</td>
           <td class="paramname"><em>lvl</em>, </td>
         </tr>
         <tr>
@@ -567,6 +576,37 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 </div><div class="memdoc">
 
 <p>Log Text to log file. </p>
+
+</div>
+</div>
+<a id="aa57c7468550f4b9fadb2dc3ef887a20f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa57c7468550f4b9fadb2dc3ef887a20f">&#9670;&nbsp;</a></span>safeGetline()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::istream&amp; safeGetline </td>
+          <td>(</td>
+          <td class="paramtype">std::istream &amp;&#160;</td>
+          <td class="paramname"><em>is</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>t</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Read a text line, handling both Windows (CRLF) and Unix (LF) ending. </p>
+<p>Code makes use of the fact that in both cases LF is the terminal character. So we read from file until LF (<em>without</em> widening!). In case of CRLF files there then is a trailing CR, which we just remove. </p>
 
 </div>
 </div>
@@ -598,6 +638,72 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 
 <p>Copy <em>at most</em> <code>n</code> chars from location, or less if zero-terminated. </p>
 <p>Unlike std::string(char*, n) this will <em>not</em> copy null chars </p>
+
+</div>
+</div>
+<a id="ad03e60fa7489b31edd7dc432d478117d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad03e60fa7489b31edd7dc432d478117d">&#9670;&nbsp;</a></span>str_split()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt;std::string,std::string&gt; str_split </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>tokens</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Split the string at the first of the tokens and return the two pieces. </p>
+
+</div>
+</div>
+<a id="a848ca3b3b3079efcb70f8c4a6d9cb37e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a848ca3b3b3079efcb70f8c4a6d9cb37e">&#9670;&nbsp;</a></span>str_tokenize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;std::string&gt; str_tokenize </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>s</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>tokens</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>bSkipEmpty</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>separates string into tokens </p>
 
 </div>
 </div>

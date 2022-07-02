@@ -51,6 +51,9 @@ inline bool CheckEverySoOften (float& _lastCheck, float _interval)
 /// Return a plugin's name
 std::string GetPluginName (XPLMPluginID who);
 
+/// Read a text line, handling both Windows (CRLF) and Unix (LF) ending
+std::istream& safeGetline(std::istream& is, std::string& t);
+
 //
 // MARK: String functions
 //
@@ -61,6 +64,15 @@ std::string str_n (const char* s, size_t max);
 
 /// Simplify using str_n() with char arrays
 #define STR_N(s) str_n(s,sizeof(s))
+
+/// separates string into tokens
+std::vector<std::string> str_tokenize (const std::string& s,
+                                       const std::string& tokens,
+                                       bool bSkipEmpty = true);
+
+/// Split the string at the first of the tokens and return the two pieces
+std::pair<std::string,std::string> str_split (const std::string& s,
+                                              const std::string& tokens);
 
 //
 // MARK: Logging Support
@@ -75,7 +87,7 @@ std::string str_n (const char* s, size_t max);
 #endif
 
 /// Logging level
-enum logLevelTy : std::uint8_t {
+enum logLevelTy : int {
     logDEBUG = 0,       ///< Debug, highest level of detail
     logINFO,            ///< regular info messages
     logWARN,            ///< warnings, i.e. unexpected, but uncritical events, maybe leading to unwanted display, but still: display of aircraft
@@ -118,6 +130,15 @@ throw XPMP2::XPMP2Error(__FILE__, __LINE__, __func__, __VA_ARGS__);
 //
 // MARK: Compiler differences
 //
+
+// XCode/Linux don't provide the _s functions, not even with __STDC_WANT_LIB_EXT1__ 1
+#if APL
+inline int strerror_s( char *buf, size_t bufsz, int errnum )
+{ return strerror_r(errnum, buf, bufsz); }
+#elif LIN
+inline int strerror_s( char *buf, size_t bufsz, int errnum )
+{ strerror_r(errnum, buf, bufsz); return 0; }
+#endif
 
 // MARK: Thread names
 #ifdef DEBUG

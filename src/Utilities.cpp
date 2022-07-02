@@ -55,6 +55,24 @@ std::string GetPluginName (XPLMPluginID who)
     return whoName;
 }
 
+/// @brief Read a text line, handling both Windows (CRLF) and Unix (LF) ending
+/// @details Code makes use of the fact that in both cases LF is the terminal character.
+///          So we read from file until LF (_without_ widening!).
+///          In case of CRLF files there then is a trailing CR, which we just remove.
+std::istream& safeGetline(std::istream& is, std::string& t)
+{
+    // read a line until LF
+    std::getline(is, t, '\n');
+    
+    // if last character is CR then remove it
+    if (!t.empty() && t.back() == '\r')
+        t.pop_back();
+    
+    return is;
+}
+
+
+
 //
 // MARK: String functions
 //
@@ -68,6 +86,39 @@ std::string str_n (const char* s, size_t max)
     return std::string(s,i);
 }
 
+// separates string into tokens
+std::vector<std::string> str_tokenize (const std::string& s,
+                                       const std::string& tokens,
+                                       bool bSkipEmpty)
+{
+    std::vector<std::string> v;
+ 
+    // find all tokens before the last
+    size_t b = 0;                                   // begin
+    for (size_t e = s.find_first_of(tokens);        // end
+         e != std::string::npos;
+         b = e+1, e = s.find_first_of(tokens, b))
+    {
+        if (!bSkipEmpty || e != b)
+            v.emplace_back(s.substr(b, e-b));
+    }
+    
+    // add the last one: the remainder of the string (could be empty!)
+    v.emplace_back(s.substr(b));
+    
+    return v;
+}
+
+/// Split the string at the first of the tokens and return the two pieces
+std::pair<std::string,std::string> str_split (const std::string& s,
+                                              const std::string& tokens)
+{
+    size_t e = s.find_first_of(tokens);
+    if (e == std::string::npos)             // no token found, return full string in first element
+        return std::make_pair(s, std::string());
+    else
+        return std::make_pair(s.substr(0, e), s.substr(e+1));
+}
 
 //
 //MARK: Log

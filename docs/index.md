@@ -2,7 +2,7 @@
 
 [![Build all Platforms](https://github.com/TwinFan/XPPlanes/actions/workflows/build.yml/badge.svg)](https://github.com/TwinFan/XPPlanes/actions/workflows/build.yml)
 
-Display additional planes controled by network messages
+Display additional planes controlled by network messages
 
 ## Credits
 The project is based on
@@ -42,6 +42,47 @@ For **MacOS**, the plugin can be **signed and notarized**, provided that the req
 - `NOTARIZATION_USERNAME`: Username for login at notarization service, typically your Apple Developer ID EMail.
 - `NOTARIZATION_PASSWORD`: [App-specific password](https://support.apple.com/en-gb/HT204397) for notarization service
 
-## Documentation
+### Documentation
 
 [Doxygen-generated code documentation](https://twinfan.github.io/XPPlanes/html/index.html)
+
+## Installation
+
+The plugin itself is to be placed under `<X-Plane>/Resources/plugins/` as usual with the following folder structure:
+```
+.../XPLanes/
+            mac_x64/XPPlanes.xpl
+            lin_x64/XPPlanes.xpl
+            win_x64/XPPlanes.xpl
+            Resources/...
+```
+The `Resources` folder needs to hold the CSL model installation, similar to [LiveTraffic](https://twinfan.gitbook.io/livetraffic/setup/installation/step-by-step#csl-model-installation) or [XPMP2 Remote Client](https://twinfan.gitbook.io/livetraffic/setup/installation/xpmp2-remote-client#standard-setup-with-external-visuals).
+
+Alternatively, if you have a CSL installation somewhere, you can create a symbolic link to an existing `Resources` folder. Even [Windows supports symbolic links](https://www.maketecheasier.com/create-symbolic-links-windows10/) for folders by the `mklink /D` command, Linux and Mac users will know the `ln -s` command already (or will find [help on the net](https://osxdaily.com/2015/08/06/make-symbolic-links-command-line-mac-os-x/)).
+
+## Configuration
+
+Currently, there is no user interface available for configuring the plugin. But the plugin writes a configuration file during shutdown, that you can modify while X-Plane/the plugin is not running. Find it in
+```
+<X-Plane>/Output/preferences/XPPlanes.prf
+```
+and includes the following config entries:
+Item | Description
+-----|------------
+LogLevel 0 | Logging level: 0 - Debug (most output) ... 4 - Fatal (least output)
+LogModelMatch 0 | Log model matching?
+ObjReplDataRefs 1 | Replace dataRefs in CSL models? ([more details](https://twinfan.github.io/XPMP2/CopyingObjFiles.html))
+ObjReplTextures 1 | Replace textures in CSL models? ([more details](https://twinfan.github.io/XPMP2/CopyingObjFiles.html))
+TCAS_Control 1 | Acquire control over TCAS/AI planes upon startup?
+PlanesMaxDist 50 | Max distance to display aircraft around camera in nm
+PlanesClampAll 0 | Enforce clamping of all planes above ground?
+LabelsDraw 1 | Draw plane labels
+LabelsMaxDist 5556 | Max distance in meter to draw labels
+LabelsCutMaxVisible 1 | Don't draw labels for planes father away than visibility
+MapEnable 1 | Support display of planes in X-Plane's map?
+MapLabels 1 | Add labels to planes in X-Plane's map?
+NetMCGroup 239.255.1.1 | Multicast group the plugin listens to for flight data
+NetListenPort 49900 | Multicast port the plugin listens to for flight data
+NetTTL 8 | Time-to-live of network multicast messages
+NetBufSize 8192 | (Max) network buffer size in bytes
+
