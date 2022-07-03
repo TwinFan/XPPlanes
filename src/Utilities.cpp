@@ -109,6 +109,25 @@ std::vector<std::string> str_tokenize (const std::string& s,
     return v;
 }
 
+// returns the next token, can be the empty string if two tokens follow immediately, or if `finished()`
+std::string StrTokens::next()
+{
+    if (finished()) return std::string();
+    ++num;                                                      // we are going to return one more finding
+    const size_t b = p == std::string::npos ? 0 : p+1;          // begin: in first call start at 0, otherwise one char behind last find
+    if (b >= s.length()) {                                      // begin after string's end means: the last char was a separator, hence the last token is empty
+        p = b;                                                  // marks `finished` as p = b >= length
+        return std::string();
+    }
+    p = s.find_first_of(sep, b);                                // p points to next separator, or is npos if there is no more separator
+    if (p == std::string::npos) {
+        p = s.length();                                         // marks the end of the search
+        return s.substr(b);                                     // return the remainder of s
+    }
+    else
+        return s.substr(b, p-b);                                // returns the token until before the separator
+}
+
 /// Split the string at the first of the tokens and return the two pieces
 std::pair<std::string,std::string> str_split (const std::string& s,
                                               const std::string& tokens)

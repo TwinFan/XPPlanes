@@ -40,7 +40,7 @@ Plane::~Plane ()
 // Called by XPMP2 right before updating the aircraft's placement in the world
 void Plane::UpdatePosition (float _elapsedSinceLastCall, int _flCounter)
 {
-    const tsTy now = std::chrono::steady_clock::now();
+    const tsTy now = std::chrono::system_clock::now();
     
     
     // TODO: Implement UpdatePosition

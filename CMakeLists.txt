@@ -120,6 +120,7 @@ add_library(XPPlanes MODULE
     inc/Utilities.h
     inc/XPPlanes.h
     src/FlightData.cpp
+    src/FD_RTTFC.cpp
     src/Global.cpp
     src/Listener.cpp
     src/main.cpp

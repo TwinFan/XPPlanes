@@ -44,7 +44,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md_docs_index"></a> <a href="https://github.com/TwinFan/XPPlanes/actions/workflows/build.yml"><img src="https://github.com/TwinFan/XPPlanes/actions/workflows/build.yml/badge.svg" alt="Build all Platforms" style="pointer-events: none;" class="inline"/></a></p>
-<p>Display additional planes controled by network messages</p>
+<p>Display additional planes controlled by network messages</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
 Credits</h1>
 <p>The project is based on</p><ul>
@@ -70,9 +70,58 @@ Build</h1>
 <li><code>NOTARIZATION_USERNAME</code>: Username for login at notarization service, typically your Apple Developer ID EMail.</li>
 <li><code>NOTARIZATION_PASSWORD</code>: <a href="https://support.apple.com/en-gb/HT204397">App-specific password</a> for notarization service</li>
 </ul>
+<h2>Documentation</h2>
+<p><a href="https://twinfan.github.io/XPPlanes/html/index.html">Doxygen-generated code documentation</a></p>
 <h1><a class="anchor" id="autotoc_md3"></a>
-Documentation</h1>
-<p><a href="https://twinfan.github.io/XPPlanes/html/index.html">Doxygen-generated code documentation</a> </p>
+Installation</h1>
+<p>The plugin itself is to be placed under <code>&lt;X-Plane&gt;/Resources/plugins/</code> as usual with the following folder structure: </p><div class="fragment"><div class="line">.../XPPlanes/</div>
+<div class="line">             mac_x64/XPPlanes.xpl</div>
+<div class="line">             lin_x64/XPPlanes.xpl</div>
+<div class="line">             win_x64/XPPlanes.xpl</div>
+<div class="line">             Resources/...</div>
+</div><!-- fragment --><p> The <code>Resources</code> folder needs to hold the CSL model installation, similar to <a href="https://twinfan.gitbook.io/livetraffic/setup/installation/step-by-step#csl-model-installation">LiveTraffic</a> or <a href="https://twinfan.gitbook.io/livetraffic/setup/installation/xpmp2-remote-client#standard-setup-with-external-visuals">XPMP2 Remote Client</a>.</p>
+<p>Alternatively, if you have a CSL installation somewhere, you can create a symbolic link to an existing <code>Resources</code> folder. Even <a href="https://www.maketecheasier.com/create-symbolic-links-windows10/">Windows supports symbolic links</a> for folders by the <code>mklink /D</code> command, Linux and Mac users will know the <code>ln -s</code> command already (or will find <a href="https://osxdaily.com/2015/08/06/make-symbolic-links-command-line-mac-os-x/">help on the net</a>).</p>
+<h1><a class="anchor" id="autotoc_md4"></a>
+Configuration</h1>
+<p>Currently, there is no user interface available for configuring the plugin. But the plugin writes a configuration file during shutdown, that you can modify while X-Plane/the plugin is not running. Find it in </p><div class="fragment"><div class="line">&lt;X-Plane&gt;/Output/preferences/XPPlanes.prf</div>
+</div><!-- fragment --><p> It includes the following config entries: </p><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Item   </th><th class="markdownTableHeadNone">Description    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">LogLevel 0   </td><td class="markdownTableBodyNone">Logging level: 0 - Debug (most output) ... 4 - Fatal (least output)    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">LogModelMatch 0   </td><td class="markdownTableBodyNone">Log model matching?    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">ObjReplDataRefs 1   </td><td class="markdownTableBodyNone">Replace dataRefs in CSL models? (<a href="https://twinfan.github.io/XPMP2/CopyingObjFiles.html">more details</a>)    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">ObjReplTextures 1   </td><td class="markdownTableBodyNone">Replace textures in CSL models? (<a href="https://twinfan.github.io/XPMP2/CopyingObjFiles.html">more details</a>)    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">TCAS_Control 1   </td><td class="markdownTableBodyNone">Acquire control over TCAS/AI planes upon startup?    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">PlanesMaxDist 50   </td><td class="markdownTableBodyNone">Max distance to display aircraft around camera in nm    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">PlanesClampAll 0   </td><td class="markdownTableBodyNone">Enforce clamping of all planes above ground?    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">LabelsDraw 1   </td><td class="markdownTableBodyNone">Draw plane labels    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">LabelsMaxDist 5556   </td><td class="markdownTableBodyNone">Max distance in meter to draw labels    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">LabelsCutMaxVisible 1   </td><td class="markdownTableBodyNone">Don't draw labels for planes father away than visibility    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">MapEnable 1   </td><td class="markdownTableBodyNone">Support display of planes in X-Plane's map?    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">MapLabels 1   </td><td class="markdownTableBodyNone">Add labels to planes in X-Plane's map?    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">NetMCGroup 239.255.1.1   </td><td class="markdownTableBodyNone">Multicast group the plugin listens to for flight data    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">NetMCPort 49900   </td><td class="markdownTableBodyNone">UDP Multicast port the plugin listens to for flight data, <code>0</code> switches off    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">NetBcstPort 49800   </td><td class="markdownTableBodyNone">UDP Broadcast port the plugin listens to for flight data, <code>0</code> switches off, e.g. <code>49005</code> would listen to RealTraffic's RTTFC data    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">NetTTL 8   </td><td class="markdownTableBodyNone">Time-to-live of network multicast messages    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">NetBufSize 8192   </td><td class="markdownTableBodyNone">(Max) network buffer size in bytes   </td></tr>
+</table>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->

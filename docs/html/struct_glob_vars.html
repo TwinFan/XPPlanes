@@ -92,8 +92,8 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:ae34e79d95cda3f7ddb84f06468cae420"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_glob_vars.html#ae34e79d95cda3f7ddb84f06468cae420">bClampAll</a> = false</td></tr>
 <tr class="memdesc:ae34e79d95cda3f7ddb84f06468cae420"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clamp all planes to the ground? Default is <code>false</code> as clamping is kinda expensive due to Y-Testing; then clamping is only activated when plane is thought to be on the ground.  <a href="struct_glob_vars.html#ae34e79d95cda3f7ddb84f06468cae420">More...</a><br /></td></tr>
 <tr class="separator:ae34e79d95cda3f7ddb84f06468cae420"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b620d425fae00df04e0e82cf9557909"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_glob_vars.html#a6b620d425fae00df04e0e82cf9557909">bObjReplDataRefs</a> = false</td></tr>
-<tr class="memdesc:a6b620d425fae00df04e0e82cf9557909"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replace dataRefs in <code>.obj</code> files on load? (defaults to OFF!)  <a href="struct_glob_vars.html#a6b620d425fae00df04e0e82cf9557909">More...</a><br /></td></tr>
+<tr class="memitem:a6b620d425fae00df04e0e82cf9557909"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_glob_vars.html#a6b620d425fae00df04e0e82cf9557909">bObjReplDataRefs</a> = true</td></tr>
+<tr class="memdesc:a6b620d425fae00df04e0e82cf9557909"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replace dataRefs in <code>.obj</code> files on load?  <a href="struct_glob_vars.html#a6b620d425fae00df04e0e82cf9557909">More...</a><br /></td></tr>
 <tr class="separator:a6b620d425fae00df04e0e82cf9557909"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aac55d3c7a127ab8d30aa0e6cc263f12e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_glob_vars.html#aac55d3c7a127ab8d30aa0e6cc263f12e">bObjReplTextures</a> = true</td></tr>
 <tr class="memdesc:aac55d3c7a127ab8d30aa0e6cc263f12e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replace textures in <code>.obj</code> files on load if needed?  <a href="struct_glob_vars.html#aac55d3c7a127ab8d30aa0e6cc263f12e">More...</a><br /></td></tr>
@@ -119,12 +119,15 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:add2b5f76c3c67cdad30a98f433659e3f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_glob_vars.html#add2b5f76c3c67cdad30a98f433659e3f">bMapLabels</a> = true</td></tr>
 <tr class="memdesc:add2b5f76c3c67cdad30a98f433659e3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Do we show labels with the aircraft icons?  <a href="struct_glob_vars.html#add2b5f76c3c67cdad30a98f433659e3f">More...</a><br /></td></tr>
 <tr class="separator:add2b5f76c3c67cdad30a98f433659e3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4de0e41455c5778e38d5596258ceb39e"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_glob_vars.html#a4de0e41455c5778e38d5596258ceb39e">remoteMCGroup</a> = &quot;239.255.1.1&quot;</td></tr>
-<tr class="memdesc:a4de0e41455c5778e38d5596258ceb39e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The multicast group that we use, which is the same X-Plane is using itself for its BEACON.  <a href="struct_glob_vars.html#a4de0e41455c5778e38d5596258ceb39e">More...</a><br /></td></tr>
-<tr class="separator:a4de0e41455c5778e38d5596258ceb39e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7886e0dd3b530d6343f6db7c2e5789ca"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_glob_vars.html#a7886e0dd3b530d6343f6db7c2e5789ca">remotePort</a> = 49900</td></tr>
-<tr class="memdesc:a7886e0dd3b530d6343f6db7c2e5789ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">The port we use is <em>different</em> from the port the X-Plane BEACON uses, so we don't get into conflict.  <a href="struct_glob_vars.html#a7886e0dd3b530d6343f6db7c2e5789ca">More...</a><br /></td></tr>
-<tr class="separator:a7886e0dd3b530d6343f6db7c2e5789ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3555956520d733f7abfbfda1de9ab189"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_glob_vars.html#a3555956520d733f7abfbfda1de9ab189">listenMCGroup</a> = &quot;239.255.1.1&quot;</td></tr>
+<tr class="memdesc:a3555956520d733f7abfbfda1de9ab189"><td class="mdescLeft">&#160;</td><td class="mdescRight">The multicast group that we use, which is the same X-Plane is using itself for its BEACON.  <a href="struct_glob_vars.html#a3555956520d733f7abfbfda1de9ab189">More...</a><br /></td></tr>
+<tr class="separator:a3555956520d733f7abfbfda1de9ab189"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a810fbb619d16f3cfff59c80e7e571347"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_glob_vars.html#a810fbb619d16f3cfff59c80e7e571347">listenMCPort</a> = 49900</td></tr>
+<tr class="memdesc:a810fbb619d16f3cfff59c80e7e571347"><td class="mdescLeft">&#160;</td><td class="mdescRight">The port we use is <em>different</em> from the port the X-Plane BEACON uses, so we don't get into conflict.  <a href="struct_glob_vars.html#a810fbb619d16f3cfff59c80e7e571347">More...</a><br /></td></tr>
+<tr class="separator:a810fbb619d16f3cfff59c80e7e571347"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6bc1e6cffd458d2d7013a32d07886c3d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_glob_vars.html#a6bc1e6cffd458d2d7013a32d07886c3d">listenBcstPort</a> = 49800</td></tr>
+<tr class="memdesc:a6bc1e6cffd458d2d7013a32d07886c3d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The port for receiving UDP broadcast messages.  <a href="struct_glob_vars.html#a6bc1e6cffd458d2d7013a32d07886c3d">More...</a><br /></td></tr>
+<tr class="separator:a6bc1e6cffd458d2d7013a32d07886c3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c32d8fd42ab7ed3eb0d49a69c501436"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_glob_vars.html#a5c32d8fd42ab7ed3eb0d49a69c501436">remoteTTL</a> = 8</td></tr>
 <tr class="memdesc:a5c32d8fd42ab7ed3eb0d49a69c501436"><td class="mdescLeft">&#160;</td><td class="mdescRight">Time-to-live, or mumber of hops for a multicast message.  <a href="struct_glob_vars.html#a5c32d8fd42ab7ed3eb0d49a69c501436">More...</a><br /></td></tr>
 <tr class="separator:a5c32d8fd42ab7ed3eb0d49a69c501436"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -435,12 +438,12 @@ Public Attributes</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool GlobVars::bObjReplDataRefs = false</td>
+          <td class="memname">bool GlobVars::bObjReplDataRefs = true</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Replace dataRefs in <code>.obj</code> files on load? (defaults to OFF!) </p>
+<p>Replace dataRefs in <code>.obj</code> files on load? </p>
 
 </div>
 </div>
@@ -492,6 +495,55 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a6bc1e6cffd458d2d7013a32d07886c3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6bc1e6cffd458d2d7013a32d07886c3d">&#9670;&nbsp;</a></span>listenBcstPort</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GlobVars::listenBcstPort = 49800</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The port for receiving UDP broadcast messages. </p>
+
+</div>
+</div>
+<a id="a3555956520d733f7abfbfda1de9ab189"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3555956520d733f7abfbfda1de9ab189">&#9670;&nbsp;</a></span>listenMCGroup</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string GlobVars::listenMCGroup = &quot;239.255.1.1&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The multicast group that we use, which is the same X-Plane is using itself for its BEACON. </p>
+<dl class="section see"><dt>See also</dt><dd>&lt;X-Plane&gt;/Instructions/Exchanging Data with X-Plane.rtfd, chapter "DISCOVER X-PLANE BY A BEACON" </dd></dl>
+
+</div>
+</div>
+<a id="a810fbb619d16f3cfff59c80e7e571347"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a810fbb619d16f3cfff59c80e7e571347">&#9670;&nbsp;</a></span>listenMCPort</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GlobVars::listenMCPort = 49900</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The port we use is <em>different</em> from the port the X-Plane BEACON uses, so we don't get into conflict. </p>
+
+</div>
+</div>
 <a id="ae8d1cfa0b0e1ad8a7083d142c6a8ccb2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae8d1cfa0b0e1ad8a7083d142c6a8ccb2">&#9670;&nbsp;</a></span>logLvl</h2>
 
@@ -506,7 +558,7 @@ Public Attributes</h2></td></tr>
 <b>Initial value:</b><div class="fragment"><div class="line">=</div>
 <div class="line"> </div>
 <div class="line">                              <a class="code" href="_utilities_8h.html#af9756fb0e490680af11a06052249b86aa1101ecfc407894ef3d771d6bda32053e">logDEBUG</a></div>
-<div class="ttc" id="a_utilities_8h_html_af9756fb0e490680af11a06052249b86aa1101ecfc407894ef3d771d6bda32053e"><div class="ttname"><a href="_utilities_8h.html#af9756fb0e490680af11a06052249b86aa1101ecfc407894ef3d771d6bda32053e">logDEBUG</a></div><div class="ttdeci">@ logDEBUG</div><div class="ttdoc">Debug, highest level of detail.</div><div class="ttdef"><b>Definition:</b> Utilities.h:91</div></div>
+<div class="ttc" id="a_utilities_8h_html_af9756fb0e490680af11a06052249b86aa1101ecfc407894ef3d771d6bda32053e"><div class="ttname"><a href="_utilities_8h.html#af9756fb0e490680af11a06052249b86aa1101ecfc407894ef3d771d6bda32053e">logDEBUG</a></div><div class="ttdeci">@ logDEBUG</div><div class="ttdoc">Debug, highest level of detail.</div><div class="ttdef"><b>Definition:</b> Utilities.h:115</div></div>
 </div><!-- fragment -->
 <p>Logging level. </p>
 
@@ -637,39 +689,6 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Buffer size, ie. max message length we send over multicast. </p>
-
-</div>
-</div>
-<a id="a4de0e41455c5778e38d5596258ceb39e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4de0e41455c5778e38d5596258ceb39e">&#9670;&nbsp;</a></span>remoteMCGroup</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string GlobVars::remoteMCGroup = &quot;239.255.1.1&quot;</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The multicast group that we use, which is the same X-Plane is using itself for its BEACON. </p>
-<dl class="section see"><dt>See also</dt><dd>&lt;X-Plane&gt;/Instructions/Exchanging Data with X-Plane.rtfd, chapter "DISCOVER X-PLANE BY A BEACON" </dd></dl>
-
-</div>
-</div>
-<a id="a7886e0dd3b530d6343f6db7c2e5789ca"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7886e0dd3b530d6343f6db7c2e5789ca">&#9670;&nbsp;</a></span>remotePort</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int GlobVars::remotePort = 49900</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The port we use is <em>different</em> from the port the X-Plane BEACON uses, so we don't get into conflict. </p>
 
 </div>
 </div>

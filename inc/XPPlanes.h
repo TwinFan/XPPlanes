@@ -45,6 +45,7 @@
 #include <thread>
 #include <mutex>
 #include <fstream>
+#include <stdexcept>
 
 // On Windows, 'max' and 'min' are defined macros in conflict with C++ library. Let's undefine them!
 #if IBM

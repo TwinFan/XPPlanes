@@ -54,6 +54,10 @@ std::string GetPluginName (XPLMPluginID who);
 /// Read a text line, handling both Windows (CRLF) and Unix (LF) ending
 std::istream& safeGetline(std::istream& is, std::string& t);
 
+/// Compute geometric altitude [ft] from pressure altitude and current weather in a very simplistic manner good enough for the first 3,000ft
+inline double WeatherAltCorr_ft (double pressureAlt_ft, double hPa)
+{ return pressureAlt_ft + ((hPa - HPA_STANDARD) * FT_per_HPA); }
+
 //
 // MARK: String functions
 //
@@ -69,6 +73,26 @@ std::string str_n (const char* s, size_t max);
 std::vector<std::string> str_tokenize (const std::string& s,
                                        const std::string& tokens,
                                        bool bSkipEmpty = true);
+
+/// Class to extract tokens from a string
+class StrTokens {
+protected:
+    const std::string& s;               ///< reference to the string to search
+    std::string sep;                    ///< separators
+    size_t p = std::string::npos;       ///< points to last separator found
+    int num = 0;                        ///< counts the findings
+public:
+    /// Constructor: Pass in the string to separate and the separators
+    StrTokens (const std::string& _s, const std::string& _sep) : s(_s), sep(_sep) {}
+    /// returns the next token, can be the empty string if two tokens follow immediately, or if `finished()`
+    std::string next();
+    /// (re)sets the separators, then returns the next token
+    std::string next(const std::string& _sep) { sep = _sep; return next(); }
+    /// returns how many finds have been returned so far
+    int count() const { return num; }
+    /// have all tokens been returned?
+    bool finished () const { return p != std::string::npos && p >= s.length(); }
+};
 
 /// Split the string at the first of the tokens and return the two pieces
 std::pair<std::string,std::string> str_split (const std::string& s,

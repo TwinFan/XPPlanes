@@ -21,8 +21,12 @@
 
 #pragma once
 
-/// Timestamp format is a steady clock's timepoint
-typedef std::chrono::time_point<std::chrono::steady_clock> tsTy;
+//
+// MARK: Flight Data
+//
+
+/// Timestamp format is a system clock's timepoint
+typedef std::chrono::time_point<std::chrono::system_clock> tsTy;
 
 /// Transports flight data for location, attitude, configuration between the network and the main thread
 class FlightData
@@ -41,6 +45,7 @@ public:
     double      lat         = NAN;  ///< latitude
     double      lon         = NAN;  ///< longitude
     double      alt_m       = NAN;  ///< altitude in meter above ground
+    bool        bGnd        = false;///< on the ground?
     
     // Attitude
     float       pitch       = NAN;  ///< Pitch in degres to rotate the object, positive is up.
@@ -67,6 +72,20 @@ public:
     
     // TODO: Reasonable approach to engine, rotor, wheels
 
+public:
+    /// Constructor: Creates a FlightData object from received network data
+    FlightData (const std::string& s);
+    
+    /// Has usable data? (Has at least position information)
+    bool IsUsable () const;
+    
+protected:
+    /// Reads flight data from the passed-in network data, identifying the type of data, then calling the appropriate conversion function
+    bool FillFromNetworkData (const std::string& s);
+    
+    /// @brief RTTFC: Interprets the data as an RTTFC line
+    /// @see https://www.flyrealtraffic.com/RTdev2.0.pdf
+    bool FillFromRTTFC (const std::string& s);
 };
 
 /// Smart pointer to flight data objects
@@ -77,6 +96,18 @@ typedef std::list<ptrFlightDataTy> listFlightDataTy;
 
 /// Map indexed by plane id holding lists of flight data elements
 typedef std::map<XPMPPlaneID,listFlightDataTy> mapListFlightDataTy;
+
+//
+// MARK: Exception class
+//
+
+/// Exception thrown by FlightData, e.g. when object creation impossible
+class FlightData_error : public std::runtime_error {
+public:
+    /// Constructor takes some error message
+    FlightData_error (const std::string& what_arg) :
+    std::runtime_error(what_arg) {}
+};
 
 //
 // MARK: Global Functions

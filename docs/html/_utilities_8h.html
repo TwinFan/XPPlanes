@@ -44,6 +44,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
+<a href="#nested-classes">Classes</a> &#124;
 <a href="#define-members">Macros</a> &#124;
 <a href="#enum-members">Enumerations</a> &#124;
 <a href="#func-members">Functions</a>  </div>
@@ -57,6 +58,12 @@ $(function() {
 
 <p><a href="_utilities_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_str_tokens.html">StrTokens</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class to extract tokens from a string.  <a href="class_str_tokens.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:a7ce9aa95423bd1497a03374c17fdfa68"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_utilities_8h.html#a7ce9aa95423bd1497a03374c17fdfa68">ERR_ASSERT</a>&#160;&#160;&#160;&quot;ASSERT FAILED: %s&quot;</td></tr>
@@ -113,6 +120,9 @@ Functions</h2></td></tr>
 <tr class="memitem:aa57c7468550f4b9fadb2dc3ef887a20f"><td class="memItemLeft" align="right" valign="top">std::istream &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_utilities_8h.html#aa57c7468550f4b9fadb2dc3ef887a20f">safeGetline</a> (std::istream &amp;is, std::string &amp;t)</td></tr>
 <tr class="memdesc:aa57c7468550f4b9fadb2dc3ef887a20f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read a text line, handling both Windows (CRLF) and Unix (LF) ending.  <a href="_utilities_8h.html#aa57c7468550f4b9fadb2dc3ef887a20f">More...</a><br /></td></tr>
 <tr class="separator:aa57c7468550f4b9fadb2dc3ef887a20f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab24e32d4c6fb314df02e139b5a4e80e7"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_utilities_8h.html#ab24e32d4c6fb314df02e139b5a4e80e7">WeatherAltCorr_ft</a> (double pressureAlt_ft, double hPa)</td></tr>
+<tr class="memdesc:ab24e32d4c6fb314df02e139b5a4e80e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute geometric altitude [ft] from pressure altitude and current weather in a very simplistic manner good enough for the first 3,000ft.  <a href="_utilities_8h.html#ab24e32d4c6fb314df02e139b5a4e80e7">More...</a><br /></td></tr>
+<tr class="separator:ab24e32d4c6fb314df02e139b5a4e80e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9fd1c9062a6a78adb1a395e9a629227"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_utilities_8h.html#ad9fd1c9062a6a78adb1a395e9a629227">str_n</a> (const char *s, size_t max)</td></tr>
 <tr class="memdesc:ad9fd1c9062a6a78adb1a395e9a629227"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy <em>at most</em> <code>n</code> chars from location, or less if zero-terminated.  <a href="_utilities_8h.html#ad9fd1c9062a6a78adb1a395e9a629227">More...</a><br /></td></tr>
 <tr class="separator:ad9fd1c9062a6a78adb1a395e9a629227"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -221,7 +231,7 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 <div class="line">    {<a class="code" href="_utilities_8h.html#a5456996fe3973d17aaf0b656f5e42487">LogMsg</a>(__FILE__, __LINE__, __func__, lvl, __VA_ARGS__);}       \</div>
 <div class="line">}</div>
 <div class="ttc" id="a_global_8h_html_ae6e590b5e09e0ae14114be6fe4c2698d"><div class="ttname"><a href="_global_8h.html#ae6e590b5e09e0ae14114be6fe4c2698d">glob</a></div><div class="ttdeci">GlobVars glob</div><div class="ttdoc">The one and only global variable structure.</div><div class="ttdef"><b>Definition:</b> Global.cpp:24</div></div>
-<div class="ttc" id="a_utilities_8h_html_a5456996fe3973d17aaf0b656f5e42487"><div class="ttname"><a href="_utilities_8h.html#a5456996fe3973d17aaf0b656f5e42487">LogMsg</a></div><div class="ttdeci">void LogMsg(const char *szFile, int ln, const char *szFunc, logLevelTy lvl, const char *szMsg,...) XPPLANES_FMTARGS(5)</div><div class="ttdoc">Log Text to log file.</div><div class="ttdef"><b>Definition:</b> Utilities.cpp:182</div></div>
+<div class="ttc" id="a_utilities_8h_html_a5456996fe3973d17aaf0b656f5e42487"><div class="ttname"><a href="_utilities_8h.html#a5456996fe3973d17aaf0b656f5e42487">LogMsg</a></div><div class="ttdeci">void LogMsg(const char *szFile, int ln, const char *szFunc, logLevelTy lvl, const char *szMsg,...) XPPLANES_FMTARGS(5)</div><div class="ttdoc">Log Text to log file.</div><div class="ttdef"><b>Definition:</b> Utilities.cpp:201</div></div>
 <div class="ttc" id="astruct_glob_vars_html_ae8d1cfa0b0e1ad8a7083d142c6a8ccb2"><div class="ttname"><a href="struct_glob_vars.html#ae8d1cfa0b0e1ad8a7083d142c6a8ccb2">GlobVars::logLvl</a></div><div class="ttdeci">logLevelTy logLvl</div><div class="ttdoc">Logging level.</div><div class="ttdef"><b>Definition:</b> Global.h:30</div></div>
 </div><!-- fragment -->
 <p>Log a message if lvl is greater or equal currently defined log level. </p>
@@ -704,6 +714,44 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 </div><div class="memdoc">
 
 <p>separates string into tokens </p>
+
+</div>
+</div>
+<a id="ab24e32d4c6fb314df02e139b5a4e80e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab24e32d4c6fb314df02e139b5a4e80e7">&#9670;&nbsp;</a></span>WeatherAltCorr_ft()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double WeatherAltCorr_ft </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>pressureAlt_ft</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>hPa</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compute geometric altitude [ft] from pressure altitude and current weather in a very simplistic manner good enough for the first 3,000ft. </p>
 
 </div>
 </div>

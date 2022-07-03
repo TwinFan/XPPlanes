@@ -31,15 +31,16 @@
 // MARK: RECEIVING Remote Data (Worker Thread)
 //
 
-#define DEBUG_MC_RECV_BEGIN "Receiver started listening to %s:%d"
-#define INFO_MC_RECV_BEGIN  "Receiver started listening on the network..."
-#define INFO_MC_RECV_RCVD   "Receiver received data from %.*s on %s, will start message processing"
-#define ERR_MC_THREAD       "Exception in multicast handling: %s"
+#define BCST_LOCALHOST      "0.0.0.0"
+#define INFO_LISTEN_BEGIN   "Receiver started listening to %s:%d"
+#define INFO_LISTEN_RCVD    "Receiver received data from %.*s on %s, will start message processing"
+#define ERR_LISTEN_THREAD   "Exception in listener: %s"
 
 // module-global variables
 constexpr int LISTEN_INTVL = 15;                ///< listen for this many seconds before thread wakes up again
 static std::thread gThrMC;                      ///< remote listening/sending thread
-static XPMP2::UDPMulticast* gpMc = nullptr;     ///< multicast socket for listening/sending (destructor uses locks, which don't work during module shutdown, so can't create a global object due to its exit-time destructor)
+static XPMP2::UDPMulticast* gpMc = nullptr;     ///< multicast socket (destructor uses locks, which don't work during module shutdown, so can't create a global object due to its exit-time destructor)
+static XPMP2::UDPReceiver* gpUDP = nullptr;     ///< UDP receiver socket (destructor uses locks, which don't work during module shutdown, so can't create a global object due to its exit-time destructor)
 
 #if APL == 1 || LIN == 1
 /// the self-pipe to shut down the APRS thread gracefully
@@ -47,8 +48,13 @@ static XPMP2::SOCKET gSelfPipe[2] = { XPMP2::INVALID_SOCKET, XPMP2::INVALID_SOCK
 #endif
 
 /// Conditions for continued receive operation
-inline bool ListenContinue ()
-{ return glob.eStatus > GlobVars::STATUS_INACTIVE && gpMc && gpMc->isOpen(); }
+bool ListenContinue ()
+{
+    return
+    glob.eStatus > GlobVars::STATUS_INACTIVE &&     // status not inactive
+    ((gpMc && gpMc->isOpen()) ||                    // multicast listening or
+     (gpUDP && gpUDP->isOpen()));                   // broadcast listening
+}
 
 
 /// Thread main function for the receiver
@@ -59,14 +65,25 @@ void ListenMain()
     
     try {
         LOG_ASSERT(gpMc != nullptr);
+        LOG_ASSERT(gpUDP != nullptr);
         
         // Set global status to: we are "waiting" for data
         glob.eStatus = GlobVars::STATUS_WAITING;
 
-        // Create a multicast socket
-        gpMc->Join(glob.remoteMCGroup, glob.remotePort, glob.remoteTTL,
-                   size_t(glob.remoteBufSize));
-        int maxSock = (int)gpMc->getSocket() + 1;
+        // Create a multicast socket, if so configured
+        int maxSock = 0;
+        if (glob.listenMCPort > 0) {
+            gpMc->Join(glob.listenMCGroup, glob.listenMCPort, glob.remoteTTL,
+                       size_t(glob.remoteBufSize));
+            maxSock = std::max(maxSock, (int)gpMc->getSocket() + 1);
+        }
+        
+        // Create a UDP broadcast socket, if so configured
+        if (glob.listenBcstPort > 0) {
+            gpUDP->Open (BCST_LOCALHOST, glob.listenBcstPort, size_t(glob.remoteBufSize));
+            maxSock = std::max(maxSock, (int)gpUDP->getSocket() + 1);
+        }
+        
 #if APL == 1 || LIN == 1
         // the self-pipe to shut down the TCP socket gracefully
         if (pipe(gSelfPipe) < 0)
@@ -75,21 +92,25 @@ void ListenMain()
         maxSock = std::max(maxSock, gSelfPipe[0]+1);
 #endif
                 
+        // Log message on what's open and listening
+        for (const XPMP2::SocketNetworking* pNet: { (XPMP2::SocketNetworking*)gpMc, (XPMP2::SocketNetworking*)gpUDP }) {
+            if (pNet->isOpen()) {
+                LOG_MSG(logMSG, INFO_LISTEN_BEGIN, pNet->getAddr().c_str(), pNet->getPort());
+            }
+        }
+        
         // *** Main listening loop ***
-        
-        if (glob.logLvl == logDEBUG)
-            LOG_MSG(logDEBUG, DEBUG_MC_RECV_BEGIN, glob.remoteMCGroup.c_str(), glob.remotePort)
-        else
-            LOG_MSG(logINFO, INFO_MC_RECV_BEGIN)
-        
         while (ListenContinue())
         {
             // wait for some data on either socket (multicast or self-pipe)
             fd_set sRead;
             FD_ZERO(&sRead);
-            FD_SET(gpMc->getSocket(), &sRead);      // check our socket
+            if (gpMc->isOpen())
+                FD_SET(gpMc->getSocket(), &sRead);      // wait for multicast
+            if (gpUDP->isOpen())
+                FD_SET(gpUDP->getSocket(), &sRead);     // wait for broadcast
 #if APL == 1 || LIN == 1
-            FD_SET(gSelfPipe[0], &sRead);           // check the self-pipe
+            FD_SET(gSelfPipe[0], &sRead);               // check the self-pipe
 #endif
             // Timeout is 15s, just to make sure that every once in a while we wake up here
             struct timeval timeout = { LISTEN_INTVL, 0 };
@@ -103,34 +124,52 @@ void ListenMain()
             if (retval == -1)
                 throw XPMP2::NetRuntimeError("'select' failed");
             
-            // select successful - there is multicast data!
-            else if (retval > 0 && FD_ISSET(gpMc->getSocket(), &sRead))
+            // select successful - there is multicast and/or broadcast data!
+            else if (retval > 0)
             {
-                // Receive the data (if we are still waiting then we're interested in the sender's address purely for logging purposes)
-                sockaddr saFrom;
-                const size_t recvSize = gpMc->RecvMC(nullptr, &saFrom);
-                if (recvSize >= 10)
+                // loop over both multicast and broadcast sockets
+                for (XPMP2::SocketNetworking* pNet: { (XPMP2::SocketNetworking*)gpMc, (XPMP2::SocketNetworking*)gpUDP })
                 {
-                    const XPMP2::InetAddrTy from(&saFrom);           // extract the numerical address
-                    const char* theData = gpMc->getBuf();
+                    // No message waiting? -> skip
+                    if (!FD_ISSET(pNet->getSocket(), &sRead))
+                        continue;
                     
-                    // TODO: Do something with the received data
-                    LOG_MSG(logDEBUG, "Received from %s:\n%s",
-                            XPMP2::SocketNetworking::GetAddrString(&saFrom).c_str(),
-                            theData);
+                    // Receive the data
+                    const size_t recvSize = pNet->recv();
+                    if (recvSize < 10) {
+                        LOG_MSG(logWARN, "Received too small message with just %lu bytes: %s", (unsigned long)recvSize, pNet->getBuf());
+                        continue;
+                    }
                     
-                } else {
-                    LOG_MSG(logWARN, "Received too small message with just %lu bytes", (unsigned long)recvSize);
+                    // buffer to network data
+                    const char* theData = pNet->getBuf();
+                    
+                    // Convert the data into a FlightData object, that can fail and would raise an exception
+                    ptrFlightDataTy pFD;
+                    try {
+                        pFD = std::make_shared<FlightData>(theData);
+                        // insertion into the map/list of flight data is protected by a mutex
+                        std::lock_guard<std::mutex> guard(glob.mtxListFD);
+                        listFlightDataTy& listFD = glob.mapListFD[pFD->_modeS_id];
+                        listFD.emplace_back(std::move(pFD));
+                    }
+                    catch (const FlightData_error& e) {
+                        LOG_MSG(logDEBUG, "Couldn't convert to FlightData object, unknown format or data insufficient:\n%.80s", theData);
+                    }
+                    catch (const std::exception& e) {
+                        LOG_MSG(logWARN, "Couldn't convert to FlightData object, %s:\n%.80s", e.what(), theData);
+                    }
                 }
             }
         }
     }
-    catch (std::exception& e) {
-        LOG_MSG(logERR, ERR_MC_THREAD, e.what());
+    catch (const std::exception& e) {
+        LOG_MSG(logERR, ERR_LISTEN_THREAD, e.what());
     }
     
-    // close the multicast socket
+    // close the sockets
     gpMc->Close();
+    gpUDP->Close();
 
 #if APL == 1 || LIN == 1
     // close the self-pipe sockets
@@ -151,10 +190,19 @@ void ListenMain()
 // Initialize the module and start the network listener thread, returns success
 bool ListenStartup ()
 {
-    // Create the global multicast object
+    // At least one port needs to be configured
+    if (glob.listenMCPort <= 0 && glob.listenBcstPort <= 0) {
+        LOG_MSG(logFATAL, "Both multicast and broadcast ports are configured off, cannot listen to anything; change config!");
+        return false;
+    }
+    
+    // Create the global multicast and UDP objects
     if (!gpMc)
         gpMc = new XPMP2::UDPMulticast();
     LOG_ASSERT(gpMc);
+    if (!gpUDP)
+        gpUDP = new XPMP2::UDPReceiver();
+    LOG_ASSERT(gpUDP);
     
     // Start the background thread to listen to multicast
     // Can only do that if currently off
@@ -185,17 +233,25 @@ void ListenShutdown ()
             write(gSelfPipe[1], "STOP", 4) < 0)
             // if the self-pipe didn't work:
 #endif
+        {
             if (gpMc)
                 gpMc->Close();
+            if (gpUDP)
+                gpUDP->Close();
+        }
 
         // wait for the network thread to finish
         gThrMC.join();
         gThrMC = std::thread();
     }
 
-    // remove the multicast object
+    // remove the networking objects
     if (gpMc) {
         delete gpMc;
         gpMc = nullptr;
+    }
+    if (gpUDP) {
+        delete gpUDP;
+        gpUDP = nullptr;
     }
 }

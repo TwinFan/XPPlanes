@@ -50,11 +50,11 @@ For **MacOS**, the plugin can be **signed and notarized**, provided that the req
 
 The plugin itself is to be placed under `<X-Plane>/Resources/plugins/` as usual with the following folder structure:
 ```
-.../XPLanes/
-            mac_x64/XPPlanes.xpl
-            lin_x64/XPPlanes.xpl
-            win_x64/XPPlanes.xpl
-            Resources/...
+.../XPPlanes/
+             mac_x64/XPPlanes.xpl
+             lin_x64/XPPlanes.xpl
+             win_x64/XPPlanes.xpl
+             Resources/...
 ```
 The `Resources` folder needs to hold the CSL model installation, similar to [LiveTraffic](https://twinfan.gitbook.io/livetraffic/setup/installation/step-by-step#csl-model-installation) or [XPMP2 Remote Client](https://twinfan.gitbook.io/livetraffic/setup/installation/xpmp2-remote-client#standard-setup-with-external-visuals).
 
@@ -66,7 +66,7 @@ Currently, there is no user interface available for configuring the plugin. But 
 ```
 <X-Plane>/Output/preferences/XPPlanes.prf
 ```
-and includes the following config entries:
+It includes the following config entries:
 Item | Description
 -----|------------
 LogLevel 0 | Logging level: 0 - Debug (most output) ... 4 - Fatal (least output)
@@ -82,7 +82,8 @@ LabelsCutMaxVisible 1 | Don't draw labels for planes father away than visibility
 MapEnable 1 | Support display of planes in X-Plane's map?
 MapLabels 1 | Add labels to planes in X-Plane's map?
 NetMCGroup 239.255.1.1 | Multicast group the plugin listens to for flight data
-NetListenPort 49900 | Multicast port the plugin listens to for flight data
+NetMCPort 49900 | UDP Multicast port the plugin listens to for flight data, `0` switches off
+NetBcstPort 49800 | UDP Broadcast port the plugin listens to for flight data, `0` switches off, e.g. `49005` would listen to RealTraffic's RTTFC data
 NetTTL 8 | Time-to-live of network multicast messages
 NetBufSize 8192 | (Max) network buffer size in bytes
 

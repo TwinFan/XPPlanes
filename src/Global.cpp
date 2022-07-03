@@ -88,8 +88,9 @@ static CfgInfoTy CFGINFO[] = {
     { "LabelsCutMaxVisible",    glob.bLabelCutOffAtVisibility   },
     { "MapEnable",              glob.bMapEnabled                },
     { "MapLabels",              glob.bMapLabels                 },
-    { "NetMCGroup",             glob.remoteMCGroup              },
-    { "NetListenPort",          glob.remotePort                 },
+    { "NetMCGroup",             glob.listenMCGroup              },
+    { "NetMCPort",              glob.listenMCPort               },
+    { "NetBcstPort",            glob.listenBcstPort             },
     { "NetTTL",                 glob.remoteTTL                  },
     { "NetBufSize",             glob.remoteBufSize              },
 };

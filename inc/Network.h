@@ -98,15 +98,17 @@ public:
     static std::string GetLastErr();
     
     // attribute access
-    SOCKET       getSocket() const   { return f_socket; }   ///< the socket
-    int          getPort() const     { return f_port; }     ///< the port
-    std::string  getAddr() const     { return f_addr; }     ///< the interface address
+    SOCKET              getSocket() const   { return f_socket; }   ///< the socket
+    int                 getPort() const     { return f_port; }     ///< the port
+    virtual std::string getAddr() const     { return f_addr; }     ///< the interface address
 
     /// return the buffer
     const char* getBuf () const  { return buf ? buf : ""; }
-    
+    /// return the buffer (writable, could be `NULL`)
+    char* getBuf () { return buf; }
+
     /// Waits to receive a message, ensures zero-termination in the buffer
-    long                recv();
+    virtual long        recv();
     /// Waits to receive a message with timeout, ensures zero-termination in the buffer
     long                timedRecv(int max_wait_ms);
     
@@ -135,7 +137,7 @@ public:
     
 protected:
     /// Sets flags to AI_PASSIVE, AF_INET, SOCK_DGRAM, IPPROTO_UDP
-    virtual void GetAddrHints (struct addrinfo& hints);
+    void GetAddrHints (struct addrinfo& hints) override;
 };
 
 
@@ -153,8 +155,11 @@ public:
     UDPMulticast(const std::string& _multicastAddr, int _port, int _ttl=8,
                  size_t _bufSize = 512, unsigned _timeOut_ms = 0);
     /// makes sure pMCAddr is cleared up
-    virtual ~UDPMulticast();
+    ~UDPMulticast() override;
     
+    /// the interface address
+    std::string getAddr() const override { return multicastAddr; }
+
     /// @brief Connect to the multicast group
     /// @exception XPMP2::NetRuntimeError in case of any errors
     void Join (const std::string& _multicastAddr, int _port, int _ttl=8,
@@ -172,6 +177,9 @@ public:
     /// @return Number of bytes received
     size_t RecvMC (std::string* _pFromAddr  = nullptr,
                    sockaddr* _pFromSockAddr = nullptr);
+
+    /// Waits to receive a message, ensures zero-termination in the buffer
+    long recv() override { return RecvMC(); }
 
 protected:
     void Cleanup ();                    ///< frees pMCAddr
@@ -199,7 +207,7 @@ public:
                   unsigned _timeOut_ms = 0) :
         SocketNetworking(_addr,_port,_bufSize,_timeOut_ms) {}
     
-    virtual void Close();       ///< also close session connection
+    void Close() override;      ///< also close session connection
     void CloseListenerOnly();   ///< only closes the listening socket, but not a connected session
 
     void listen (int numConnections = 1);       ///< listen for incoming connections
@@ -213,7 +221,7 @@ public:
     bool send(const char* msg);
 
 protected:
-    virtual void GetAddrHints (struct addrinfo& hints);
+    void GetAddrHints (struct addrinfo& hints) override;
 };
 
 

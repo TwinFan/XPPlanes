@@ -61,9 +61,11 @@ public:
     
     /// @brief The multicast group that we use, which is the same X-Plane is using itself for its BEACON
     /// @see <X-Plane>/Instructions/Exchanging Data with X-Plane.rtfd, chapter "DISCOVER X-PLANE BY A BEACON"
-    std::string     remoteMCGroup   = "239.255.1.1";
+    std::string     listenMCGroup   = "239.255.1.1";
     /// The port we use is _different_ from the port the X-Plane BEACON uses, so we don't get into conflict
-    int             remotePort      = 49900;
+    int             listenMCPort    = 49900;
+    /// The port for receiving UDP broadcast messages
+    int             listenBcstPort  = 49800;
     /// Time-to-live, or mumber of hops for a multicast message
     int             remoteTTL       = 8;
     /// Buffer size, ie. max message length we send over multicast

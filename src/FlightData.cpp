@@ -21,6 +21,52 @@
 
 #include "XPPlanes.h"
 
+//
+// MARK: Object Creation
+//
+
+// Constructor: Creates a FlightData object from received network data
+FlightData::FlightData (const std::string& s)
+{
+    if (!FillFromNetworkData(s)) {
+        throw(FlightData_error("Couldn't interpret network data as FlightData"));
+    }
+}
+
+// Has usable data? (Has at least position information)
+bool FlightData::IsUsable () const
+{
+    return
+    _modeS_id != 0 &&                       // has an id
+    !std::isnan(lat) &&                     // has a position
+    !std::isnan(lon) &&
+    (!std::isnan(alt_m) || bGnd);           // and altitude information
+}
+
+// Reads flight data from the passed-in network data, identifying the type of data, then calling the appropriate conversion function
+bool FlightData::FillFromNetworkData (const std::string& s)
+{
+    // We need something to work on...
+    if (s.length() < 10) {
+        LOG_MSG(logDEBUG, "Too short");
+        return false;
+    }
+    
+    // Try RTTFC
+    if (s.substr(0,5) == "RTTFC")
+        return FillFromRTTFC(s);
+    // Didn't match anything we know
+    else {
+        LOG_MSG(logDEBUG, "Not matching any known format");
+        return false;
+    }
+}
+
+
+//
+// MARK: Global Functions
+//
+
 // Initialize the FlightData module
 bool FlightDataStartup ()
 {

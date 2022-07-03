@@ -21,3 +21,11 @@
 #pragma once
 
 #define XPPLANES "XPPlanes"
+
+// Helpers for converting barometric altitude (approx) to geo altitude
+constexpr double HPA_STANDARD   = 1013.25;      ///< standard air pressure
+/// @brief The pressure drops approximately by 11.3 Pa per meter in first 1000 meters above sea level.
+/// @see https://en.wikipedia.org/wiki/Barometric_formula
+constexpr double PA_per_M       = 11.3;
+/// ft altitude diff per hPa change
+constexpr double FT_per_HPA     = (100/PA_per_M)/XPMP2::M_per_FT;
