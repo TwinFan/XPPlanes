@@ -76,12 +76,24 @@ public:
     /// Constructor: Creates a FlightData object from received network data
     FlightData (const std::string& s);
     
+    /// Order is solely by timestamp
+    bool operator< (const FlightData& o) const { return ts < o.ts; }
+    
     /// Has usable data? (Has at least position information)
     bool IsUsable () const;
     
+    /// Convert to XP's drawInfo
+    operator XPLMDrawInfo_t () const;
+    
 protected:
-    /// Reads flight data from the passed-in network data, identifying the type of data, then calling the appropriate conversion function
+    /// @brief Reads flight data from the passed-in network data, identifying the type of data, then calling the appropriate conversion function
+    /// @returns if any converter worked and produced usable data
     bool FillFromNetworkData (const std::string& s);
+    
+    // The following format-handling functions shall
+    // 1. verify if the format matches expectation, if not exit quickly,
+    // 2. fill fields from the data
+    // Return if conversion was technically successful
     
     /// @brief RTTFC: Interprets the data as an RTTFC line
     /// @see https://www.flyrealtraffic.com/RTdev2.0.pdf

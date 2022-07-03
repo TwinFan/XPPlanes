@@ -67,23 +67,24 @@ Currently, there is no user interface available for configuring the plugin. But 
 <X-Plane>/Output/preferences/XPPlanes.prf
 ```
 It includes the following config entries:
-Item | Description
------|------------
-LogLevel 0 | Logging level: 0 - Debug (most output) ... 4 - Fatal (least output)
-LogModelMatch 0 | Log model matching?
-ObjReplDataRefs 1 | Replace dataRefs in CSL models? ([more details](https://twinfan.github.io/XPMP2/CopyingObjFiles.html))
-ObjReplTextures 1 | Replace textures in CSL models? ([more details](https://twinfan.github.io/XPMP2/CopyingObjFiles.html))
-TCAS_Control 1 | Acquire control over TCAS/AI planes upon startup?
-PlanesMaxDist 50 | Max distance to display aircraft around camera in nm
-PlanesClampAll 0 | Enforce clamping of all planes above ground?
-LabelsDraw 1 | Draw plane labels
-LabelsMaxDist 5556 | Max distance in meter to draw labels
-LabelsCutMaxVisible 1 | Don't draw labels for planes father away than visibility
-MapEnable 1 | Support display of planes in X-Plane's map?
-MapLabels 1 | Add labels to planes in X-Plane's map?
-NetMCGroup 239.255.1.1 | Multicast group the plugin listens to for flight data
-NetMCPort 49900 | UDP Multicast port the plugin listens to for flight data, `0` switches off
-NetBcstPort 49800 | UDP Broadcast port the plugin listens to for flight data, `0` switches off, e.g. `49005` would listen to RealTraffic's RTTFC data
-NetTTL 8 | Time-to-live of network multicast messages
-NetBufSize 8192 | (Max) network buffer size in bytes
+Item                    | Description
+------------------------|-----------------------------------
+LogLevel 0              | Logging level: 0 - Debug (most output) ... 4 - Fatal (least output)
+LogModelMatch 0         | Log model matching?
+ObjReplDataRefs 1       | Replace dataRefs in CSL models? ([more details](https://twinfan.github.io/XPMP2/CopyingObjFiles.html))
+ObjReplTextures 1       | Replace textures in CSL models? ([more details](https://twinfan.github.io/XPMP2/CopyingObjFiles.html))
+TCAS_Control 1          | Acquire control over TCAS/AI planes upon startup?
+PlanesMaxDist 50        | Max distance to display aircraft around camera in nm
+PlanesOutdatedPeriod 30 | Seconds after which a plane without fresh data is removed
+PlanesClampAll 0        | Enforce clamping of all planes above ground?
+LabelsDraw 1            | Draw plane labels
+LabelsMaxDist 5556      | Max distance in meter to draw labels
+LabelsCutMaxVisible 1   | Don't draw labels for planes father away than visibility
+MapEnable 1             | Support display of planes in X-Plane's map?
+MapLabels 1             | Add labels to planes in X-Plane's map?
+NetMCGroup 239.255.1.1  | Multicast group the plugin listens to for flight data
+NetMCPort 49900         | UDP Multicast port the plugin listens to for flight data, `0` switches off
+NetBcstPort 49800       | UDP Broadcast port the plugin listens to for flight data, `0` switches off, e.g. `49005` would listen to RealTraffic's RTTFC data
+NetTTL 8                | Time-to-live of network multicast messages
+NetBufSize 8192         | (Max) network buffer size in bytes
 

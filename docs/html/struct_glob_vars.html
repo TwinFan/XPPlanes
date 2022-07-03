@@ -101,6 +101,9 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a7eab35b63c3398adb5c8b4e58ff15c4a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_glob_vars.html#a7eab35b63c3398adb5c8b4e58ff15c4a">maxPlaneDist</a> = 50</td></tr>
 <tr class="memdesc:a7eab35b63c3398adb5c8b4e58ff15c4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Max distance from camera [nm].  <a href="struct_glob_vars.html#a7eab35b63c3398adb5c8b4e58ff15c4a">More...</a><br /></td></tr>
 <tr class="separator:a7eab35b63c3398adb5c8b4e58ff15c4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5176c527bbce04ec0cddb92a46a05c45"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_glob_vars.html#a5176c527bbce04ec0cddb92a46a05c45">outdatedPeriod</a> = 30</td></tr>
+<tr class="memdesc:a5176c527bbce04ec0cddb92a46a05c45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a plane after how many seconds without fresh data?  <a href="struct_glob_vars.html#a5176c527bbce04ec0cddb92a46a05c45">More...</a><br /></td></tr>
+<tr class="separator:a5176c527bbce04ec0cddb92a46a05c45"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d36990da7b156479096340716547dea"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_glob_vars.html#a5d36990da7b156479096340716547dea">bDrawLabels</a> = true</td></tr>
 <tr class="memdesc:a5d36990da7b156479096340716547dea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shall we draw aircraft labels?  <a href="struct_glob_vars.html#a5d36990da7b156479096340716547dea">More...</a><br /></td></tr>
 <tr class="separator:a5d36990da7b156479096340716547dea"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -558,7 +561,7 @@ Public Attributes</h2></td></tr>
 <b>Initial value:</b><div class="fragment"><div class="line">=</div>
 <div class="line"> </div>
 <div class="line">                              <a class="code" href="_utilities_8h.html#af9756fb0e490680af11a06052249b86aa1101ecfc407894ef3d771d6bda32053e">logDEBUG</a></div>
-<div class="ttc" id="a_utilities_8h_html_af9756fb0e490680af11a06052249b86aa1101ecfc407894ef3d771d6bda32053e"><div class="ttname"><a href="_utilities_8h.html#af9756fb0e490680af11a06052249b86aa1101ecfc407894ef3d771d6bda32053e">logDEBUG</a></div><div class="ttdeci">@ logDEBUG</div><div class="ttdoc">Debug, highest level of detail.</div><div class="ttdef"><b>Definition:</b> Utilities.h:115</div></div>
+<div class="ttc" id="a_utilities_8h_html_af9756fb0e490680af11a06052249b86aa1101ecfc407894ef3d771d6bda32053e"><div class="ttname"><a href="_utilities_8h.html#af9756fb0e490680af11a06052249b86aa1101ecfc407894ef3d771d6bda32053e">logDEBUG</a></div><div class="ttdeci">@ logDEBUG</div><div class="ttdoc">Debug, highest level of detail.</div><div class="ttdef"><b>Definition:</b> Utilities.h:120</div></div>
 </div><!-- fragment -->
 <p>Logging level. </p>
 
@@ -657,6 +660,22 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Current X-Xplane's time. </p>
+
+</div>
+</div>
+<a id="a5176c527bbce04ec0cddb92a46a05c45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5176c527bbce04ec0cddb92a46a05c45">&#9670;&nbsp;</a></span>outdatedPeriod</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GlobVars::outdatedPeriod = 30</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Remove a plane after how many seconds without fresh data? </p>
 
 </div>
 </div>

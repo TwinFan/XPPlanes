@@ -44,6 +44,9 @@ public:
     
     /// Max distance from camera [nm]
     int             maxPlaneDist = 50;
+// TODO: Allow for a buffering period
+    /// Remove a plane after how many seconds without fresh data?
+    int             outdatedPeriod = 30;
     /// Shall we draw aircraft labels?
     bool            bDrawLabels = true;
     /// Maximum distance for drawing labels? [m], defaults to 3nm

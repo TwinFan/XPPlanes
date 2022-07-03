@@ -66,9 +66,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a819140c84ef28a8c2524f53f38f64a30"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_flight_data.html#a819140c84ef28a8c2524f53f38f64a30">FlightData</a> (const std::string &amp;s)</td></tr>
 <tr class="memdesc:a819140c84ef28a8c2524f53f38f64a30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Creates a <a class="el" href="class_flight_data.html" title="Transports flight data for location, attitude, configuration between the network and the main thread.">FlightData</a> object from received network data.  <a href="class_flight_data.html#a819140c84ef28a8c2524f53f38f64a30">More...</a><br /></td></tr>
 <tr class="separator:a819140c84ef28a8c2524f53f38f64a30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af637ccefd378b7a5dfbf5181708dd1c5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_flight_data.html#af637ccefd378b7a5dfbf5181708dd1c5">operator&lt;</a> (const <a class="el" href="class_flight_data.html">FlightData</a> &amp;o) const</td></tr>
+<tr class="memdesc:af637ccefd378b7a5dfbf5181708dd1c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Order is solely by timestamp.  <a href="class_flight_data.html#af637ccefd378b7a5dfbf5181708dd1c5">More...</a><br /></td></tr>
+<tr class="separator:af637ccefd378b7a5dfbf5181708dd1c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a691ccd8026bf6d7bac327136aaea4f9b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_flight_data.html#a691ccd8026bf6d7bac327136aaea4f9b">IsUsable</a> () const</td></tr>
 <tr class="memdesc:a691ccd8026bf6d7bac327136aaea4f9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Has usable data? (Has at least position information)  <a href="class_flight_data.html#a691ccd8026bf6d7bac327136aaea4f9b">More...</a><br /></td></tr>
 <tr class="separator:a691ccd8026bf6d7bac327136aaea4f9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c5f0ed307c8f4a7dc63846cc5e6774d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_flight_data.html#a9c5f0ed307c8f4a7dc63846cc5e6774d">operator XPLMDrawInfo_t</a> () const</td></tr>
+<tr class="memdesc:a9c5f0ed307c8f4a7dc63846cc5e6774d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert to XP's drawInfo.  <a href="class_flight_data.html#a9c5f0ed307c8f4a7dc63846cc5e6774d">More...</a><br /></td></tr>
+<tr class="separator:a9c5f0ed307c8f4a7dc63846cc5e6774d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -233,6 +239,7 @@ taxi lights </td></tr>
 </div><div class="memdoc">
 
 <p>Reads flight data from the passed-in network data, identifying the type of data, then calling the appropriate conversion function. </p>
+<dl class="section return"><dt>Returns</dt><dd>if any converter worked and produced usable data </dd></dl>
 
 </div>
 </div>
@@ -281,6 +288,53 @@ taxi lights </td></tr>
 </div><div class="memdoc">
 
 <p>Has usable data? (Has at least position information) </p>
+
+</div>
+</div>
+<a id="a9c5f0ed307c8f4a7dc63846cc5e6774d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c5f0ed307c8f4a7dc63846cc5e6774d">&#9670;&nbsp;</a></span>operator XPLMDrawInfo_t()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">FlightData::operator XPLMDrawInfo_t </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Convert to XP's drawInfo. </p>
+
+</div>
+</div>
+<a id="af637ccefd378b7a5dfbf5181708dd1c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af637ccefd378b7a5dfbf5181708dd1c5">&#9670;&nbsp;</a></span>operator&lt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool FlightData::operator&lt; </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_flight_data.html">FlightData</a> &amp;&#160;</td>
+          <td class="paramname"><em>o</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Order is solely by timestamp. </p>
 
 </div>
 </div>

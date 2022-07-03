@@ -135,23 +135,28 @@ void ListenMain()
                         continue;
                     
                     // Receive the data
-                    const size_t recvSize = pNet->recv();
+                    const long recvSize = pNet->recv();
                     if (recvSize < 10) {
-                        LOG_MSG(logWARN, "Received too small message with just %lu bytes: %s", (unsigned long)recvSize, pNet->getBuf());
+                        LOG_MSG(logWARN, "Received too small message with just %ld bytes: %s", recvSize, pNet->getBuf());
                         continue;
                     }
                     
                     // buffer to network data
                     const char* theData = pNet->getBuf();
                     
-                    // Convert the data into a FlightData object, that can fail and would raise an exception
+                    // *** Data Conversin
                     ptrFlightDataTy pFD;
                     try {
+                        // Convert the data into a FlightData object (done in FlightData constructor),
+                        // that can fail and would raise a FlightData_error exception
                         pFD = std::make_shared<FlightData>(theData);
+                        
                         // insertion into the map/list of flight data is protected by a mutex
                         std::lock_guard<std::mutex> guard(glob.mtxListFD);
                         listFlightDataTy& listFD = glob.mapListFD[pFD->_modeS_id];
-                        listFD.emplace_back(std::move(pFD));
+                        if (listFD.empty() ||
+                            listFD.back()->ts + MIN_TS_DIFF < pFD->ts)  // only add if data is newer, this way it stays sorted
+                            listFD.emplace_back(std::move(pFD));
                     }
                     catch (const FlightData_error& e) {
                         LOG_MSG(logDEBUG, "Couldn't convert to FlightData object, unknown format or data insufficient:\n%.80s", theData);

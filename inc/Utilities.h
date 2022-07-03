@@ -58,6 +58,11 @@ std::istream& safeGetline(std::istream& is, std::string& t);
 inline double WeatherAltCorr_ft (double pressureAlt_ft, double hPa)
 { return pressureAlt_ft + ((hPa - HPA_STANDARD) * FT_per_HPA); }
 
+/// Replace NAN with 0.0
+template<typename T>
+inline T NZ (T v)
+{ return std::isnan(v) ? T(0) : v; }
+
 //
 // MARK: String functions
 //

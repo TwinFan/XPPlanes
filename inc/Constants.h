@@ -29,3 +29,6 @@ constexpr double HPA_STANDARD   = 1013.25;      ///< standard air pressure
 constexpr double PA_per_M       = 11.3;
 /// ft altitude diff per hPa change
 constexpr double FT_per_HPA     = (100/PA_per_M)/XPMP2::M_per_FT;
+
+/// Minimum time expected between two position to allow for meaningful interpolation
+constexpr auto MIN_TS_DIFF = std::chrono::milliseconds(200);

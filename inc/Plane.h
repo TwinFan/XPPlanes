@@ -40,6 +40,9 @@ public:
            XPMPPlaneID _modeS_id = 0,
            const std::string& _cslId = "");
     
+    /// @brief Create a new plane from two flight data objects
+    Plane (ptrFlightDataTy&& from, ptrFlightDataTy&& to);
+    
     /// Destructor cleans up all resources acquired
     ~Plane() override;
     
@@ -47,17 +50,32 @@ public:
     void UpdatePosition (float _elapsedSinceLastCall, int _flCounter) override;
 
 protected:
-    /// Is this plane to be removed next flight loop?
-    bool    bToBeRemoved = false;
+    ptrFlightDataTy fdFrom;         ///< the from-position for interpolation
+    ptrFlightDataTy fdTo;           ///< the to-position for interpolation
+    XPLMDrawInfo_t  diFrom;         ///< the from-position in XP speak
+    XPLMDrawInfo_t  diTo;           ///< the to-position in XP speak
+    XPLMProbeRef hProbe = NULL;     ///< probe reference needed to determine
     
 public:
+    /// Regularly called to update from/to positions from the list of available flight data
+    void UpdateFromFlightData (listFlightDataTy& listFD,
+                               const tsTy& now);
+    
+    /// Determine ground altitude of a given location
+    void DetermineGndAlt (ptrFlightDataTy& fd);
+    
     /// @brief Determines if this plane shall be removed, sets `bToBeRemoved` if so
     /// @details Reasons for removal:
     ///          - no updates for too long
     ///          - too far away from camera
-    bool ComputeToBeRemoved ();
-    /// Shall this plane be removed?
-    bool ShallBeRemoved () const { return bToBeRemoved; }
+    bool ShallBeRemoved (const tsTy& cutOff) const;
+    
+    // This data is updated once per cycle, then reused by other Update... calls
+protected:
+    static int flCounter;           ///< flight loop counter of last update
+    static float ticksNow;          ///< 'now' timestamp in ticks since epoch
+    /// perform once-per-cycle activities
+    static void OncePerCycle (int _flCounter);
 };
 
 /// Type of the map that stores and owns the plane objects
@@ -72,3 +90,6 @@ bool PlaneStartup();
 
 /// Shutdown the plane module
 void PlaneShutdown();
+
+/// Regular updates from flight data
+void PlaneMaintenance ();

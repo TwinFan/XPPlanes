@@ -43,23 +43,32 @@ bool FlightData::IsUsable () const
     (!std::isnan(alt_m) || bGnd);           // and altitude information
 }
 
+// Convert to XP's drawInfo
+FlightData::operator XPLMDrawInfo_t () const
+{
+    double X, Y, Z;
+    XPLMWorldToLocal(lat, lon, NZ(alt_m),
+                     &X, &Y, &Z);
+    return XPLMDrawInfo_t { sizeof(XPLMDrawInfo_t),
+                            float(X), float(Y), float(Z),
+                            NZ(pitch), NZ(heading), NZ(roll) };
+}
+
 // Reads flight data from the passed-in network data, identifying the type of data, then calling the appropriate conversion function
 bool FlightData::FillFromNetworkData (const std::string& s)
 {
-    // We need something to work on...
-    if (s.length() < 10) {
-        LOG_MSG(logDEBUG, "Too short");
-        return false;
+    // Try the different formats the we support
+    if (FillFromRTTFC(s))
+    {
+        // One of the format accepted the input. Was it sufficiently detailed?
+        if (!IsUsable()) {
+            LOG_MSG(logDEBUG, "Not enough informaton in the data to be usable");
+            return false;
+        }
+        return true;
     }
-    
-    // Try RTTFC
-    if (s.substr(0,5) == "RTTFC")
-        return FillFromRTTFC(s);
-    // Didn't match anything we know
-    else {
-        LOG_MSG(logDEBUG, "Not matching any known format");
-        return false;
-    }
+    LOG_MSG(logDEBUG, "No format converter could make use of the data");
+    return false;
 }
 
 

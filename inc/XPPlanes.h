@@ -60,6 +60,7 @@
 #include "XPLMDataAccess.h"
 #include "XPLMPlugin.h"
 #include "XPLMMenus.h"
+#include "XPLMGraphics.h"
 
 // XPMP2 - Public Header Files
 #include "XPMPMultiplayer.h"

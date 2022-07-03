@@ -123,6 +123,10 @@ Functions</h2></td></tr>
 <tr class="memitem:ab24e32d4c6fb314df02e139b5a4e80e7"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_utilities_8h.html#ab24e32d4c6fb314df02e139b5a4e80e7">WeatherAltCorr_ft</a> (double pressureAlt_ft, double hPa)</td></tr>
 <tr class="memdesc:ab24e32d4c6fb314df02e139b5a4e80e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute geometric altitude [ft] from pressure altitude and current weather in a very simplistic manner good enough for the first 3,000ft.  <a href="_utilities_8h.html#ab24e32d4c6fb314df02e139b5a4e80e7">More...</a><br /></td></tr>
 <tr class="separator:ab24e32d4c6fb314df02e139b5a4e80e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac1ac3faf6f259716e858da72b02d3f85"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ac1ac3faf6f259716e858da72b02d3f85"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="_utilities_8h.html#ac1ac3faf6f259716e858da72b02d3f85">NZ</a> (T v)</td></tr>
+<tr class="memdesc:ac1ac3faf6f259716e858da72b02d3f85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replace NAN with 0.0.  <a href="_utilities_8h.html#ac1ac3faf6f259716e858da72b02d3f85">More...</a><br /></td></tr>
+<tr class="separator:ac1ac3faf6f259716e858da72b02d3f85"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9fd1c9062a6a78adb1a395e9a629227"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_utilities_8h.html#ad9fd1c9062a6a78adb1a395e9a629227">str_n</a> (const char *s, size_t max)</td></tr>
 <tr class="memdesc:ad9fd1c9062a6a78adb1a395e9a629227"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy <em>at most</em> <code>n</code> chars from location, or less if zero-terminated.  <a href="_utilities_8h.html#ad9fd1c9062a6a78adb1a395e9a629227">More...</a><br /></td></tr>
 <tr class="separator:ad9fd1c9062a6a78adb1a395e9a629227"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -586,6 +590,36 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 </div><div class="memdoc">
 
 <p>Log Text to log file. </p>
+
+</div>
+</div>
+<a id="ac1ac3faf6f259716e858da72b02d3f85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac1ac3faf6f259716e858da72b02d3f85">&#9670;&nbsp;</a></span>NZ()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">T NZ </td>
+          <td>(</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Replace NAN with 0.0. </p>
 
 </div>
 </div>

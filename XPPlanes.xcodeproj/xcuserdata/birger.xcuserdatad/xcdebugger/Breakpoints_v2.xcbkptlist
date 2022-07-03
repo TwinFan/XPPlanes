@@ -7,145 +7,81 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "FED4FE6C-4357-48ED-B0AD-162E1923EC17"
+            uuid = "3C7F401F-B929-4742-8BC6-732AD172627F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "src/Listener.cpp"
+            filePath = "src/Plane.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "154"
-            endingLineNumber = "154"
-            landmarkName = "ListenMain()"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "PlaneMaintenance()"
             landmarkType = "9">
-            <Locations>
-               <Location
-                  uuid = "FED4FE6C-4357-48ED-B0AD-162E1923EC17 - 246fdeff6a8c65af"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ListenMain()"
-                  moduleName = "XPPlanes.xpl"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/birger/Programming/XPlane/XPPlanes/src/Listener.cpp"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "155"
-                  endingLineNumber = "155"
-                  offsetFromSymbolStart = "3601">
-               </Location>
-               <Location
-                  uuid = "FED4FE6C-4357-48ED-B0AD-162E1923EC17 - 246fdeff6a8c658e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ListenMain()"
-                  moduleName = "XPPlanes.xpl"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/birger/Programming/XPlane/XPPlanes/src/Listener.cpp"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "154"
-                  endingLineNumber = "154"
-                  offsetFromSymbolStart = "3334">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "FA1FAC20-DC42-4D96-8382-B7066B37763E"
+            uuid = "7B136DFB-3700-41D8-A2F7-A3F46B127C67"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "src/Listener.cpp"
+            filePath = "src/Plane.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
-            landmarkName = "ListenMain()"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "PlaneMaintenance()"
             landmarkType = "9">
-            <Locations>
-               <Location
-                  uuid = "FA1FAC20-DC42-4D96-8382-B7066B37763E - 246fdeff6a8c682c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ListenMain()"
-                  moduleName = "XPPlanes.xpl"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/birger/Programming/XPlane/XPPlanes/src/Listener.cpp"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "120"
-                  endingLineNumber = "120"
-                  offsetFromSymbolStart = "2387">
-               </Location>
-               <Location
-                  uuid = "FA1FAC20-DC42-4D96-8382-B7066B37763E - 246fdeff6a8c682c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ListenMain()"
-                  moduleName = "XPPlanes.xpl"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/birger/Programming/XPlane/XPPlanes/src/Listener.cpp"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "120"
-                  endingLineNumber = "120"
-                  offsetFromSymbolStart = "2329">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7F8EB8B8-7F11-43B6-B89E-801AE6D5DFC1"
+            uuid = "BE4455E8-2193-4541-873F-461F2D389786"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "src/Listener.cpp"
+            filePath = "src/Plane.cpp"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
-            landmarkName = "ListenMain()"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
+            landmarkName = "PlaneMaintenance()"
             landmarkType = "9">
-            <Locations>
-               <Location
-                  uuid = "7F8EB8B8-7F11-43B6-B89E-801AE6D5DFC1 - 246fdeff6a8c6e99"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ListenMain()"
-                  moduleName = "XPPlanes.xpl"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/birger/Programming/XPlane/XPPlanes/src/Listener.cpp"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "69"
-                  endingLineNumber = "69"
-                  offsetFromSymbolStart = "373">
-               </Location>
-               <Location
-                  uuid = "7F8EB8B8-7F11-43B6-B89E-801AE6D5DFC1 - 246fdeff6a8c6ef8"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ListenMain()"
-                  moduleName = "XPPlanes.xpl"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/birger/Programming/XPlane/XPPlanes/src/Listener.cpp"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "68"
-                  endingLineNumber = "68"
-                  offsetFromSymbolStart = "208">
-               </Location>
-            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D69B0061-AEDB-4AD3-8B6B-7C36D493A6F1"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/Plane.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "164"
+            endingLineNumber = "164"
+            landmarkName = "Plane::Plane(from, to)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B9D05F34-B7B3-435D-BD0F-0A1E0F8FB271"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/Plane.cpp"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "187"
+            endingLineNumber = "187"
+            landmarkName = "Plane::UpdatePosition(, _flCounter)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -179,7 +179,7 @@ public:
                    sockaddr* _pFromSockAddr = nullptr);
 
     /// Waits to receive a message, ensures zero-termination in the buffer
-    long recv() override { return RecvMC(); }
+    long recv() override { return long(RecvMC()); }
 
 protected:
     void Cleanup ();                    ///< frees pMCAddr

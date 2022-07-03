@@ -41,7 +41,9 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
+<a href="#pro-static-attribs">Static Protected Attributes</a> &#124;
 <a href="class_plane-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Plane Class Reference</div>  </div>
@@ -63,28 +65,61 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a98c47ea6eb2ce5bc21fa3d5c6cf902de"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plane.html#a98c47ea6eb2ce5bc21fa3d5c6cf902de">Plane</a> (const std::string &amp;_icaoType, const std::string &amp;_icaoAirline, const std::string &amp;_livery, XPMPPlaneID _modeS_id=0, const std::string &amp;_cslId=&quot;&quot;)</td></tr>
 <tr class="memdesc:a98c47ea6eb2ce5bc21fa3d5c6cf902de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor creates a new aircraft object, which will be managed and displayed.  <a href="class_plane.html#a98c47ea6eb2ce5bc21fa3d5c6cf902de">More...</a><br /></td></tr>
 <tr class="separator:a98c47ea6eb2ce5bc21fa3d5c6cf902de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d9c8cc0f8358515ec615a13793e76cc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plane.html#a6d9c8cc0f8358515ec615a13793e76cc">Plane</a> (<a class="el" href="_flight_data_8h.html#acba488d7341fd70a01d64313e3bc0eb1">ptrFlightDataTy</a> &amp;&amp;from, <a class="el" href="_flight_data_8h.html#acba488d7341fd70a01d64313e3bc0eb1">ptrFlightDataTy</a> &amp;&amp;to)</td></tr>
+<tr class="memdesc:a6d9c8cc0f8358515ec615a13793e76cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new plane from two flight data objects.  <a href="class_plane.html#a6d9c8cc0f8358515ec615a13793e76cc">More...</a><br /></td></tr>
+<tr class="separator:a6d9c8cc0f8358515ec615a13793e76cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a82d4b5c4a32418ea376f9bb84c9e586b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plane.html#a82d4b5c4a32418ea376f9bb84c9e586b">~Plane</a> () override</td></tr>
 <tr class="memdesc:a82d4b5c4a32418ea376f9bb84c9e586b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor cleans up all resources acquired.  <a href="class_plane.html#a82d4b5c4a32418ea376f9bb84c9e586b">More...</a><br /></td></tr>
 <tr class="separator:a82d4b5c4a32418ea376f9bb84c9e586b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa38ed9eb3813b3da5ad9decd6da037e4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plane.html#aa38ed9eb3813b3da5ad9decd6da037e4">UpdatePosition</a> (float _elapsedSinceLastCall, int _flCounter) override</td></tr>
 <tr class="memdesc:aa38ed9eb3813b3da5ad9decd6da037e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called by <a class="el" href="namespace_x_p_m_p2.html">XPMP2</a> right before updating the aircraft's placement in the world.  <a href="class_plane.html#aa38ed9eb3813b3da5ad9decd6da037e4">More...</a><br /></td></tr>
 <tr class="separator:aa38ed9eb3813b3da5ad9decd6da037e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aef7e94a7a7eb0963fc2e61cb24a43b6c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plane.html#aef7e94a7a7eb0963fc2e61cb24a43b6c">ComputeToBeRemoved</a> ()</td></tr>
-<tr class="memdesc:aef7e94a7a7eb0963fc2e61cb24a43b6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines if this plane shall be removed, sets <code>bToBeRemoved</code> if so.  <a href="class_plane.html#aef7e94a7a7eb0963fc2e61cb24a43b6c">More...</a><br /></td></tr>
-<tr class="separator:aef7e94a7a7eb0963fc2e61cb24a43b6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a51fa6157272c09618309ae2f0f08639d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plane.html#a51fa6157272c09618309ae2f0f08639d">ShallBeRemoved</a> () const</td></tr>
-<tr class="memdesc:a51fa6157272c09618309ae2f0f08639d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shall this plane be removed?  <a href="class_plane.html#a51fa6157272c09618309ae2f0f08639d">More...</a><br /></td></tr>
-<tr class="separator:a51fa6157272c09618309ae2f0f08639d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5bc1c37419ee6cd39803d67041d04233"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plane.html#a5bc1c37419ee6cd39803d67041d04233">UpdateFromFlightData</a> (<a class="el" href="_flight_data_8h.html#a4ec35781be599aff18154f41da0243cd">listFlightDataTy</a> &amp;listFD, const <a class="el" href="_flight_data_8h.html#af09343bf593690e7caceb1b17e33830c">tsTy</a> &amp;now)</td></tr>
+<tr class="memdesc:a5bc1c37419ee6cd39803d67041d04233"><td class="mdescLeft">&#160;</td><td class="mdescRight">Regularly called to update from/to positions from the list of available flight data.  <a href="class_plane.html#a5bc1c37419ee6cd39803d67041d04233">More...</a><br /></td></tr>
+<tr class="separator:a5bc1c37419ee6cd39803d67041d04233"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6079fb0bc0a047340781f669512ff44d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plane.html#a6079fb0bc0a047340781f669512ff44d">DetermineGndAlt</a> (<a class="el" href="_flight_data_8h.html#acba488d7341fd70a01d64313e3bc0eb1">ptrFlightDataTy</a> &amp;fd)</td></tr>
+<tr class="memdesc:a6079fb0bc0a047340781f669512ff44d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determine ground altitude of a given location.  <a href="class_plane.html#a6079fb0bc0a047340781f669512ff44d">More...</a><br /></td></tr>
+<tr class="separator:a6079fb0bc0a047340781f669512ff44d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a250e80253b8f206920f3298296d4d5ec"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plane.html#a250e80253b8f206920f3298296d4d5ec">ShallBeRemoved</a> (const <a class="el" href="_flight_data_8h.html#af09343bf593690e7caceb1b17e33830c">tsTy</a> &amp;cutOff) const</td></tr>
+<tr class="memdesc:a250e80253b8f206920f3298296d4d5ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines if this plane shall be removed, sets <code>bToBeRemoved</code> if so.  <a href="class_plane.html#a250e80253b8f206920f3298296d4d5ec">More...</a><br /></td></tr>
+<tr class="separator:a250e80253b8f206920f3298296d4d5ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-methods"></a>
+Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:ac460971b210632cd08f402ad64088628"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plane.html#ac460971b210632cd08f402ad64088628">OncePerCycle</a> (int _flCounter)</td></tr>
+<tr class="memdesc:ac460971b210632cd08f402ad64088628"><td class="mdescLeft">&#160;</td><td class="mdescRight">perform once-per-cycle activities  <a href="class_plane.html#ac460971b210632cd08f402ad64088628">More...</a><br /></td></tr>
+<tr class="separator:ac460971b210632cd08f402ad64088628"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:a36cd9de8dad7506014bfd9350f4b7e45"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plane.html#a36cd9de8dad7506014bfd9350f4b7e45">bToBeRemoved</a> = false</td></tr>
-<tr class="memdesc:a36cd9de8dad7506014bfd9350f4b7e45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Is this plane to be removed next flight loop?  <a href="class_plane.html#a36cd9de8dad7506014bfd9350f4b7e45">More...</a><br /></td></tr>
-<tr class="separator:a36cd9de8dad7506014bfd9350f4b7e45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a082062a7ed730bb4ab12a660d3f38da7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_flight_data_8h.html#acba488d7341fd70a01d64313e3bc0eb1">ptrFlightDataTy</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plane.html#a082062a7ed730bb4ab12a660d3f38da7">fdFrom</a></td></tr>
+<tr class="memdesc:a082062a7ed730bb4ab12a660d3f38da7"><td class="mdescLeft">&#160;</td><td class="mdescRight">the from-position for interpolation  <a href="class_plane.html#a082062a7ed730bb4ab12a660d3f38da7">More...</a><br /></td></tr>
+<tr class="separator:a082062a7ed730bb4ab12a660d3f38da7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a004ddfa8afe2a74c0ccaa25db8cac1a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_flight_data_8h.html#acba488d7341fd70a01d64313e3bc0eb1">ptrFlightDataTy</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plane.html#a004ddfa8afe2a74c0ccaa25db8cac1a6">fdTo</a></td></tr>
+<tr class="memdesc:a004ddfa8afe2a74c0ccaa25db8cac1a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">the to-position for interpolation  <a href="class_plane.html#a004ddfa8afe2a74c0ccaa25db8cac1a6">More...</a><br /></td></tr>
+<tr class="separator:a004ddfa8afe2a74c0ccaa25db8cac1a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9a73a5fcfa147d31f559a8fba65a8225"><td class="memItemLeft" align="right" valign="top">XPLMDrawInfo_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plane.html#a9a73a5fcfa147d31f559a8fba65a8225">diFrom</a></td></tr>
+<tr class="memdesc:a9a73a5fcfa147d31f559a8fba65a8225"><td class="mdescLeft">&#160;</td><td class="mdescRight">the from-position in XP speak  <a href="class_plane.html#a9a73a5fcfa147d31f559a8fba65a8225">More...</a><br /></td></tr>
+<tr class="separator:a9a73a5fcfa147d31f559a8fba65a8225"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10f467caef5529a4cb47e235dc334022"><td class="memItemLeft" align="right" valign="top">XPLMDrawInfo_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plane.html#a10f467caef5529a4cb47e235dc334022">diTo</a></td></tr>
+<tr class="memdesc:a10f467caef5529a4cb47e235dc334022"><td class="mdescLeft">&#160;</td><td class="mdescRight">the to-position in XP speak  <a href="class_plane.html#a10f467caef5529a4cb47e235dc334022">More...</a><br /></td></tr>
+<tr class="separator:a10f467caef5529a4cb47e235dc334022"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a355c0323ad649c60815d2896b5f6c621"><td class="memItemLeft" align="right" valign="top">XPLMProbeRef&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plane.html#a355c0323ad649c60815d2896b5f6c621">hProbe</a> = NULL</td></tr>
+<tr class="memdesc:a355c0323ad649c60815d2896b5f6c621"><td class="mdescLeft">&#160;</td><td class="mdescRight">probe reference needed to determine  <a href="class_plane.html#a355c0323ad649c60815d2896b5f6c621">More...</a><br /></td></tr>
+<tr class="separator:a355c0323ad649c60815d2896b5f6c621"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-attribs"></a>
+Static Protected Attributes</h2></td></tr>
+<tr class="memitem:abd9085e82c3aa4037f8c081adce6ecab"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plane.html#abd9085e82c3aa4037f8c081adce6ecab">flCounter</a> = -1</td></tr>
+<tr class="memdesc:abd9085e82c3aa4037f8c081adce6ecab"><td class="mdescLeft">&#160;</td><td class="mdescRight">flight loop counter of last update  <a href="class_plane.html#abd9085e82c3aa4037f8c081adce6ecab">More...</a><br /></td></tr>
+<tr class="separator:abd9085e82c3aa4037f8c081adce6ecab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9504a5cb65c8a625ee406d4f7779605d"><td class="memItemLeft" align="right" valign="top">static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plane.html#a9504a5cb65c8a625ee406d4f7779605d">ticksNow</a> = 0.0</td></tr>
+<tr class="memdesc:a9504a5cb65c8a625ee406d4f7779605d"><td class="mdescLeft">&#160;</td><td class="mdescRight">'now' timestamp  <a href="class_plane.html#a9504a5cb65c8a625ee406d4f7779605d">More...</a><br /></td></tr>
+<tr class="separator:a9504a5cb65c8a625ee406d4f7779605d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a98c47ea6eb2ce5bc21fa3d5c6cf902de"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a98c47ea6eb2ce5bc21fa3d5c6cf902de">&#9670;&nbsp;</a></span>Plane()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a98c47ea6eb2ce5bc21fa3d5c6cf902de">&#9670;&nbsp;</a></span>Plane() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -147,6 +182,36 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a6d9c8cc0f8358515ec615a13793e76cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d9c8cc0f8358515ec615a13793e76cc">&#9670;&nbsp;</a></span>Plane() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Plane::Plane </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="_flight_data_8h.html#acba488d7341fd70a01d64313e3bc0eb1">ptrFlightDataTy</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>from</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="_flight_data_8h.html#acba488d7341fd70a01d64313e3bc0eb1">ptrFlightDataTy</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>to</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Create a new plane from two flight data objects. </p>
+
+</div>
+</div>
 <a id="a82d4b5c4a32418ea376f9bb84c9e586b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a82d4b5c4a32418ea376f9bb84c9e586b">&#9670;&nbsp;</a></span>~Plane()</h2>
 
@@ -175,17 +240,66 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="aef7e94a7a7eb0963fc2e61cb24a43b6c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aef7e94a7a7eb0963fc2e61cb24a43b6c">&#9670;&nbsp;</a></span>ComputeToBeRemoved()</h2>
+<a id="a6079fb0bc0a047340781f669512ff44d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6079fb0bc0a047340781f669512ff44d">&#9670;&nbsp;</a></span>DetermineGndAlt()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool Plane::ComputeToBeRemoved </td>
+          <td class="memname">void Plane::DetermineGndAlt </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype"><a class="el" href="_flight_data_8h.html#acba488d7341fd70a01d64313e3bc0eb1">ptrFlightDataTy</a> &amp;&#160;</td>
+          <td class="paramname"><em>fd</em></td><td>)</td>
           <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Determine ground altitude of a given location. </p>
+
+</div>
+</div>
+<a id="ac460971b210632cd08f402ad64088628"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac460971b210632cd08f402ad64088628">&#9670;&nbsp;</a></span>OncePerCycle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Plane::OncePerCycle </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>_flCounter</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>perform once-per-cycle activities </p>
+
+</div>
+</div>
+<a id="a250e80253b8f206920f3298296d4d5ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a250e80253b8f206920f3298296d4d5ec">&#9670;&nbsp;</a></span>ShallBeRemoved()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Plane::ShallBeRemoved </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="_flight_data_8h.html#af09343bf593690e7caceb1b17e33830c">tsTy</a> &amp;&#160;</td>
+          <td class="paramname"><em>cutOff</em></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -198,30 +312,33 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a51fa6157272c09618309ae2f0f08639d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a51fa6157272c09618309ae2f0f08639d">&#9670;&nbsp;</a></span>ShallBeRemoved()</h2>
+<a id="a5bc1c37419ee6cd39803d67041d04233"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5bc1c37419ee6cd39803d67041d04233">&#9670;&nbsp;</a></span>UpdateFromFlightData()</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool Plane::ShallBeRemoved </td>
+          <td class="memname">void Plane::UpdateFromFlightData </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
+          <td class="paramtype"><a class="el" href="_flight_data_8h.html#a4ec35781be599aff18154f41da0243cd">listFlightDataTy</a> &amp;&#160;</td>
+          <td class="paramname"><em>listFD</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="_flight_data_8h.html#af09343bf593690e7caceb1b17e33830c">tsTy</a> &amp;&#160;</td>
+          <td class="paramname"><em>now</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p>Shall this plane be removed? </p>
+<p>Regularly called to update from/to positions from the list of available flight data. </p>
 
 </div>
 </div>
@@ -264,8 +381,8 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a36cd9de8dad7506014bfd9350f4b7e45"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a36cd9de8dad7506014bfd9350f4b7e45">&#9670;&nbsp;</a></span>bToBeRemoved</h2>
+<a id="a9a73a5fcfa147d31f559a8fba65a8225"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a73a5fcfa147d31f559a8fba65a8225">&#9670;&nbsp;</a></span>diFrom</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -274,7 +391,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool Plane::bToBeRemoved = false</td>
+          <td class="memname">XPLMDrawInfo_t Plane::diFrom</td>
         </tr>
       </table>
   </td>
@@ -284,7 +401,152 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Is this plane to be removed next flight loop? </p>
+<p>the from-position in XP speak </p>
+
+</div>
+</div>
+<a id="a10f467caef5529a4cb47e235dc334022"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10f467caef5529a4cb47e235dc334022">&#9670;&nbsp;</a></span>diTo</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">XPLMDrawInfo_t Plane::diTo</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>the to-position in XP speak </p>
+
+</div>
+</div>
+<a id="a082062a7ed730bb4ab12a660d3f38da7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a082062a7ed730bb4ab12a660d3f38da7">&#9670;&nbsp;</a></span>fdFrom</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="_flight_data_8h.html#acba488d7341fd70a01d64313e3bc0eb1">ptrFlightDataTy</a> Plane::fdFrom</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>the from-position for interpolation </p>
+
+</div>
+</div>
+<a id="a004ddfa8afe2a74c0ccaa25db8cac1a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a004ddfa8afe2a74c0ccaa25db8cac1a6">&#9670;&nbsp;</a></span>fdTo</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="_flight_data_8h.html#acba488d7341fd70a01d64313e3bc0eb1">ptrFlightDataTy</a> Plane::fdTo</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>the to-position for interpolation </p>
+
+</div>
+</div>
+<a id="abd9085e82c3aa4037f8c081adce6ecab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd9085e82c3aa4037f8c081adce6ecab">&#9670;&nbsp;</a></span>flCounter</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Plane::flCounter = -1</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>flight loop counter of last update </p>
+
+</div>
+</div>
+<a id="a355c0323ad649c60815d2896b5f6c621"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a355c0323ad649c60815d2896b5f6c621">&#9670;&nbsp;</a></span>hProbe</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">XPLMProbeRef Plane::hProbe = NULL</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>probe reference needed to determine </p>
+
+</div>
+</div>
+<a id="a9504a5cb65c8a625ee406d4f7779605d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9504a5cb65c8a625ee406d4f7779605d">&#9670;&nbsp;</a></span>ticksNow</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Plane::ticksNow = 0.0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>'now' timestamp </p>
+<p>'now' timestamp in ticks since epoch </p>
 
 </div>
 </div>

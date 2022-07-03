@@ -82,6 +82,7 @@ static CfgInfoTy CFGINFO[] = {
     { "ObjReplTextures",        glob.bObjReplTextures           },
     { "TCAS_Control",           glob.bAITcasControl             },
     { "PlanesMaxDist",          glob.maxPlaneDist               },
+    { "PlanesOutdatedPeriod",   glob.outdatedPeriod             },
     { "PlanesClampAll",         glob.bClampAll                  },
     { "LabelsDraw",             glob.bDrawLabels                },
     { "LabelsMaxDist",          glob.maxLabelDist               },

@@ -21,6 +21,126 @@
 #include "XPPlanes.h"
 
 //
+// MARK: Globally before XPMP2-triggered updates
+//
+
+void PlaneMaintenance ()
+{
+    // *** Update from FlightData lists***
+    tsTy now = std::chrono::system_clock::now();
+    
+    // Loop over map/list of flight data and see if we need to create or update planes
+    std::lock_guard<std::mutex> guard(glob.mtxListFD);      // guarded by a mutex so that network thread doesn't update
+    for (auto iPlaneFD = glob.mapListFD.begin();
+         iPlaneFD != glob.mapListFD.end();)
+    {
+        // if there is no data then remove the plane's entry
+        if (iPlaneFD->second.empty()) {
+            iPlaneFD = glob.mapListFD.erase(iPlaneFD);
+            continue;
+        }
+        
+        // Is there already a matching plane?
+        try {
+            Plane& plane = glob.mapPlanes.at(iPlaneFD->first);
+            plane.UpdateFromFlightData(iPlaneFD->second, now);
+        }
+        catch (const std::out_of_range&) {
+            // there is no such plane yet, do we have enough data to create one?
+            if (iPlaneFD->second.size() >= 2) {
+                // fetch the two starting position from the list
+                ptrFlightDataTy from = std::move(iPlaneFD->second.front());
+                iPlaneFD->second.pop_front();
+                ptrFlightDataTy to = std::move(iPlaneFD->second.front());
+                iPlaneFD->second.pop_front();
+                // and create a plane with those
+                glob.mapPlanes.emplace(std::piecewise_construct,
+                                       std::forward_as_tuple(iPlaneFD->first),
+                                       std::forward_as_tuple(std::move(from), std::move(to)));
+            }
+        }
+        
+        // next entry
+        ++iPlaneFD;
+    }
+    
+    // *** Remove planes that say so ***
+    now -= std::chrono::seconds(glob.outdatedPeriod);       // deduct grace period
+    for (auto iPlane = glob.mapPlanes.begin();
+         iPlane != glob.mapPlanes.end();)
+    {
+        if (iPlane->second.ShallBeRemoved(now))
+            iPlane = glob.mapPlanes.erase(iPlane);
+        else
+            ++iPlane;
+    }
+}
+
+// Regularly called to update from/to positions from the list of available flight data
+void Plane::UpdateFromFlightData (listFlightDataTy& listFD,
+                                  const tsTy& now)
+{
+    // Younger data needs to have a ts larger than this CutOff time
+    const auto tsCutOff = fdTo->ts + MIN_TS_DIFF;
+    // Loop all flight data (sorted), from the oldest to the newest:
+    for (auto iFD = listFD.begin();
+         iFD != listFD.end();)
+    {
+        // Cleanup: remove all flight data from the list that is useless because it
+        // is already older than my current 'to' position:
+        if (iFD->get()->ts <= tsCutOff)
+            iFD = listFD.erase(iFD);
+        else
+        {
+            // So iFD points to the first FlightData that is younger than fdTo
+            // If fdTo is still in the future, then we don't yet need that data and are done
+            if (fdTo->ts > now)
+                break;
+            
+            // Otherwise we need that new data iFD points to
+            
+            // Copy shift current 'to' to 'from'
+            fdFrom = std::move(fdTo);
+            diFrom = diTo;
+            
+            // get fresh 'to' from the flight data list
+            fdTo = std::move(*iFD);
+            if (fdTo->bGnd) DetermineGndAlt(fdTo);
+            diTo = *fdTo;
+            
+            // Remove the object from the list
+            // and continue in the loop...maybe that just added data is already outdated...?
+            iFD = listFD.erase(iFD);
+        }
+    }
+}
+
+// Should this plane be removed?
+bool Plane::ShallBeRemoved (const tsTy& cutOff) const
+{
+    return
+    // not updated for too long?
+    fdTo->ts < cutOff ||
+    // Too far away from camera position?
+    camDist > glob.maxPlaneDist * XPMP2::M_per_NM;
+}
+
+//
+// MARK: Once per Cycle
+//
+
+// This data is updated once per cycle, then reused by other Update... calls
+int Plane::flCounter = -1;          ///< flight loop counter of last update
+float Plane::ticksNow = 0.0;        ///< 'now' timestamp
+
+// Once per cycle activities
+void Plane::OncePerCycle (int _flCounter)
+{
+    if (_flCounter <= flCounter) return;
+    ticksNow = float(std::chrono::system_clock::now().time_since_epoch().count());
+}
+
+//
 // MARK: XPMP2 Interface
 //
 
@@ -33,29 +153,106 @@ Plane::Plane (const std::string& _icaoType,
 XPMP2::Aircraft(_icaoType, _icaoAirline, _livery, _modeS_id, _cslId)
 {}
 
+// Constructor from two flight data objects
+Plane::Plane (ptrFlightDataTy&& from, ptrFlightDataTy&& to) :
+XPMP2::Aircraft(from->icaoType, from->icaoAirline, from->livery,
+                from->_modeS_id),
+fdFrom(std::move(from)),
+fdTo(std::move(to))
+{
+    // if necessary determine ground altitude
+    if (fdFrom->bGnd)   DetermineGndAlt(fdFrom);
+    if (fdTo->bGnd)     DetermineGndAlt(fdTo);
+    // fill from/to drawInfo
+    diFrom = *fdFrom;
+    diTo = *fdTo;
+    // as we have take care of terrain already we don't need clamping
+    bClampToGround = false;
+}
+
 // Destructor
 Plane::~Plane ()
 {}
 
+/// Calculate interpolation between 0 and 1 from the FlightData objects
+#define IP_01(v) std::clamp<float>(fdFrom->v + f * (fdTo->v - fdFrom->v),0.0f,1.0f)
+
 // Called by XPMP2 right before updating the aircraft's placement in the world
-void Plane::UpdatePosition (float _elapsedSinceLastCall, int _flCounter)
+void Plane::UpdatePosition (float /*_elapsedSinceLastCall*/, int _flCounter)
 {
-    const tsTy now = std::chrono::system_clock::now();
+    // Once per cycle
+    OncePerCycle(_flCounter);
     
+    // Interpolation between fdFrom and fdTo
+    const float tsFrom = float(fdFrom->ts.time_since_epoch().count());
+    const float tsTo   = float(fdTo->ts.time_since_epoch().count());
+    // _the_ factor: increases from 0 to 1 while `now` is between `from` and `to` (->interpolation),
+    // and becomes larger than 1 if `now` increases even beyond `to` (-> extrapolation)
+    const float f = (ticksNow - tsFrom) / (tsTo - tsFrom);
     
-    // TODO: Implement UpdatePosition
+    // Update the drawInfo with interpolated values
+    drawInfo.x      = diFrom.x     + f * (diTo.x     - diFrom.x);
+    drawInfo.y      =(diFrom.y     + f * (diTo.y     - diFrom.y)) + GetVertOfs();
+    drawInfo.z      = diFrom.z     + f * (diTo.z     - diFrom.z);
+    drawInfo.pitch  = diFrom.pitch + f * (diTo.pitch - diFrom.pitch);
+    drawInfo.roll   = diFrom.roll  + f * (diTo.roll  - diFrom.roll);
+    // just heading isn't so simple...could be a move from 359 to 1 degree...
+    float degDif = diTo.heading - diFrom.heading;
+    while (degDif < -180.0f) degDif += 360.0f;
+    while (degDif >  180.0f) degDif -= 360.0f;
+    drawInfo.heading = diFrom.heading + f * degDif;
+    
+    // Configuration
+    SetGearRatio(IP_01(gear));
+    SetNoseWheelAngle(IP_01(nws));
+    SetFlapRatio(IP_01(flaps));
+    SetSpoilerRatio(IP_01(spoilers));
+    
+    // Lights
+    const FlightData::lightsTy& lights = (f >= 0.5) ? fdTo->lights : fdFrom->lights;
+    SetLightsTaxi(lights.taxi);
+    SetLightsLanding(lights.landing);
+    SetLightsBeacon(lights.beacon);
+    SetLightsStrobe(lights.strobe);
+    SetLightsNav(lights.nav);
 }
 
 
-//
-// MARK: XPPlanes control
-//
-
-// Should this plane be removed?
-bool Plane::ComputeToBeRemoved ()
+// Clamp to ground: Make sure the plane is not below ground, corrects Aircraft::drawInfo if needed.
+void Plane::DetermineGndAlt (ptrFlightDataTy& fd)
 {
-    // Too far away from camera position?
-    return bToBeRemoved = camDist > glob.maxPlaneDist * XPMP2::M_per_NM;
+    // Make sure we have a probe object (an attribute of XPMP2::Aircraft and cleaned up by its destructor)
+    if (!hProbe)
+        hProbe = XPLMCreateProbe(xplm_ProbeY);
+    LOG_ASSERT(hProbe);
+    
+    // Convert lat/lon to OpenGL
+    double X = 0.0, Y = 0.0, Z = 0.0;
+    XPLMWorldToLocal(fd->lat, fd->lon, 0.0,
+                     &X, &Y, &Z);
+    
+    // Where's the ground?
+    XPLMProbeInfo_t infoProbe = {
+        sizeof(XPLMProbeInfo_t),            // structSIze
+        0.0f, 0.0f, 0.0f,                   // location
+        0.0f, 0.0f, 0.0f,                   // normal vector
+        0.0f, 0.0f, 0.0f,                   // velocity vector
+        0                                   // is_wet
+    };
+    if (XPLMProbeTerrainXYZ(hProbe,
+                            float(X), float(Y), float(Z),
+                            &infoProbe) == xplm_ProbeHitTerrain)
+    {
+        // Return the altitude back to world coordinates
+        XPLMLocalToWorld(double(infoProbe.locationX),
+                         double(infoProbe.locationY),
+                         double(infoProbe.locationZ),
+                         &X, &Y, &fd->alt_m);
+    }
+    else {
+        // probe failed...so we need to assume something
+        fd->alt_m = 0.0;
+    }
 }
 
 //

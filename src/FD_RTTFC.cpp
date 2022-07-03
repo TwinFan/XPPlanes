@@ -73,11 +73,17 @@ enum RT_RTTFC_FIELDS_TY : int {
 static const char* CSV_DELIM = ",";
 
 #define TO_DOUBLE(v) v = std::stod(tok); break;
+#define TO_FLOAT(v) v = std::stof(tok); break;
 #define TO_STR(v) v = tok; break;
 
 // RTTFC: Interprets the data as an RTTFC line
 bool FlightData::FillFromRTTFC (const std::string& s)
 {
+    // *** 1. Could it be our format? ***
+    if (s.substr(0,5) != "RTTFC")               // needs to start with 'RTTFC'
+        return false;
+
+    // *** 2. Convert ***
     double alt_baro_ft = NAN;
     double qnh = NAN;
     
@@ -111,6 +117,7 @@ bool FlightData::FillFromRTTFC (const std::string& s)
                 case RT_RTTFC_ALT_BARO:     TO_DOUBLE(alt_baro_ft);
                 case RT_RTTFC_GND:
                     bGnd = std::stoi(tok) != 0;
+                    if (bGnd) gear = 1.0f;              // on the ground need gear
                     break;
                 case RT_RTTFC_CS_ICAO:                  // in lieu of airline take first 3 chars as airline
                     icaoAirline = tok;
@@ -139,9 +146,9 @@ bool FlightData::FillFromRTTFC (const std::string& s)
                 case RT_RTTFC_ALT_GEOM:                 // altitude is given in feet, convert to meter
                     alt_m = std::stod(tok) * XPMP2::M_per_FT;
                     break;
-                case RT_RTTFC_ROLL:         TO_DOUBLE(roll);
-                case RT_RTTFC_MAG_HEADING:  TO_DOUBLE(heading);
-                case RT_RTTFC_TRUE_HEADING: TO_DOUBLE(heading);     // overwrites a mag heading, which is good
+                case RT_RTTFC_ROLL:         TO_FLOAT(roll);
+                case RT_RTTFC_MAG_HEADING:  TO_FLOAT(heading);
+                case RT_RTTFC_TRUE_HEADING: TO_FLOAT(heading);      // overwrites a mag heading, which is good
                 case RT_RTTFC_NAV_QNH:      TO_DOUBLE(qnh);
                     
                 default:                            // don't handle a couple of fields
@@ -160,9 +167,5 @@ bool FlightData::FillFromRTTFC (const std::string& s)
         alt_m = alt_baro_ft * XPMP2::M_per_FT;
     }
     
-    if (!IsUsable()) {
-        LOG_MSG(logDEBUG, "Not enough informaton in the data to be usable");
-        return false;
-    }
     return true;
 }

@@ -176,23 +176,21 @@ int CmdCallback (XPLMCommandRef cmdRef, XPLMCommandPhase inPhase, void*)
 /// ID of our flight loop callback for regular tasks
 XPLMFlightLoopID flId = nullptr;
 
-/// Regular tasks every second, called by flight loop
+/// Regular tasks, called by flight loop
 float FlightLoop_EverySecond(float, float, int, void*)
 {
     // entry point into plugin...catch exceptions latest here
     try {
         GetMiscNetwTime();              // update rcGlob.now, e.g. for logging from worker threads
-        
-        // TODO: Any regular cleanup? Remove a/c? Create new a/c?
-
+        PlaneMaintenance();             // regular plane updates from flight data
         MenuUpdateCheckmarks();         // update menu
     }
     catch (const std::exception& e) {
         LOG_MSG(logFATAL, ERR_EXCEPTION, e.what());
     }
     
-    // call me every second only
-    return 1.0f;
+    // call me every other flight loop
+    return -2.0f;
 }
 
 //
