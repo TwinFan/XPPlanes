@@ -60,6 +60,13 @@ bool FlightData::FillFromNetworkData (const std::string& s)
     // Try the different formats the we support
     if (FillFromRTTFC(s))
     {
+        // If no timestamp was given we assume 'now'
+        if (!ts.time_since_epoch().count())
+            ts = std::chrono::system_clock::now();
+        
+        // Add the buffering period to the timestamp
+        ts += std::chrono::seconds(glob.bufferPeriod);
+        
         // One of the format accepted the input. Was it sufficiently detailed?
         if (!IsUsable()) {
             LOG_MSG(logDEBUG, "Not enough informaton in the data to be usable");

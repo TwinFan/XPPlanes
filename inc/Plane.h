@@ -73,7 +73,7 @@ public:
     // This data is updated once per cycle, then reused by other Update... calls
 protected:
     static int flCounter;           ///< flight loop counter of last update
-    static float ticksNow;          ///< 'now' timestamp in ticks since epoch
+    static tsTy::rep ticksNow;      ///< 'now' timestamp in ticks since epoch
     /// perform once-per-cycle activities
     static void OncePerCycle (int _flCounter);
 };

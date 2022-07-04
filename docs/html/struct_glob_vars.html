@@ -101,9 +101,12 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a7eab35b63c3398adb5c8b4e58ff15c4a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_glob_vars.html#a7eab35b63c3398adb5c8b4e58ff15c4a">maxPlaneDist</a> = 50</td></tr>
 <tr class="memdesc:a7eab35b63c3398adb5c8b4e58ff15c4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Max distance from camera [nm].  <a href="struct_glob_vars.html#a7eab35b63c3398adb5c8b4e58ff15c4a">More...</a><br /></td></tr>
 <tr class="separator:a7eab35b63c3398adb5c8b4e58ff15c4a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5176c527bbce04ec0cddb92a46a05c45"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_glob_vars.html#a5176c527bbce04ec0cddb92a46a05c45">outdatedPeriod</a> = 30</td></tr>
-<tr class="memdesc:a5176c527bbce04ec0cddb92a46a05c45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a plane after how many seconds without fresh data?  <a href="struct_glob_vars.html#a5176c527bbce04ec0cddb92a46a05c45">More...</a><br /></td></tr>
-<tr class="separator:a5176c527bbce04ec0cddb92a46a05c45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a354bc23c7377b0a36c709dc964c34354"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_glob_vars.html#a354bc23c7377b0a36c709dc964c34354">bufferPeriod</a> = 5</td></tr>
+<tr class="memdesc:a354bc23c7377b0a36c709dc964c34354"><td class="mdescLeft">&#160;</td><td class="mdescRight">Buffering period in seconds.  <a href="struct_glob_vars.html#a354bc23c7377b0a36c709dc964c34354">More...</a><br /></td></tr>
+<tr class="separator:a354bc23c7377b0a36c709dc964c34354"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae76b7749f8c5a12960b0c777c7abf13a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_glob_vars.html#ae76b7749f8c5a12960b0c777c7abf13a">gracePeriod</a> = 30</td></tr>
+<tr class="memdesc:ae76b7749f8c5a12960b0c777c7abf13a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a plane after how many seconds without fresh data?  <a href="struct_glob_vars.html#ae76b7749f8c5a12960b0c777c7abf13a">More...</a><br /></td></tr>
+<tr class="separator:ae76b7749f8c5a12960b0c777c7abf13a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d36990da7b156479096340716547dea"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_glob_vars.html#a5d36990da7b156479096340716547dea">bDrawLabels</a> = true</td></tr>
 <tr class="memdesc:a5d36990da7b156479096340716547dea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shall we draw aircraft labels?  <a href="struct_glob_vars.html#a5d36990da7b156479096340716547dea">More...</a><br /></td></tr>
 <tr class="separator:a5d36990da7b156479096340716547dea"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -466,6 +469,22 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a354bc23c7377b0a36c709dc964c34354"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a354bc23c7377b0a36c709dc964c34354">&#9670;&nbsp;</a></span>bufferPeriod</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GlobVars::bufferPeriod = 5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Buffering period in seconds. </p>
+
+</div>
+</div>
 <a id="af9d9bfea592e98edf1288cd69ffc12e8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af9d9bfea592e98edf1288cd69ffc12e8">&#9670;&nbsp;</a></span>eStatus</h2>
 
@@ -479,6 +498,22 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Plugin status. </p>
+
+</div>
+</div>
+<a id="ae76b7749f8c5a12960b0c777c7abf13a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae76b7749f8c5a12960b0c777c7abf13a">&#9670;&nbsp;</a></span>gracePeriod</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GlobVars::gracePeriod = 30</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Remove a plane after how many seconds without fresh data? </p>
 
 </div>
 </div>
@@ -660,22 +695,6 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Current X-Xplane's time. </p>
-
-</div>
-</div>
-<a id="a5176c527bbce04ec0cddb92a46a05c45"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5176c527bbce04ec0cddb92a46a05c45">&#9670;&nbsp;</a></span>outdatedPeriod</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int GlobVars::outdatedPeriod = 30</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Remove a plane after how many seconds without fresh data? </p>
 
 </div>
 </div>

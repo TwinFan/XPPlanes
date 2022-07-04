@@ -75,7 +75,8 @@ ObjReplDataRefs 1       | Replace dataRefs in CSL models? ([more details](https:
 ObjReplTextures 1       | Replace textures in CSL models? ([more details](https://twinfan.github.io/XPMP2/CopyingObjFiles.html))
 TCAS_Control 1          | Acquire control over TCAS/AI planes upon startup?
 PlanesMaxDist 50        | Max distance to display aircraft around camera in nm
-PlanesOutdatedPeriod 30 | Seconds after which a plane without fresh data is removed
+PlanesBufferPeriod 5    | Buffering period in seconds
+PlanesGracePeriod 30    | Seconds after which a plane without fresh data is removed
 PlanesClampAll 0        | Enforce clamping of all planes above ground?
 LabelsDraw 1            | Draw plane labels
 LabelsMaxDist 5556      | Max distance in meter to draw labels

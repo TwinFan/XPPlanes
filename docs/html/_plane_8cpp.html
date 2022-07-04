@@ -57,9 +57,9 @@ $(function() {
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:adbe69f48450e51a888e64c399fb46797"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_plane_8cpp.html#adbe69f48450e51a888e64c399fb46797">IP_01</a>(v)&#160;&#160;&#160;std::clamp&lt;float&gt;(fdFrom-&gt;v + f * (fdTo-&gt;v - fdFrom-&gt;v),0.0f,1.0f)</td></tr>
-<tr class="memdesc:adbe69f48450e51a888e64c399fb46797"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate interpolation between 0 and 1 from the <a class="el" href="class_flight_data.html" title="Transports flight data for location, attitude, configuration between the network and the main thread.">FlightData</a> objects.  <a href="_plane_8cpp.html#adbe69f48450e51a888e64c399fb46797">More...</a><br /></td></tr>
-<tr class="separator:adbe69f48450e51a888e64c399fb46797"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5477eda149f94cd4ccff9de8d728b2eb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_plane_8cpp.html#a5477eda149f94cd4ccff9de8d728b2eb">IP_01</a>(fct,  v)</td></tr>
+<tr class="memdesc:a5477eda149f94cd4ccff9de8d728b2eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate interpolation between 0 and 1 from the <a class="el" href="class_flight_data.html" title="Transports flight data for location, attitude, configuration between the network and the main thread.">FlightData</a> objects.  <a href="_plane_8cpp.html#a5477eda149f94cd4ccff9de8d728b2eb">More...</a><br /></td></tr>
+<tr class="separator:a5477eda149f94cd4ccff9de8d728b2eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -82,8 +82,8 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
  The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.<br  />
  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. </dd></dl>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="adbe69f48450e51a888e64c399fb46797"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adbe69f48450e51a888e64c399fb46797">&#9670;&nbsp;</a></span>IP_01</h2>
+<a id="a5477eda149f94cd4ccff9de8d728b2eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5477eda149f94cd4ccff9de8d728b2eb">&#9670;&nbsp;</a></span>IP_01</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -92,13 +92,29 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
           <td class="memname">#define IP_01</td>
           <td>(</td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname">v</td><td>)</td>
-          <td>&#160;&#160;&#160;std::clamp&lt;float&gt;(fdFrom-&gt;v + f * (fdTo-&gt;v - fdFrom-&gt;v),0.0f,1.0f)</td>
+          <td class="paramname">fct, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname">v&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-
+<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">if</span> (!std::isnan(fdTo-&gt;v)) {                                                     \</div>
+<div class="line">    fct(std::clamp&lt;float&gt;(std::isnan(fdFrom-&gt;v) ?                               \</div>
+<div class="line">                          fdTo-&gt;v :                                             \</div>
+<div class="line">                          fdFrom-&gt;v + f * (fdTo-&gt;v - fdFrom-&gt;v),0.0f,1.0f));    \</div>
+<div class="line">}</div>
+</div><!-- fragment -->
 <p>Calculate interpolation between 0 and 1 from the <a class="el" href="class_flight_data.html" title="Transports flight data for location, attitude, configuration between the network and the main thread.">FlightData</a> objects. </p>
+<p>If <code>to</code> is <code>NAN</code> then does nothing, does not change the existing value, else if <code>from</code> is <code>NAN</code> sets just the <code>to</code> value, otherwise interpolates between <code>from</code> and <code>to</code> using <code>f</code> </p>
 
 </div>
 </div>

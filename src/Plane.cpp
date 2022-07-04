@@ -65,7 +65,7 @@ void PlaneMaintenance ()
     }
     
     // *** Remove planes that say so ***
-    now -= std::chrono::seconds(glob.outdatedPeriod);       // deduct grace period
+    now -= std::chrono::seconds(glob.gracePeriod);       // deduct grace period
     for (auto iPlane = glob.mapPlanes.begin();
          iPlane != glob.mapPlanes.end();)
     {
@@ -99,7 +99,7 @@ void Plane::UpdateFromFlightData (listFlightDataTy& listFD,
             
             // Otherwise we need that new data iFD points to
             
-            // Copy shift current 'to' to 'from'
+            // Shift current 'to' to 'from'
             fdFrom = std::move(fdTo);
             diFrom = diTo;
             
@@ -107,6 +107,18 @@ void Plane::UpdateFromFlightData (listFlightDataTy& listFD,
             fdTo = std::move(*iFD);
             if (fdTo->bGnd) DetermineGndAlt(fdTo);
             diTo = *fdTo;
+            diTo.y += GetVertOfs();                 // vertical offset to make plane move on wheels
+            
+            // So far, we only established that the new 'to' is younger than 'from',
+            // but if the new 'to' is actually in the future compared to 'now',
+            // then we can move from our _current_ position to that new position,
+            // that avoids any sudden jumping of the plane
+            if (fdTo->ts > now) {
+                diFrom = drawInfo;                  // current position
+                XPLMLocalToWorld(diFrom.x, diFrom.y, diFrom.y,
+                                 &fdFrom->lat, &fdFrom->lon, &fdFrom->alt_m);
+                fdFrom->ts = now;                   // as of right now
+            }
             
             // Remove the object from the list
             // and continue in the loop...maybe that just added data is already outdated...?
@@ -131,13 +143,13 @@ bool Plane::ShallBeRemoved (const tsTy& cutOff) const
 
 // This data is updated once per cycle, then reused by other Update... calls
 int Plane::flCounter = -1;          ///< flight loop counter of last update
-float Plane::ticksNow = 0.0;        ///< 'now' timestamp
+tsTy::rep Plane::ticksNow = 0;      ///< 'now' timestamp
 
 // Once per cycle activities
 void Plane::OncePerCycle (int _flCounter)
 {
     if (_flCounter <= flCounter) return;
-    ticksNow = float(std::chrono::system_clock::now().time_since_epoch().count());
+    ticksNow = std::chrono::system_clock::now().time_since_epoch().count();
 }
 
 //
@@ -165,7 +177,9 @@ fdTo(std::move(to))
     if (fdTo->bGnd)     DetermineGndAlt(fdTo);
     // fill from/to drawInfo
     diFrom = *fdFrom;
+    diFrom.y += GetVertOfs();               // vertical offset to make plane move on wheels
     diTo = *fdTo;
+    diTo.y += GetVertOfs();                 // vertical offset to make plane move on wheels
     // as we have take care of terrain already we don't need clamping
     bClampToGround = false;
 }
@@ -174,47 +188,62 @@ fdTo(std::move(to))
 Plane::~Plane ()
 {}
 
-/// Calculate interpolation between 0 and 1 from the FlightData objects
-#define IP_01(v) std::clamp<float>(fdFrom->v + f * (fdTo->v - fdFrom->v),0.0f,1.0f)
+/// @brief Calculate interpolation between 0 and 1 from the FlightData objects
+/// @details If `to` is `NAN` then does nothing, does not change the existing value,
+///          else if `from` is `NAN` sets just the `to` value,
+///          otherwise interpolates between `from` and `to` using `f`
+#define IP_01(fct,v)                                                            \
+if (!std::isnan(fdTo->v)) {                                                     \
+    fct(std::clamp<float>(std::isnan(fdFrom->v) ?                               \
+                          fdTo->v :                                             \
+                          fdFrom->v + f * (fdTo->v - fdFrom->v),0.0f,1.0f));    \
+}
+                   
 
 // Called by XPMP2 right before updating the aircraft's placement in the world
 void Plane::UpdatePosition (float /*_elapsedSinceLastCall*/, int _flCounter)
 {
-    // Once per cycle
-    OncePerCycle(_flCounter);
-    
-    // Interpolation between fdFrom and fdTo
-    const float tsFrom = float(fdFrom->ts.time_since_epoch().count());
-    const float tsTo   = float(fdTo->ts.time_since_epoch().count());
-    // _the_ factor: increases from 0 to 1 while `now` is between `from` and `to` (->interpolation),
-    // and becomes larger than 1 if `now` increases even beyond `to` (-> extrapolation)
-    const float f = (ticksNow - tsFrom) / (tsTo - tsFrom);
-    
-    // Update the drawInfo with interpolated values
-    drawInfo.x      = diFrom.x     + f * (diTo.x     - diFrom.x);
-    drawInfo.y      =(diFrom.y     + f * (diTo.y     - diFrom.y)) + GetVertOfs();
-    drawInfo.z      = diFrom.z     + f * (diTo.z     - diFrom.z);
-    drawInfo.pitch  = diFrom.pitch + f * (diTo.pitch - diFrom.pitch);
-    drawInfo.roll   = diFrom.roll  + f * (diTo.roll  - diFrom.roll);
-    // just heading isn't so simple...could be a move from 359 to 1 degree...
-    float degDif = diTo.heading - diFrom.heading;
-    while (degDif < -180.0f) degDif += 360.0f;
-    while (degDif >  180.0f) degDif -= 360.0f;
-    drawInfo.heading = diFrom.heading + f * degDif;
-    
-    // Configuration
-    SetGearRatio(IP_01(gear));
-    SetNoseWheelAngle(IP_01(nws));
-    SetFlapRatio(IP_01(flaps));
-    SetSpoilerRatio(IP_01(spoilers));
-    
-    // Lights
-    const FlightData::lightsTy& lights = (f >= 0.5) ? fdTo->lights : fdFrom->lights;
-    SetLightsTaxi(lights.taxi);
-    SetLightsLanding(lights.landing);
-    SetLightsBeacon(lights.beacon);
-    SetLightsStrobe(lights.strobe);
-    SetLightsNav(lights.nav);
+    try {
+        // Once per cycle
+        OncePerCycle(_flCounter);
+        
+        // Interpolation between fdFrom and fdTo
+        const tsTy::rep tsFrom = fdFrom->ts.time_since_epoch().count();
+        const tsTy::rep tsTo   = fdTo->ts.time_since_epoch().count();
+        // _the_ factor: increases from 0 to 1 while `now` is between `from` and `to` (->interpolation),
+        // and becomes larger than 1 if `now` increases even beyond `to` (-> extrapolation)
+        const float f = float(ticksNow - tsFrom) / float(tsTo - tsFrom);
+        LOG_ASSERT(!std::isnan(f));
+        
+        // Update the drawInfo with interpolated values
+        drawInfo.x      = diFrom.x     + f * (diTo.x     - diFrom.x);
+        drawInfo.y      = diFrom.y     + f * (diTo.y     - diFrom.y);
+        drawInfo.z      = diFrom.z     + f * (diTo.z     - diFrom.z);
+        drawInfo.pitch  = diFrom.pitch + f * (diTo.pitch - diFrom.pitch);
+        drawInfo.roll   = diFrom.roll  + f * (diTo.roll  - diFrom.roll);
+        // just heading isn't so simple...could be a move from 359 to 1 degree...
+        float degDif = diTo.heading - diFrom.heading;
+        while (degDif < -180.0f) degDif += 360.0f;
+        while (degDif >  180.0f) degDif -= 360.0f;
+        drawInfo.heading = diFrom.heading + f * degDif;
+        
+        // Configuration
+        IP_01(SetGearRatio, gear);
+// FIXME:        SetNoseWheelAngle(IP_01(nws));      needs heading calc like above
+        IP_01(SetFlapRatio, flaps);
+        IP_01(SetSpoilerRatio, spoilers);
+        
+        // Lights
+        const FlightData::lightsTy& lights = (f >= 0.5) ? fdTo->lights : fdFrom->lights;
+        SetLightsTaxi(lights.taxi);
+        SetLightsLanding(lights.landing);
+        SetLightsBeacon(lights.beacon);
+        SetLightsStrobe(lights.strobe);
+        SetLightsNav(lights.nav);
+    }
+    catch (const std::exception& e) {
+        LOG_MSG(logWARN, "Updating 0x%06X failed: %s", modeS_id, e.what());
+    }
 }
 
 
