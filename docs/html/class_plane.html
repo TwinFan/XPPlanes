@@ -41,6 +41,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="#pro-static-attribs">Static Protected Attributes</a> &#124;
@@ -83,6 +84,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a250e80253b8f206920f3298296d4d5ec"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plane.html#a250e80253b8f206920f3298296d4d5ec">ShallBeRemoved</a> (const <a class="el" href="_flight_data_8h.html#af09343bf593690e7caceb1b17e33830c">tsTy</a> &amp;cutOff) const</td></tr>
 <tr class="memdesc:a250e80253b8f206920f3298296d4d5ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Determines if this plane shall be removed, sets <code>bToBeRemoved</code> if so.  <a href="class_plane.html#a250e80253b8f206920f3298296d4d5ec">More...</a><br /></td></tr>
 <tr class="separator:a250e80253b8f206920f3298296d4d5ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:ac9c1c9302366788a8865394b3470c204"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plane.html#ac9c1c9302366788a8865394b3470c204">TakeOverData</a> (bool bFrom, <a class="el" href="_flight_data_8h.html#acba488d7341fd70a01d64313e3bc0eb1">ptrFlightDataTy</a> &amp;&amp;source)</td></tr>
+<tr class="memdesc:ac9c1c9302366788a8865394b3470c204"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prepare given position for usage after taking over from passed-in smart pointer.  <a href="class_plane.html#ac9c1c9302366788a8865394b3470c204">More...</a><br /></td></tr>
+<tr class="separator:ac9c1c9302366788a8865394b3470c204"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-methods"></a>
 Static Protected Member Functions</h2></td></tr>
@@ -309,6 +316,51 @@ Static Protected Attributes</h2></td></tr>
 <li>no updates for too long</li>
 <li>too far away from camera </li>
 </ul>
+
+</div>
+</div>
+<a id="ac9c1c9302366788a8865394b3470c204"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9c1c9302366788a8865394b3470c204">&#9670;&nbsp;</a></span>TakeOverData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Plane::TakeOverData </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>bFrom</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="_flight_data_8h.html#acba488d7341fd70a01d64313e3bc0eb1">ptrFlightDataTy</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>source</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Prepare given position for usage after taking over from passed-in smart pointer. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">bFrom</td><td>Store into <code>from</code> variables? Otherwise into <code>to</code> </td></tr>
+    <tr><td class="paramname">source</td><td>From where to take over the data </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

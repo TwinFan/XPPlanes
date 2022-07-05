@@ -42,8 +42,6 @@ public:
     /// Replace textures in `.obj` files on load if needed?
     bool            bObjReplTextures = true;
     
-    /// Max distance from camera [nm]
-    int             maxPlaneDist = 50;
     /// Buffering period in seconds
     int             bufferPeriod = 5;
     /// Remove a plane after how many seconds without fresh data?

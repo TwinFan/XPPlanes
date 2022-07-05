@@ -28,40 +28,56 @@ void PlaneMaintenance ()
 {
     // *** Update from FlightData lists***
     tsTy now = std::chrono::system_clock::now();
+    tsTy cutOff = now - std::chrono::seconds(glob.gracePeriod);
     
     // Loop over map/list of flight data and see if we need to create or update planes
-    std::lock_guard<std::mutex> guard(glob.mtxListFD);      // guarded by a mutex so that network thread doesn't update
-    for (auto iPlaneFD = glob.mapListFD.begin();
-         iPlaneFD != glob.mapListFD.end();)
+    bool bHaveData = false;
     {
-        // if there is no data then remove the plane's entry
-        if (iPlaneFD->second.empty()) {
-            iPlaneFD = glob.mapListFD.erase(iPlaneFD);
-            continue;
+        std::lock_guard<std::mutex> guard(glob.mtxListFD);          // guarded by a mutex so that network thread doesn't update
+
+        bHaveData = !glob.mapListFD.empty();
+        if (glob.eStatus == GlobVars::STATUS_WAITING && bHaveData) {// if there is data we are no longer 'waiting'
+            glob.eStatus = GlobVars::STATUS_ACTIVE;
+            LOG_MSG(logINFO, "Status turned ACTIVE");
         }
-        
-        // Is there already a matching plane?
-        try {
-            Plane& plane = glob.mapPlanes.at(iPlaneFD->first);
-            plane.UpdateFromFlightData(iPlaneFD->second, now);
-        }
-        catch (const std::out_of_range&) {
-            // there is no such plane yet, do we have enough data to create one?
-            if (iPlaneFD->second.size() >= 2) {
-                // fetch the two starting position from the list
-                ptrFlightDataTy from = std::move(iPlaneFD->second.front());
-                iPlaneFD->second.pop_front();
-                ptrFlightDataTy to = std::move(iPlaneFD->second.front());
-                iPlaneFD->second.pop_front();
-                // and create a plane with those
-                glob.mapPlanes.emplace(std::piecewise_construct,
-                                       std::forward_as_tuple(iPlaneFD->first),
-                                       std::forward_as_tuple(std::move(from), std::move(to)));
+
+        for (auto iPlaneFD = glob.mapListFD.begin();
+             iPlaneFD != glob.mapListFD.end();)
+        {
+            // Remove outdated data from the list just to make sure we clean up properly
+            listFlightDataTy& listFd = iPlaneFD->second;
+            while (!listFd.empty() && listFd.front()->ts < cutOff)
+                listFd.pop_front();
+            
+            // if there is no data then remove the plane's entry
+            if (iPlaneFD->second.empty()) {
+                iPlaneFD = glob.mapListFD.erase(iPlaneFD);
+                continue;
             }
+            
+            // Is there already a matching plane?
+            try {
+                Plane& plane = glob.mapPlanes.at(iPlaneFD->first);
+                plane.UpdateFromFlightData(iPlaneFD->second, now);
+            }
+            catch (const std::out_of_range&) {
+                // there is no such plane yet, do we have enough data to create one?
+                if (iPlaneFD->second.size() >= 2) {
+                    // fetch the two starting position from the list
+                    ptrFlightDataTy from = std::move(iPlaneFD->second.front());
+                    iPlaneFD->second.pop_front();
+                    ptrFlightDataTy to = std::move(iPlaneFD->second.front());
+                    iPlaneFD->second.pop_front();
+                    // and create a plane with those
+                    glob.mapPlanes.emplace(std::piecewise_construct,
+                                           std::forward_as_tuple(iPlaneFD->first),
+                                           std::forward_as_tuple(std::move(from), std::move(to)));
+                }
+            }
+            
+            // next entry
+            ++iPlaneFD;
         }
-        
-        // next entry
-        ++iPlaneFD;
     }
     
     // *** Remove planes that say so ***
@@ -69,11 +85,22 @@ void PlaneMaintenance ()
     for (auto iPlane = glob.mapPlanes.begin();
          iPlane != glob.mapPlanes.end();)
     {
-        if (iPlane->second.ShallBeRemoved(now))
+        if (glob.eStatus == GlobVars::STATUS_INACTIVE ||    // remove all planes if (turned) inactive
+            iPlane->second.ShallBeRemoved(now))             // or if plane itself says so
             iPlane = glob.mapPlanes.erase(iPlane);
         else
             ++iPlane;
     }
+    
+    // if there are neither planes nor data we should probably be waiting
+    if (glob.eStatus == GlobVars::STATUS_ACTIVE &&
+        !bHaveData &&
+        glob.mapPlanes.empty())
+    {
+        glob.eStatus = GlobVars::STATUS_WAITING;
+        LOG_MSG(logINFO, "Status turned back to WAITING");
+    }
+    
 }
 
 // Regularly called to update from/to positions from the list of available flight data
@@ -104,10 +131,7 @@ void Plane::UpdateFromFlightData (listFlightDataTy& listFD,
             diFrom = diTo;
             
             // get fresh 'to' from the flight data list
-            fdTo = std::move(*iFD);
-            if (fdTo->bGnd) DetermineGndAlt(fdTo);
-            diTo = *fdTo;
-            diTo.y += GetVertOfs();                 // vertical offset to make plane move on wheels
+            TakeOverData(false, std::move(*iFD));
             
             // So far, we only established that the new 'to' is younger than 'from',
             // but if the new 'to' is actually in the future compared to 'now',
@@ -132,9 +156,7 @@ bool Plane::ShallBeRemoved (const tsTy& cutOff) const
 {
     return
     // not updated for too long?
-    fdTo->ts < cutOff ||
-    // Too far away from camera position?
-    camDist > glob.maxPlaneDist * XPMP2::M_per_NM;
+    fdTo->ts < cutOff;
 }
 
 //
@@ -168,18 +190,12 @@ XPMP2::Aircraft(_icaoType, _icaoAirline, _livery, _modeS_id, _cslId)
 // Constructor from two flight data objects
 Plane::Plane (ptrFlightDataTy&& from, ptrFlightDataTy&& to) :
 XPMP2::Aircraft(from->icaoType, from->icaoAirline, from->livery,
-                from->_modeS_id),
-fdFrom(std::move(from)),
-fdTo(std::move(to))
+                from->_modeS_id)
 {
-    // if necessary determine ground altitude
-    if (fdFrom->bGnd)   DetermineGndAlt(fdFrom);
-    if (fdTo->bGnd)     DetermineGndAlt(fdTo);
-    // fill from/to drawInfo
-    diFrom = *fdFrom;
-    diFrom.y += GetVertOfs();               // vertical offset to make plane move on wheels
-    diTo = *fdTo;
-    diTo.y += GetVertOfs();                 // vertical offset to make plane move on wheels
+    // Take over the flight data
+    TakeOverData(true,  std::move(from));
+    TakeOverData(false, std::move(to));
+    
     // as we have take care of terrain already we don't need clamping
     bClampToGround = false;
 }
@@ -212,24 +228,29 @@ void Plane::UpdatePosition (float /*_elapsedSinceLastCall*/, int _flCounter)
         const tsTy::rep tsTo   = fdTo->ts.time_since_epoch().count();
         // _the_ factor: increases from 0 to 1 while `now` is between `from` and `to` (->interpolation),
         // and becomes larger than 1 if `now` increases even beyond `to` (-> extrapolation)
-        const float f = float(ticksNow - tsFrom) / float(tsTo - tsFrom);
+        float f = float(ticksNow - tsFrom) / float(tsTo - tsFrom);
         LOG_ASSERT(!std::isnan(f));
         
         // Update the drawInfo with interpolated values
+        // Location
         drawInfo.x      = diFrom.x     + f * (diTo.x     - diFrom.x);
         drawInfo.y      = diFrom.y     + f * (diTo.y     - diFrom.y);
         drawInfo.z      = diFrom.z     + f * (diTo.z     - diFrom.z);
+        
+        // for all the following values we cap `f` at 1.25 so we don't do too much of spinning etc in case we are missing future updates
+        if (f > MAX_F) f = MAX_F;
+        
+        // Attitude
         drawInfo.pitch  = diFrom.pitch + f * (diTo.pitch - diFrom.pitch);
         drawInfo.roll   = diFrom.roll  + f * (diTo.roll  - diFrom.roll);
-        // just heading isn't so simple...could be a move from 359 to 1 degree...
-        float degDif = diTo.heading - diFrom.heading;
-        while (degDif < -180.0f) degDif += 360.0f;
-        while (degDif >  180.0f) degDif -= 360.0f;
-        drawInfo.heading = diFrom.heading + f * degDif;
+        drawInfo.heading= diFrom.heading + f * HeadDiff(diFrom.heading, diTo.heading);
         
         // Configuration
         IP_01(SetGearRatio, gear);
-// FIXME:        SetNoseWheelAngle(IP_01(nws));      needs heading calc like above
+        if (!std::isnan(fdTo->nws))                 // nose wheel angle
+            SetNoseWheelAngle(std::isnan(fdFrom->nws)   ?
+                              fdTo->nws                 :
+                              HeadDiff(fdFrom->nws, fdTo->nws));
         IP_01(SetFlapRatio, flaps);
         IP_01(SetSpoilerRatio, spoilers);
         
@@ -245,6 +266,38 @@ void Plane::UpdatePosition (float /*_elapsedSinceLastCall*/, int _flCounter)
         LOG_MSG(logWARN, "Updating 0x%06X failed: %s", modeS_id, e.what());
     }
 }
+
+
+// Prepare given position for usage after taking over from passed-in smart pointer
+void Plane::TakeOverData (bool bFrom, ptrFlightDataTy&& source)
+{
+    // Which members to act on?
+    ptrFlightDataTy& fd = bFrom ? fdFrom : fdTo;
+    XPLMDrawInfo_t&  di = bFrom ? diFrom : diTo;
+    
+    fd = std::move(source);                     // move the smart pointer
+    if (fd->bGnd) DetermineGndAlt(fd);          // if on gnd let's figure out where gnd is
+    if (bFrom)                                  // In a `from` case (only once from the constructor)
+        fd->NANtoZero();                        // we set all `NAN`s to zero so we have a start basis to draw the plane
+    else                                        // In all future updates we keep the current value stable if no new value arrives
+        fd->NANtoCopy(*fdFrom);                 // by copying from `from` to `to`
+    di = *fd;                                   // convert to XP's draw info
+    di.y += GetVertOfs();                       // vertical offset to make plane move on wheels
+    
+    // Calculate the aircraft label
+    if (fd->callSign.empty()) {                 // Id is callsign or hex id
+        char sId[10];
+        snprintf(sId, sizeof(sId), "0x%06X", modeS_id);
+        label = sId;
+    } else
+        label = fd->callSign;
+    if (!fd->icaoType.empty()) {                // Add a/c type
+        label += " (";
+        label += fd->icaoType;
+        label += ')';
+    }
+}
+
 
 
 // Clamp to ground: Make sure the plane is not below ground, corrects Aircraft::drawInfo if needed.

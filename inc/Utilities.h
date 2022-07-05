@@ -58,6 +58,9 @@ std::istream& safeGetline(std::istream& is, std::string& t);
 inline double WeatherAltCorr_ft (double pressureAlt_ft, double hPa)
 { return pressureAlt_ft + ((hPa - HPA_STANDARD) * FT_per_HPA); }
 
+/// Return shortest turn from one heading to the other
+float HeadDiff (float from, float to);
+
 /// Replace NAN with 0.0
 template<typename T>
 inline T NZ (T v)

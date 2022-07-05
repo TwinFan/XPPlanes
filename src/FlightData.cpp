@@ -54,6 +54,32 @@ FlightData::operator XPLMDrawInfo_t () const
                             NZ(pitch), NZ(heading), NZ(roll) };
 }
 
+// Replace any remaining `NAN`s with `0.0`
+void FlightData::NANtoZero ()
+{
+#define NAN2Z(v) if (std::isnan(v)) v = 0.0f;
+    NAN2Z(pitch);
+    NAN2Z(heading);
+    NAN2Z(roll);
+    NAN2Z(gear);
+    NAN2Z(nws);
+    NAN2Z(flaps);
+    NAN2Z(spoilers);
+}
+
+/// Replace any remaining `NAN`s with values from the other object
+void FlightData::NANtoCopy (const FlightData& o)
+{
+#define NAN2CPY(v) if (std::isnan(v)) v = o.v;
+    NAN2CPY(pitch);
+    NAN2CPY(heading);
+    NAN2CPY(roll);
+    NAN2CPY(gear);
+    NAN2CPY(nws);
+    NAN2CPY(flaps);
+    NAN2CPY(spoilers);
+}
+
 // Reads flight data from the passed-in network data, identifying the type of data, then calling the appropriate conversion function
 bool FlightData::FillFromNetworkData (const std::string& s)
 {

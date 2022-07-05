@@ -71,7 +71,14 @@ std::istream& safeGetline(std::istream& is, std::string& t)
     return is;
 }
 
-
+// Return shortest turn from one heading to the other
+float HeadDiff (float from, float to)
+{
+    float degDif = to - from;
+    while (degDif < -180.0f) degDif += 360.0f;
+    while (degDif >  180.0f) degDif -= 360.0f;
+    return degDif;
+}
 
 //
 // MARK: String functions

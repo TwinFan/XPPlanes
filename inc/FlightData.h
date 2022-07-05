@@ -37,6 +37,7 @@ public:
     std::string icaoType;           ///< ICAO aircraft type according to doc8643
     std::string icaoAirline;        ///< ICAO airline code (for model matching)
     std::string livery;             ///< special livery code (optional, for model matching)
+    std::string callSign;           ///< call sign
     
     // Validity
     tsTy        ts;                 ///< timestamp
@@ -84,6 +85,11 @@ public:
     
     /// Convert to XP's drawInfo
     operator XPLMDrawInfo_t () const;
+    
+    /// Replace any remaining `NAN`s with `0.0`
+    void NANtoZero ();
+    /// Replace any remaining `NAN`s with values from the other object
+    void NANtoCopy (const FlightData& o);
     
 protected:
     /// @brief Reads flight data from the passed-in network data, identifying the type of data, then calling the appropriate conversion function

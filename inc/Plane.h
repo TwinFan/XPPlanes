@@ -56,6 +56,11 @@ protected:
     XPLMDrawInfo_t  diTo;           ///< the to-position in XP speak
     XPLMProbeRef hProbe = NULL;     ///< probe reference needed to determine
     
+    /// @brief Prepare given position for usage after taking over from passed-in smart pointer
+    /// @param bFrom Store into `from` variables? Otherwise into `to`
+    /// @param source From where to take over the data
+    void TakeOverData (bool bFrom, ptrFlightDataTy&& source);
+    
 public:
     /// Regularly called to update from/to positions from the list of available flight data
     void UpdateFromFlightData (listFlightDataTy& listFD,

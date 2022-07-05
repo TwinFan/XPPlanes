@@ -120,9 +120,12 @@ bool FlightData::FillFromRTTFC (const std::string& s)
                     if (bGnd) gear = 1.0f;              // on the ground need gear
                     break;
                 case RT_RTTFC_CS_ICAO:                  // in lieu of airline take first 3 chars as airline
-                    icaoAirline = tok;
+                    callSign = icaoAirline = tok;       // but also store the full call sign
                     if (icaoAirline.length() > 3)
                         icaoAirline.erase(3);
+                    break;
+                case RT_RTTFC_CS_IATA:                  // we prefer the ICAO version, so don't overwrite
+                    if (callSign.empty()) callSign = tok;
                     break;
                 case RT_RTTFC_AC_TYPE:      TO_STR(icaoType);
                 case RT_RTTFC_AC_TAILNO:    TO_STR(livery);

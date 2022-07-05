@@ -75,6 +75,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9c5f0ed307c8f4a7dc63846cc5e6774d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_flight_data.html#a9c5f0ed307c8f4a7dc63846cc5e6774d">operator XPLMDrawInfo_t</a> () const</td></tr>
 <tr class="memdesc:a9c5f0ed307c8f4a7dc63846cc5e6774d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert to XP's drawInfo.  <a href="class_flight_data.html#a9c5f0ed307c8f4a7dc63846cc5e6774d">More...</a><br /></td></tr>
 <tr class="separator:a9c5f0ed307c8f4a7dc63846cc5e6774d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5471ddd9cc6f1cc5e5a291cb53a5fd0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_flight_data.html#af5471ddd9cc6f1cc5e5a291cb53a5fd0">NANtoZero</a> ()</td></tr>
+<tr class="memdesc:af5471ddd9cc6f1cc5e5a291cb53a5fd0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replace any remaining <code>NAN</code>s with <code>0.0</code>  <a href="class_flight_data.html#af5471ddd9cc6f1cc5e5a291cb53a5fd0">More...</a><br /></td></tr>
+<tr class="separator:af5471ddd9cc6f1cc5e5a291cb53a5fd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84b822cae15d4202d570e1ff71d02b53"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_flight_data.html#a84b822cae15d4202d570e1ff71d02b53">NANtoCopy</a> (const <a class="el" href="class_flight_data.html">FlightData</a> &amp;o)</td></tr>
+<tr class="memdesc:a84b822cae15d4202d570e1ff71d02b53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replace any remaining <code>NAN</code>s with values from the other object.  <a href="class_flight_data.html#a84b822cae15d4202d570e1ff71d02b53">More...</a><br /></td></tr>
+<tr class="separator:a84b822cae15d4202d570e1ff71d02b53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -90,6 +96,9 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a68df8b45858fdd591ac6e5a411080e30"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_flight_data.html#a68df8b45858fdd591ac6e5a411080e30">livery</a></td></tr>
 <tr class="memdesc:a68df8b45858fdd591ac6e5a411080e30"><td class="mdescLeft">&#160;</td><td class="mdescRight">special livery code (optional, for model matching)  <a href="class_flight_data.html#a68df8b45858fdd591ac6e5a411080e30">More...</a><br /></td></tr>
 <tr class="separator:a68df8b45858fdd591ac6e5a411080e30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a24f42ce87006ea9c3a2caa5dfaa18215"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_flight_data.html#a24f42ce87006ea9c3a2caa5dfaa18215">callSign</a></td></tr>
+<tr class="memdesc:a24f42ce87006ea9c3a2caa5dfaa18215"><td class="mdescLeft">&#160;</td><td class="mdescRight">call sign  <a href="class_flight_data.html#a24f42ce87006ea9c3a2caa5dfaa18215">More...</a><br /></td></tr>
+<tr class="separator:a24f42ce87006ea9c3a2caa5dfaa18215"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad68a49d40aa479a82033e7f89d51a8ff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_flight_data_8h.html#af09343bf593690e7caceb1b17e33830c">tsTy</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_flight_data.html#ad68a49d40aa479a82033e7f89d51a8ff">ts</a></td></tr>
 <tr class="memdesc:ad68a49d40aa479a82033e7f89d51a8ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">timestamp  <a href="class_flight_data.html#ad68a49d40aa479a82033e7f89d51a8ff">More...</a><br /></td></tr>
 <tr class="separator:ad68a49d40aa479a82033e7f89d51a8ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -291,6 +300,45 @@ taxi lights </td></tr>
 
 </div>
 </div>
+<a id="a84b822cae15d4202d570e1ff71d02b53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84b822cae15d4202d570e1ff71d02b53">&#9670;&nbsp;</a></span>NANtoCopy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FlightData::NANtoCopy </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_flight_data.html">FlightData</a> &amp;&#160;</td>
+          <td class="paramname"><em>o</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Replace any remaining <code>NAN</code>s with values from the other object. </p>
+
+</div>
+</div>
+<a id="af5471ddd9cc6f1cc5e5a291cb53a5fd0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5471ddd9cc6f1cc5e5a291cb53a5fd0">&#9670;&nbsp;</a></span>NANtoZero()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void FlightData::NANtoZero </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Replace any remaining <code>NAN</code>s with <code>0.0</code> </p>
+
+</div>
+</div>
 <a id="a9c5f0ed307c8f4a7dc63846cc5e6774d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9c5f0ed307c8f4a7dc63846cc5e6774d">&#9670;&nbsp;</a></span>operator XPLMDrawInfo_t()</h2>
 
@@ -384,6 +432,22 @@ taxi lights </td></tr>
 </div><div class="memdoc">
 
 <p>on the ground? </p>
+
+</div>
+</div>
+<a id="a24f42ce87006ea9c3a2caa5dfaa18215"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24f42ce87006ea9c3a2caa5dfaa18215">&#9670;&nbsp;</a></span>callSign</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string FlightData::callSign</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>call sign </p>
 
 </div>
 </div>

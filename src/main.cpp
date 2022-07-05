@@ -177,7 +177,7 @@ int CmdCallback (XPLMCommandRef cmdRef, XPLMCommandPhase inPhase, void*)
 XPLMFlightLoopID flId = nullptr;
 
 /// Regular tasks, called by flight loop
-float FlightLoop_EverySecond(float, float, int, void*)
+float FlightLoop_Callback(float, float, int, void*)
 {
     // entry point into plugin...catch exceptions latest here
     try {
@@ -309,7 +309,7 @@ PLUGIN_API int  XPluginEnable(void)
     XPLMCreateFlightLoop_t flParams = {
         sizeof(flParams),                           // structSize
         xplm_FlightLoop_Phase_BeforeFlightModel,    // phase
-        FlightLoop_EverySecond,                     // callbackFunc,
+        FlightLoop_Callback,                     // callbackFunc,
         nullptr                                     // refcon
     };
     flId = XPLMCreateFlightLoop(&flParams);

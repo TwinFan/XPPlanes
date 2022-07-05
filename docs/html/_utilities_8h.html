@@ -123,6 +123,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ab24e32d4c6fb314df02e139b5a4e80e7"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_utilities_8h.html#ab24e32d4c6fb314df02e139b5a4e80e7">WeatherAltCorr_ft</a> (double pressureAlt_ft, double hPa)</td></tr>
 <tr class="memdesc:ab24e32d4c6fb314df02e139b5a4e80e7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute geometric altitude [ft] from pressure altitude and current weather in a very simplistic manner good enough for the first 3,000ft.  <a href="_utilities_8h.html#ab24e32d4c6fb314df02e139b5a4e80e7">More...</a><br /></td></tr>
 <tr class="separator:ab24e32d4c6fb314df02e139b5a4e80e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0326c56601a1bf63e40369e54c500a3b"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_utilities_8h.html#a0326c56601a1bf63e40369e54c500a3b">HeadDiff</a> (float from, float to)</td></tr>
+<tr class="memdesc:a0326c56601a1bf63e40369e54c500a3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return shortest turn from one heading to the other.  <a href="_utilities_8h.html#a0326c56601a1bf63e40369e54c500a3b">More...</a><br /></td></tr>
+<tr class="separator:a0326c56601a1bf63e40369e54c500a3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac1ac3faf6f259716e858da72b02d3f85"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ac1ac3faf6f259716e858da72b02d3f85"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="_utilities_8h.html#ac1ac3faf6f259716e858da72b02d3f85">NZ</a> (T v)</td></tr>
 <tr class="memdesc:ac1ac3faf6f259716e858da72b02d3f85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replace NAN with 0.0.  <a href="_utilities_8h.html#ac1ac3faf6f259716e858da72b02d3f85">More...</a><br /></td></tr>
@@ -235,7 +238,7 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 <div class="line">    {<a class="code" href="_utilities_8h.html#a5456996fe3973d17aaf0b656f5e42487">LogMsg</a>(__FILE__, __LINE__, __func__, lvl, __VA_ARGS__);}       \</div>
 <div class="line">}</div>
 <div class="ttc" id="a_global_8h_html_ae6e590b5e09e0ae14114be6fe4c2698d"><div class="ttname"><a href="_global_8h.html#ae6e590b5e09e0ae14114be6fe4c2698d">glob</a></div><div class="ttdeci">GlobVars glob</div><div class="ttdoc">The one and only global variable structure.</div><div class="ttdef"><b>Definition:</b> Global.cpp:24</div></div>
-<div class="ttc" id="a_utilities_8h_html_a5456996fe3973d17aaf0b656f5e42487"><div class="ttname"><a href="_utilities_8h.html#a5456996fe3973d17aaf0b656f5e42487">LogMsg</a></div><div class="ttdeci">void LogMsg(const char *szFile, int ln, const char *szFunc, logLevelTy lvl, const char *szMsg,...) XPPLANES_FMTARGS(5)</div><div class="ttdoc">Log Text to log file.</div><div class="ttdef"><b>Definition:</b> Utilities.cpp:201</div></div>
+<div class="ttc" id="a_utilities_8h_html_a5456996fe3973d17aaf0b656f5e42487"><div class="ttname"><a href="_utilities_8h.html#a5456996fe3973d17aaf0b656f5e42487">LogMsg</a></div><div class="ttdeci">void LogMsg(const char *szFile, int ln, const char *szFunc, logLevelTy lvl, const char *szMsg,...) XPPLANES_FMTARGS(5)</div><div class="ttdoc">Log Text to log file.</div><div class="ttdef"><b>Definition:</b> Utilities.cpp:208</div></div>
 <div class="ttc" id="astruct_glob_vars_html_ae8d1cfa0b0e1ad8a7083d142c6a8ccb2"><div class="ttname"><a href="struct_glob_vars.html#ae8d1cfa0b0e1ad8a7083d142c6a8ccb2">GlobVars::logLvl</a></div><div class="ttdeci">logLevelTy logLvl</div><div class="ttdoc">Logging level.</div><div class="ttdef"><b>Definition:</b> Global.h:30</div></div>
 </div><!-- fragment -->
 <p>Log a message if lvl is greater or equal currently defined log level. </p>
@@ -482,6 +485,36 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 </div><div class="memdoc">
 
 <p>Return a plugin's name. </p>
+
+</div>
+</div>
+<a id="a0326c56601a1bf63e40369e54c500a3b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0326c56601a1bf63e40369e54c500a3b">&#9670;&nbsp;</a></span>HeadDiff()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float HeadDiff </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>from</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>to</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Return shortest turn from one heading to the other. </p>
 
 </div>
 </div>
