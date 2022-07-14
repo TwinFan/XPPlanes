@@ -74,9 +74,28 @@ public:
     // TODO: Reasonable approach to engine, rotor, wheels
 
 public:
-    /// Constructor: Creates a FlightData object from received network data
-    FlightData (const std::string& s);
+    /// @brief Main function to interpret network data
+    /// @details Needs to distinguish between
+    ///          1. single record data
+    ///             a) in CSV style like RTTFC
+    ///             b) in JSON style like XPPTraffic single plane
+    ///          2. array data in JSON style like XPPTraffic
+    static bool ProcessNetworkData (const std::string& s);
     
+protected:
+    /// @brief Add a just created object to the internal list
+    /// @details Performs some basic timestamp handling and
+    ///          validations before doing so like
+    ///          timestamp within grace period and sorted.
+    static bool AddNew (std::shared_ptr<FlightData>&& pFD);
+    
+public:
+    /// Constructor: Creates a FlightData object from single record CSV-style data
+    FlightData (const std::string& csv);
+    
+    /// Constructor: Creates a FlightData object from a JSON object
+    FlightData (const JSON_Object& obj);
+
     /// Order is solely by timestamp
     bool operator< (const FlightData& o) const { return ts < o.ts; }
     
@@ -92,18 +111,14 @@ public:
     void NANtoCopy (const FlightData& o);
     
 protected:
-    /// @brief Reads flight data from the passed-in network data, identifying the type of data, then calling the appropriate conversion function
-    /// @returns if any converter worked and produced usable data
-    bool FillFromNetworkData (const std::string& s);
-    
-    // The following format-handling functions shall
-    // 1. verify if the format matches expectation, if not exit quickly,
-    // 2. fill fields from the data
-    // Return if conversion was technically successful
-    
+   
     /// @brief RTTFC: Interprets the data as an RTTFC line
     /// @see https://www.flyrealtraffic.com/RTdev2.0.pdf
-    bool FillFromRTTFC (const std::string& s);
+    bool FillFromRTTFC (const std::string& csv);
+    
+    /// Converts the purpose-desgined XPPTraffic JSON format
+    bool FillFromXPPTraffic (const JSON_Object& obj);
+    /// Helper to convert one plane object
 };
 
 /// Smart pointer to flight data objects

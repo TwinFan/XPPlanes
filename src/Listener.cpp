@@ -141,32 +141,8 @@ void ListenMain()
                         continue;
                     }
                     
-                    // buffer to network data
-                    const char* theData = pNet->getBuf();
-                    
-                    // *** Data Conversin
-                    ptrFlightDataTy pFD;
-                    try {
-                        // Convert the data into a FlightData object (done in FlightData constructor),
-                        // that can fail and would raise a FlightData_error exception
-                        pFD = std::make_shared<FlightData>(theData);
-                        
-                        // Only add data younger than the grace period, otherwise we create/remove planes immediately
-                        if (pFD->ts > std::chrono::system_clock::now() - std::chrono::seconds(glob.gracePeriod)) {
-                            // insertion into the map/list of flight data is protected by a mutex
-                            std::lock_guard<std::mutex> guard(glob.mtxListFD);
-                            listFlightDataTy& listFD = glob.mapListFD[pFD->_modeS_id];
-                            if (listFD.empty() ||
-                                listFD.back()->ts + MIN_TS_DIFF <= pFD->ts)  // only add if data is newer, this way it stays sorted
-                                listFD.emplace_back(std::move(pFD));
-                        }
-                    }
-                    catch (const FlightData_error& e) {
-                        LOG_MSG(logDEBUG, "Couldn't convert to FlightData object, unknown format or data insufficient:\n%.80s", theData);
-                    }
-                    catch (const std::exception& e) {
-                        LOG_MSG(logWARN, "Couldn't convert to FlightData object, %s:\n%.80s", e.what(), theData);
-                    }
+                    // Process the data
+                    FlightData::ProcessNetworkData(pNet->getBuf());
                 }
             }
         }

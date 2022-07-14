@@ -111,6 +111,8 @@ include_directories("${CMAKE_SOURCE_DIR}/lib/OpenGL")
 ################################################################################
 add_library(XPPlanes MODULE
     lib/OpenGL/SystemGL.h
+    lib/parson/parson.h
+    lib/parson/parsonWrapper.h
     inc/Constants.h
     inc/FlightData.h
     inc/Global.h
@@ -119,8 +121,11 @@ add_library(XPPlanes MODULE
     inc/Plane.h
     inc/Utilities.h
     inc/XPPlanes.h
+    lib/parson/parson.c
+    lib/parson/parsonWrapper.cpp
     src/FlightData.cpp
     src/FD_RTTFC.cpp
+    src/FD_XPPTraffic.cpp
     src/Global.cpp
     src/Listener.cpp
     src/main.cpp
@@ -134,6 +139,13 @@ add_library(XPPlanes MODULE
 ################################################################################
 
 target_precompile_headers(XPPlanes PUBLIC inc/XPPlanes.h)
+
+# Exclude all the non-core-LiveTraffic modules from the pch
+set_source_files_properties(
+    lib/parson/parson.c
+    lib/parson/parsonWrapper.cpp
+PROPERTIES
+    SKIP_PRECOMPILE_HEADERS ON)
 
   
 ################################################################################

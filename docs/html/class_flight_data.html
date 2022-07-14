@@ -42,8 +42,10 @@ $(function() {
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-methods">Protected Member Functions</a> &#124;
+<a href="#pro-static-methods">Static Protected Member Functions</a> &#124;
 <a href="class_flight_data-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">FlightData Class Reference</div>  </div>
@@ -63,9 +65,12 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a819140c84ef28a8c2524f53f38f64a30"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_flight_data.html#a819140c84ef28a8c2524f53f38f64a30">FlightData</a> (const std::string &amp;s)</td></tr>
-<tr class="memdesc:a819140c84ef28a8c2524f53f38f64a30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Creates a <a class="el" href="class_flight_data.html" title="Transports flight data for location, attitude, configuration between the network and the main thread.">FlightData</a> object from received network data.  <a href="class_flight_data.html#a819140c84ef28a8c2524f53f38f64a30">More...</a><br /></td></tr>
-<tr class="separator:a819140c84ef28a8c2524f53f38f64a30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac202376e0ea2449bb51e58caf215470e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_flight_data.html#ac202376e0ea2449bb51e58caf215470e">FlightData</a> (const std::string &amp;csv)</td></tr>
+<tr class="memdesc:ac202376e0ea2449bb51e58caf215470e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Creates a <a class="el" href="class_flight_data.html" title="Transports flight data for location, attitude, configuration between the network and the main thread.">FlightData</a> object from single record CSV-style data.  <a href="class_flight_data.html#ac202376e0ea2449bb51e58caf215470e">More...</a><br /></td></tr>
+<tr class="separator:ac202376e0ea2449bb51e58caf215470e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ab6aeaff256956aa8ac90e59073407c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_flight_data.html#a0ab6aeaff256956aa8ac90e59073407c">FlightData</a> (const JSON_Object &amp;obj)</td></tr>
+<tr class="memdesc:a0ab6aeaff256956aa8ac90e59073407c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor: Creates a <a class="el" href="class_flight_data.html" title="Transports flight data for location, attitude, configuration between the network and the main thread.">FlightData</a> object from a JSON object.  <a href="class_flight_data.html#a0ab6aeaff256956aa8ac90e59073407c">More...</a><br /></td></tr>
+<tr class="separator:a0ab6aeaff256956aa8ac90e59073407c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af637ccefd378b7a5dfbf5181708dd1c5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_flight_data.html#af637ccefd378b7a5dfbf5181708dd1c5">operator&lt;</a> (const <a class="el" href="class_flight_data.html">FlightData</a> &amp;o) const</td></tr>
 <tr class="memdesc:af637ccefd378b7a5dfbf5181708dd1c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Order is solely by timestamp.  <a href="class_flight_data.html#af637ccefd378b7a5dfbf5181708dd1c5">More...</a><br /></td></tr>
 <tr class="separator:af637ccefd378b7a5dfbf5181708dd1c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -81,6 +86,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a84b822cae15d4202d570e1ff71d02b53"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_flight_data.html#a84b822cae15d4202d570e1ff71d02b53">NANtoCopy</a> (const <a class="el" href="class_flight_data.html">FlightData</a> &amp;o)</td></tr>
 <tr class="memdesc:a84b822cae15d4202d570e1ff71d02b53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replace any remaining <code>NAN</code>s with values from the other object.  <a href="class_flight_data.html#a84b822cae15d4202d570e1ff71d02b53">More...</a><br /></td></tr>
 <tr class="separator:a84b822cae15d4202d570e1ff71d02b53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:ab731f832408134411aacd684d3d78401"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_flight_data.html#ab731f832408134411aacd684d3d78401">ProcessNetworkData</a> (const std::string &amp;s)</td></tr>
+<tr class="memdesc:ab731f832408134411aacd684d3d78401"><td class="mdescLeft">&#160;</td><td class="mdescRight">Main function to interpret network data.  <a href="class_flight_data.html#ab731f832408134411aacd684d3d78401">More...</a><br /></td></tr>
+<tr class="separator:ab731f832408134411aacd684d3d78401"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -143,12 +154,18 @@ Public Attributes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
 Protected Member Functions</h2></td></tr>
-<tr class="memitem:a00da0daad94cd56845a74d7a36745944"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_flight_data.html#a00da0daad94cd56845a74d7a36745944">FillFromNetworkData</a> (const std::string &amp;s)</td></tr>
-<tr class="memdesc:a00da0daad94cd56845a74d7a36745944"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads flight data from the passed-in network data, identifying the type of data, then calling the appropriate conversion function.  <a href="class_flight_data.html#a00da0daad94cd56845a74d7a36745944">More...</a><br /></td></tr>
-<tr class="separator:a00da0daad94cd56845a74d7a36745944"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae1960c2a3cbe91efc478e34ca3fee26e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_flight_data.html#ae1960c2a3cbe91efc478e34ca3fee26e">FillFromRTTFC</a> (const std::string &amp;s)</td></tr>
-<tr class="memdesc:ae1960c2a3cbe91efc478e34ca3fee26e"><td class="mdescLeft">&#160;</td><td class="mdescRight">RTTFC: Interprets the data as an RTTFC line.  <a href="class_flight_data.html#ae1960c2a3cbe91efc478e34ca3fee26e">More...</a><br /></td></tr>
-<tr class="separator:ae1960c2a3cbe91efc478e34ca3fee26e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0d77600f2b61b9a05a9335be5a37b4b7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_flight_data.html#a0d77600f2b61b9a05a9335be5a37b4b7">FillFromRTTFC</a> (const std::string &amp;csv)</td></tr>
+<tr class="memdesc:a0d77600f2b61b9a05a9335be5a37b4b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">RTTFC: Interprets the data as an RTTFC line.  <a href="class_flight_data.html#a0d77600f2b61b9a05a9335be5a37b4b7">More...</a><br /></td></tr>
+<tr class="separator:a0d77600f2b61b9a05a9335be5a37b4b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53ed4299c81f12a261daf035948c91e6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_flight_data.html#a53ed4299c81f12a261daf035948c91e6">FillFromXPPTraffic</a> (const JSON_Object &amp;obj)</td></tr>
+<tr class="memdesc:a53ed4299c81f12a261daf035948c91e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts the purpose-desgined XPPTraffic JSON format.  <a href="class_flight_data.html#a53ed4299c81f12a261daf035948c91e6">More...</a><br /></td></tr>
+<tr class="separator:a53ed4299c81f12a261daf035948c91e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-methods"></a>
+Static Protected Member Functions</h2></td></tr>
+<tr class="memitem:ac91f4fd506ce41bac9fd09a8761cc4ba"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_flight_data.html#ac91f4fd506ce41bac9fd09a8761cc4ba">AddNew</a> (std::shared_ptr&lt; <a class="el" href="class_flight_data.html">FlightData</a> &gt; &amp;&amp;pFD)</td></tr>
+<tr class="memdesc:ac91f4fd506ce41bac9fd09a8761cc4ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Add a just created object to the internal list.  <a href="class_flight_data.html#ac91f4fd506ce41bac9fd09a8761cc4ba">More...</a><br /></td></tr>
+<tr class="separator:ac91f4fd506ce41bac9fd09a8761cc4ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Transports flight data for location, attitude, configuration between the network and the main thread. </p>
@@ -202,8 +219,8 @@ taxi lights </td></tr>
 </div>
 </div>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a819140c84ef28a8c2524f53f38f64a30"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a819140c84ef28a8c2524f53f38f64a30">&#9670;&nbsp;</a></span>FlightData()</h2>
+<a id="ac202376e0ea2449bb51e58caf215470e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac202376e0ea2449bb51e58caf215470e">&#9670;&nbsp;</a></span>FlightData() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -212,19 +229,39 @@ taxi lights </td></tr>
           <td class="memname">FlightData::FlightData </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>s</em></td><td>)</td>
+          <td class="paramname"><em>csv</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Constructor: Creates a <a class="el" href="class_flight_data.html" title="Transports flight data for location, attitude, configuration between the network and the main thread.">FlightData</a> object from received network data. </p>
+<p>Constructor: Creates a <a class="el" href="class_flight_data.html" title="Transports flight data for location, attitude, configuration between the network and the main thread.">FlightData</a> object from single record CSV-style data. </p>
+
+</div>
+</div>
+<a id="a0ab6aeaff256956aa8ac90e59073407c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0ab6aeaff256956aa8ac90e59073407c">&#9670;&nbsp;</a></span>FlightData() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">FlightData::FlightData </td>
+          <td>(</td>
+          <td class="paramtype">const JSON_Object &amp;&#160;</td>
+          <td class="paramname"><em>obj</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructor: Creates a <a class="el" href="class_flight_data.html" title="Transports flight data for location, attitude, configuration between the network and the main thread.">FlightData</a> object from a JSON object. </p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a00da0daad94cd56845a74d7a36745944"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a00da0daad94cd56845a74d7a36745944">&#9670;&nbsp;</a></span>FillFromNetworkData()</h2>
+<a id="ac91f4fd506ce41bac9fd09a8761cc4ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac91f4fd506ce41bac9fd09a8761cc4ba">&#9670;&nbsp;</a></span>AddNew()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -233,27 +270,27 @@ taxi lights </td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool FlightData::FillFromNetworkData </td>
+          <td class="memname">bool FlightData::AddNew </td>
           <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>s</em></td><td>)</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="class_flight_data.html">FlightData</a> &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>pFD</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">protected</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reads flight data from the passed-in network data, identifying the type of data, then calling the appropriate conversion function. </p>
-<dl class="section return"><dt>Returns</dt><dd>if any converter worked and produced usable data </dd></dl>
+<p>Add a just created object to the internal list. </p>
+<p>Performs some basic timestamp handling and validations before doing so like timestamp within grace period and sorted. </p>
 
 </div>
 </div>
-<a id="ae1960c2a3cbe91efc478e34ca3fee26e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae1960c2a3cbe91efc478e34ca3fee26e">&#9670;&nbsp;</a></span>FillFromRTTFC()</h2>
+<a id="a0d77600f2b61b9a05a9335be5a37b4b7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0d77600f2b61b9a05a9335be5a37b4b7">&#9670;&nbsp;</a></span>FillFromRTTFC()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -265,7 +302,7 @@ taxi lights </td></tr>
           <td class="memname">bool FlightData::FillFromRTTFC </td>
           <td>(</td>
           <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>s</em></td><td>)</td>
+          <td class="paramname"><em>csv</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -278,6 +315,34 @@ taxi lights </td></tr>
 
 <p>RTTFC: Interprets the data as an RTTFC line. </p>
 <dl class="section see"><dt>See also</dt><dd><a href="https://www.flyrealtraffic.com/RTdev2.0.pdf">https://www.flyrealtraffic.com/RTdev2.0.pdf</a> </dd></dl>
+
+</div>
+</div>
+<a id="a53ed4299c81f12a261daf035948c91e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53ed4299c81f12a261daf035948c91e6">&#9670;&nbsp;</a></span>FillFromXPPTraffic()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool FlightData::FillFromXPPTraffic </td>
+          <td>(</td>
+          <td class="paramtype">const JSON_Object &amp;&#160;</td>
+          <td class="paramname"><em>obj</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Converts the purpose-desgined XPPTraffic JSON format. </p>
 
 </div>
 </div>
@@ -383,6 +448,38 @@ taxi lights </td></tr>
 </div><div class="memdoc">
 
 <p>Order is solely by timestamp. </p>
+
+</div>
+</div>
+<a id="ab731f832408134411aacd684d3d78401"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab731f832408134411aacd684d3d78401">&#9670;&nbsp;</a></span>ProcessNetworkData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool FlightData::ProcessNetworkData </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Main function to interpret network data. </p>
+<p>Needs to distinguish between</p><ol type="1">
+<li>single record data a) in CSV style like RTTFC b) in JSON style like XPPTraffic single plane</li>
+<li>array data in JSON style like XPPTraffic </li>
+</ol>
 
 </div>
 </div>
@@ -692,6 +789,7 @@ taxi lights </td></tr>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>inc/<a class="el" href="_flight_data_8h_source.html">FlightData.h</a></li>
 <li>src/<a class="el" href="_f_d___r_t_t_f_c_8cpp.html">FD_RTTFC.cpp</a></li>
+<li>src/<a class="el" href="_f_d___x_p_p_traffic_8cpp.html">FD_XPPTraffic.cpp</a></li>
 <li>src/<a class="el" href="_flight_data_8cpp.html">FlightData.cpp</a></li>
 </ul>
 </div><!-- contents -->

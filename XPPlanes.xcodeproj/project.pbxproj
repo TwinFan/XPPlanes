@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		2519AE2E28671C2E007F922C /* Utilities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2519AE2D28671C2E007F922C /* Utilities.cpp */; };
 		2519AE312867AA40007F922C /* XPMP2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2519AE302867AA40007F922C /* XPMP2.framework */; };
+		2552F98F287E0C9600146182 /* FD_XPPTraffic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2552F98D287E0C9600146182 /* FD_XPPTraffic.cpp */; };
+		2552F9EF287E127900146182 /* parson.c in Sources */ = {isa = PBXBuildFile; fileRef = 2552F9B3287E127900146182 /* parson.c */; settings = {COMPILER_FLAGS = "-Wno-sign-conversion"; }; };
+		2552F9FC287E152200146182 /* parsonWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2552F9FA287E152200146182 /* parsonWrapper.cpp */; };
 		2571279B27A56B960098F594 /* XPLM.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2571279A27A56B960098F594 /* XPLM.framework */; };
 		257127A327A56C380098F594 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 257127A227A56C380098F594 /* main.cpp */; };
 		2585D84728709E28007BED82 /* FD_RTTFC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2585D84628709E28007BED82 /* FD_RTTFC.cpp */; };
@@ -66,12 +69,16 @@
 		254A9DC1286659530053CA12 /* CMakeLists.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = "<group>"; };
 		254A9DC228665B020053CA12 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		254A9DC328665B760053CA12 /* CMakeSettings.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = CMakeSettings.json; sourceTree = "<group>"; };
+		2552F98D287E0C9600146182 /* FD_XPPTraffic.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FD_XPPTraffic.cpp; sourceTree = "<group>"; };
+		2552F9B2287E127900146182 /* parson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = parson.h; sourceTree = "<group>"; };
+		2552F9B3287E127900146182 /* parson.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = parson.c; sourceTree = "<group>"; };
+		2552F9FA287E152200146182 /* parsonWrapper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = parsonWrapper.cpp; sourceTree = "<group>"; };
+		2552F9FB287E152200146182 /* parsonWrapper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = parsonWrapper.h; sourceTree = "<group>"; };
 		2571279A27A56B960098F594 /* XPLM.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XPLM.framework; path = lib/SDK/Libraries/Mac/XPLM.framework; sourceTree = SOURCE_ROOT; };
 		257127A227A56C380098F594 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		2585D84628709E28007BED82 /* FD_RTTFC.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FD_RTTFC.cpp; sourceTree = "<group>"; };
 		25DFEC1D286CE52C0082D4F2 /* Plane.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Plane.cpp; sourceTree = "<group>"; };
 		25DFEC1E286CE52C0082D4F2 /* Plane.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Plane.h; sourceTree = "<group>"; };
-		25DFEC20286CE6510082D4F2 /* lib */ = {isa = PBXFileReference; lastKnownFileType = folder; path = lib; sourceTree = "<group>"; };
 		25DFEC21286E2D230082D4F2 /* FlightData.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FlightData.cpp; sourceTree = "<group>"; };
 		25DFEC22286E2D230082D4F2 /* FlightData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlightData.h; sourceTree = "<group>"; };
 		25DFEC24286F96950082D4F2 /* Network.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Network.h; sourceTree = "<group>"; };
@@ -217,10 +224,30 @@
 			name = build;
 			sourceTree = "<group>";
 		};
+		2552F992287E127800146182 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				2552F9B1287E127900146182 /* parson */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		2552F9B1287E127900146182 /* parson */ = {
+			isa = PBXGroup;
+			children = (
+				2552F9B2287E127900146182 /* parson.h */,
+				2552F9B3287E127900146182 /* parson.c */,
+				2552F9FA287E152200146182 /* parsonWrapper.cpp */,
+				2552F9FB287E152200146182 /* parsonWrapper.h */,
+			);
+			path = parson;
+			sourceTree = "<group>";
+		};
 		257127A127A56C380098F594 /* src */ = {
 			isa = PBXGroup;
 			children = (
 				2585D84628709E28007BED82 /* FD_RTTFC.cpp */,
+				2552F98D287E0C9600146182 /* FD_XPPTraffic.cpp */,
 				25DFEC21286E2D230082D4F2 /* FlightData.cpp */,
 				25DFEC2A28705CA70082D4F2 /* Global.cpp */,
 				25DFEC27286F99F10082D4F2 /* Listener.cpp */,
@@ -241,7 +268,7 @@
 				250A30762871D1AF0078B2D5 /* docs */,
 				D6A7BDAD16A1DEA700D1426A /* Frameworks */,
 				2519AE322867AE4C007F922C /* inc */,
-				25DFEC20286CE6510082D4F2 /* lib */,
+				2552F992287E127800146182 /* lib */,
 				D607B19A09A556E400699BC3 /* Products */,
 				25DFEC2D2870858C0082D4F2 /* script */,
 				257127A127A56C380098F594 /* src */,
@@ -340,13 +367,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2552F9EF287E127900146182 /* parson.c in Sources */,
 				25DFEC1F286CE52C0082D4F2 /* Plane.cpp in Sources */,
+				2552F9FC287E152200146182 /* parsonWrapper.cpp in Sources */,
 				2585D84728709E28007BED82 /* FD_RTTFC.cpp in Sources */,
 				25DFEC29286F99F10082D4F2 /* Listener.cpp in Sources */,
 				25DFEC2C28705CA70082D4F2 /* Global.cpp in Sources */,
 				2519AE2E28671C2E007F922C /* Utilities.cpp in Sources */,
 				257127A327A56C380098F594 /* main.cpp in Sources */,
 				25DFEC26286F96A30082D4F2 /* Network.cpp in Sources */,
+				2552F98F287E0C9600146182 /* FD_XPPTraffic.cpp in Sources */,
 				25DFEC23286E2D230082D4F2 /* FlightData.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -578,6 +608,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib/SDK/Libraries/Mac/XPLM.framework",
+					"$(PROJECT_DIR)/lib/XPMP2/lin",
+					"$(PROJECT_DIR)/lib/XPMP2/lin-bionic",
+					"$(PROJECT_DIR)/lib/XPMP2/win",
+					"$(PROJECT_DIR)/lib/SDK/Libraries/Win",
 				);
 				PRODUCT_NAME = "$(PROJECT_NAME)";
 				VALID_ARCHS = x86_64;
@@ -616,6 +650,10 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/lib/SDK/Libraries/Mac/XPLM.framework",
+					"$(PROJECT_DIR)/lib/XPMP2/lin",
+					"$(PROJECT_DIR)/lib/XPMP2/lin-bionic",
+					"$(PROJECT_DIR)/lib/XPMP2/win",
+					"$(PROJECT_DIR)/lib/SDK/Libraries/Win",
 				);
 				PRODUCT_NAME = "$(PROJECT_NAME)";
 				VALID_ARCHS = x86_64;

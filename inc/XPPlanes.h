@@ -54,6 +54,9 @@
 #undef min
 #endif
 
+// Libraries
+#include "parson/parsonWrapper.h"
+
 // X-Plane SDK
 #include "XPLMUtilities.h"
 #include "XPLMProcessing.h"

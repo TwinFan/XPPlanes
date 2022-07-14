@@ -25,13 +25,101 @@
 // MARK: Object Creation
 //
 
-// Constructor: Creates a FlightData object from received network data
-FlightData::FlightData (const std::string& s)
+// Main function to interpret network data
+bool FlightData::ProcessNetworkData (const std::string& s)
 {
-    if (!FillFromNetworkData(s)) {
+    // Determin type of data
+    std::size_t p = s.find_first_of("[{,");
+    if (p == std::string::npos) {           // eh, what? no JSON, no CSV
+        LOG_MSG(logDEBUG, "Not identified as either JSON or CSV");
+        return false;
+    }
+    
+    // Act according to type of data
+    try {
+        switch (s[p]) {
+            // Array-style JSON data, so this is multiple records that we need to loop over
+            case '[':
+                break;
+                
+            // Single-record-style JSON data
+            case '{':
+                break;
+                
+            // Single-record-style CSV data, calls constructor with std::string parameter
+            case ',':
+                return AddNew(std::make_shared<FlightData>(s));
+        }
+    }
+    catch (const FlightData_error& e) {
+        LOG_MSG(logDEBUG, "Couldn't convert to FlightData object, unknown format or data insufficient:\n%.80s",
+                s.c_str());
+        return false;
+    }
+    catch (const std::exception& e) {
+        LOG_MSG(logWARN, "Couldn't convert to FlightData object, %s:\n%.80s",
+                e.what(), s.c_str());
+        return false;
+    }
+    return true;
+}
+
+// Add a just created object to the internal list
+bool FlightData::AddNew (std::shared_ptr<FlightData>&& pFD)
+{
+    // *** Timestamp ***
+    
+    // If no timestamp was given we assume 'now'
+    if (!pFD->ts.time_since_epoch().count())
+        pFD->ts = std::chrono::system_clock::now();
+    
+    // Add the buffering period to the timestamp
+    pFD->ts += std::chrono::seconds(glob.bufferPeriod);
+    
+    // One of the format accepted the input. Was it sufficiently detailed?
+    if (!pFD->IsUsable()) {
+        pFD = nullptr;                          // destroy FlightData object
+        throw(FlightData_error("Not enough informaton in the data to be usable"));
+        return false;
+    }
+    
+    // *** Add Data ***
+
+    // Discard data if already older than grace period
+    if (pFD->ts <= std::chrono::system_clock::now() - std::chrono::seconds(glob.gracePeriod)) {
+        LOG_MSG(logDEBUG, "Ignoring too old data for %06X from %.1fs ago", pFD->_modeS_id,
+                std::chrono::duration<double>(std::chrono::system_clock::now() - pFD->ts).count());
+        pFD = nullptr;
+        // But even then we return `true` as the data as such was OK...just was too late
+        return true;
+    }
+    
+    // insertion into the map/list of flight data is protected by a mutex
+    std::lock_guard<std::mutex> guard(glob.mtxListFD);
+    listFlightDataTy& listFD = glob.mapListFD[pFD->_modeS_id];
+    if (listFD.empty() ||
+        listFD.back()->ts + MIN_TS_DIFF <= pFD->ts)  // only add if data is newer, this way it stays sorted
+        listFD.emplace_back(std::move(pFD));
+    else {
+        LOG_MSG(logDEBUG, "Ignoring out of sequence data for %06X, ts = %lld", pFD->_modeS_id,
+                pFD->ts.time_since_epoch().count());
+        pFD = nullptr;
+    }
+    
+    return true;
+}
+
+// Constructor: Creates a FlightData object from single record CSV-style data
+FlightData::FlightData (const std::string& csv)
+{
+    if (!FillFromRTTFC(csv)) {
         throw(FlightData_error("Couldn't interpret network data as FlightData"));
     }
 }
+
+//
+// MARK: Utility Functions
+//
 
 // Has usable data? (Has at least position information)
 bool FlightData::IsUsable () const
@@ -79,31 +167,6 @@ void FlightData::NANtoCopy (const FlightData& o)
     NAN2CPY(flaps);
     NAN2CPY(spoilers);
 }
-
-// Reads flight data from the passed-in network data, identifying the type of data, then calling the appropriate conversion function
-bool FlightData::FillFromNetworkData (const std::string& s)
-{
-    // Try the different formats the we support
-    if (FillFromRTTFC(s))
-    {
-        // If no timestamp was given we assume 'now'
-        if (!ts.time_since_epoch().count())
-            ts = std::chrono::system_clock::now();
-        
-        // Add the buffering period to the timestamp
-        ts += std::chrono::seconds(glob.bufferPeriod);
-        
-        // One of the format accepted the input. Was it sufficiently detailed?
-        if (!IsUsable()) {
-            LOG_MSG(logDEBUG, "Not enough informaton in the data to be usable");
-            return false;
-        }
-        return true;
-    }
-    LOG_MSG(logDEBUG, "No format converter could make use of the data");
-    return false;
-}
-
 
 //
 // MARK: Global Functions

@@ -77,10 +77,10 @@ static const char* CSV_DELIM = ",";
 #define TO_STR(v) v = tok; break;
 
 // RTTFC: Interprets the data as an RTTFC line
-bool FlightData::FillFromRTTFC (const std::string& s)
+bool FlightData::FillFromRTTFC (const std::string& csv)
 {
     // *** 1. Could it be our format? ***
-    if (s.substr(0,5) != "RTTFC")               // needs to start with 'RTTFC'
+    if (csv.substr(0,5) != "RTTFC")             // needs to start with 'RTTFC'
         return false;
 
     // *** 2. Convert ***
@@ -88,7 +88,7 @@ bool FlightData::FillFromRTTFC (const std::string& s)
     double qnh = NAN;
     
     // Loop over all tokens, ie. elements in the list of CSV fields
-    StrTokens t(s, CSV_DELIM);
+    StrTokens t(csv, CSV_DELIM);
     while (!t.finished())
     {
         const std::string tok = t.next();
