@@ -106,3 +106,49 @@ inline bool jag_b (const JSON_Array *array, size_t idx)
     // 'convert' -1 and 0 both to false with the following comparison:
     return json_array_get_boolean (array, idx) > 0;
 }
+
+//
+// MARK: Wrapper to ensure root object is freed
+//
+
+/// Wrapper to ensure root object is freed, similar to a smart pointer
+class JsonRoot {
+protected:
+    JSON_Value* pRoot = nullptr;
+public:
+    /// Create a new root from the string calling `json_parse_string`
+    JsonRoot (const char* json = nullptr) { parse(json); }
+    /// Destructur ensures freeing the value structure
+    ~JsonRoot() { free(); }
+    
+    /// Convenience wrapper to use class like pointer to root structure
+    operator JSON_Value* () { return pRoot; }
+    /// Convenience wrapper to use class like pointer to root structure
+    operator const JSON_Value* () const { return pRoot; }
+    /// Convenience wrapper to use class like reference to root structure
+    operator JSON_Value& () { return *pRoot; }
+    /// Convenience wrapper to use class like reference to root structure
+    operator const JSON_Value& () const { return *pRoot; }
+
+    /// Not valid?
+    bool operator ! () const { return !pRoot; }
+    /// Valid?
+    operator bool () const { return pRoot != nullptr; }
+
+    /// Free the root structure, not typically necessary to call manually
+    void free()
+    {
+        if (pRoot) json_value_free (pRoot);
+        pRoot = nullptr;
+    }
+    
+    /// @brief Parse a (new) string and keep the pointer
+    /// @return if valid now
+    bool parse (const char* json)
+    {
+        free();
+        if (json) pRoot = json_parse_string(json);
+        return operator bool();
+    }
+    
+};

@@ -63,9 +63,6 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a98c47ea6eb2ce5bc21fa3d5c6cf902de"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plane.html#a98c47ea6eb2ce5bc21fa3d5c6cf902de">Plane</a> (const std::string &amp;_icaoType, const std::string &amp;_icaoAirline, const std::string &amp;_livery, XPMPPlaneID _modeS_id=0, const std::string &amp;_cslId=&quot;&quot;)</td></tr>
-<tr class="memdesc:a98c47ea6eb2ce5bc21fa3d5c6cf902de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor creates a new aircraft object, which will be managed and displayed.  <a href="class_plane.html#a98c47ea6eb2ce5bc21fa3d5c6cf902de">More...</a><br /></td></tr>
-<tr class="separator:a98c47ea6eb2ce5bc21fa3d5c6cf902de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d9c8cc0f8358515ec615a13793e76cc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plane.html#a6d9c8cc0f8358515ec615a13793e76cc">Plane</a> (<a class="el" href="_flight_data_8h.html#acba488d7341fd70a01d64313e3bc0eb1">ptrFlightDataTy</a> &amp;&amp;from, <a class="el" href="_flight_data_8h.html#acba488d7341fd70a01d64313e3bc0eb1">ptrFlightDataTy</a> &amp;&amp;to)</td></tr>
 <tr class="memdesc:a6d9c8cc0f8358515ec615a13793e76cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a new plane from two flight data objects.  <a href="class_plane.html#a6d9c8cc0f8358515ec615a13793e76cc">More...</a><br /></td></tr>
 <tr class="separator:a6d9c8cc0f8358515ec615a13793e76cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -75,6 +72,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa38ed9eb3813b3da5ad9decd6da037e4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plane.html#aa38ed9eb3813b3da5ad9decd6da037e4">UpdatePosition</a> (float _elapsedSinceLastCall, int _flCounter) override</td></tr>
 <tr class="memdesc:aa38ed9eb3813b3da5ad9decd6da037e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called by <a class="el" href="namespace_x_p_m_p2.html">XPMP2</a> right before updating the aircraft's placement in the world.  <a href="class_plane.html#aa38ed9eb3813b3da5ad9decd6da037e4">More...</a><br /></td></tr>
 <tr class="separator:aa38ed9eb3813b3da5ad9decd6da037e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af43454f69c73a35fbf3210fbef14692c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plane.html#af43454f69c73a35fbf3210fbef14692c">GetLift</a> () const override</td></tr>
+<tr class="memdesc:af43454f69c73a35fbf3210fbef14692c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lift produced. Either given in <code>wake.lift</code> or simple defaults apply.  <a href="class_plane.html#af43454f69c73a35fbf3210fbef14692c">More...</a><br /></td></tr>
+<tr class="separator:af43454f69c73a35fbf3210fbef14692c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5bc1c37419ee6cd39803d67041d04233"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plane.html#a5bc1c37419ee6cd39803d67041d04233">UpdateFromFlightData</a> (<a class="el" href="_flight_data_8h.html#a4ec35781be599aff18154f41da0243cd">listFlightDataTy</a> &amp;listFD, const <a class="el" href="_flight_data_8h.html#af09343bf593690e7caceb1b17e33830c">tsTy</a> &amp;now)</td></tr>
 <tr class="memdesc:a5bc1c37419ee6cd39803d67041d04233"><td class="mdescLeft">&#160;</td><td class="mdescRight">Regularly called to update from/to positions from the list of available flight data.  <a href="class_plane.html#a5bc1c37419ee6cd39803d67041d04233">More...</a><br /></td></tr>
 <tr class="separator:a5bc1c37419ee6cd39803d67041d04233"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -109,8 +109,9 @@ Protected Attributes</h2></td></tr>
 <tr class="memdesc:a9a73a5fcfa147d31f559a8fba65a8225"><td class="mdescLeft">&#160;</td><td class="mdescRight">the from-position in XP speak  <a href="class_plane.html#a9a73a5fcfa147d31f559a8fba65a8225">More...</a><br /></td></tr>
 <tr class="separator:a9a73a5fcfa147d31f559a8fba65a8225"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10f467caef5529a4cb47e235dc334022"><td class="memItemLeft" align="right" valign="top">XPLMDrawInfo_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plane.html#a10f467caef5529a4cb47e235dc334022">diTo</a></td></tr>
-<tr class="memdesc:a10f467caef5529a4cb47e235dc334022"><td class="mdescLeft">&#160;</td><td class="mdescRight">the to-position in XP speak  <a href="class_plane.html#a10f467caef5529a4cb47e235dc334022">More...</a><br /></td></tr>
 <tr class="separator:a10f467caef5529a4cb47e235dc334022"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c2b525a797822d6e522df0e0b6643b4"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plane.html#a8c2b525a797822d6e522df0e0b6643b4">f</a> = 0.5f</td></tr>
+<tr class="separator:a8c2b525a797822d6e522df0e0b6643b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a355c0323ad649c60815d2896b5f6c621"><td class="memItemLeft" align="right" valign="top">XPLMProbeRef&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_plane.html#a355c0323ad649c60815d2896b5f6c621">hProbe</a> = NULL</td></tr>
 <tr class="memdesc:a355c0323ad649c60815d2896b5f6c621"><td class="mdescLeft">&#160;</td><td class="mdescRight">probe reference needed to determine  <a href="class_plane.html#a355c0323ad649c60815d2896b5f6c621">More...</a><br /></td></tr>
 <tr class="separator:a355c0323ad649c60815d2896b5f6c621"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -125,72 +126,8 @@ Static Protected Attributes</h2></td></tr>
 <tr class="separator:a718de9bb1cd96ffe2ea862fae2816e7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a98c47ea6eb2ce5bc21fa3d5c6cf902de"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a98c47ea6eb2ce5bc21fa3d5c6cf902de">&#9670;&nbsp;</a></span>Plane() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">Plane::Plane </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>_icaoType</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>_icaoAirline</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>_livery</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">XPMPPlaneID&#160;</td>
-          <td class="paramname"><em>_modeS_id</em> = <code>0</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>_cslId</em> = <code>&quot;&quot;</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Constructor creates a new aircraft object, which will be managed and displayed. </p>
-<dl class="exception"><dt>Exceptions</dt><dd>
-  <table class="exception">
-    <tr><td class="paramname">XPMP2::XPMP2Error</td><td>Mode S id invalid or duplicate, no model found during model matching </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">_icaoType</td><td>ICAO aircraft type designator, like 'A320', 'B738', 'C172' </td></tr>
-    <tr><td class="paramname">_icaoAirline</td><td>ICAO airline code, like 'BAW', 'DLH', can be an empty string </td></tr>
-    <tr><td class="paramname">_livery</td><td>Special livery designator, can be an empty string </td></tr>
-    <tr><td class="paramname">_modeS_id</td><td>(optional) <b>Unique</b> identification of the plane [0x01..0xFFFFFF], e.g. the 24bit mode S transponder code. <a class="el" href="namespace_x_p_m_p2.html">XPMP2</a> assigns an arbitrary unique number of not given </td></tr>
-    <tr><td class="paramname">_cslId</td><td>(optional) specific unique model id to be used (package name/short id, as defined in the <code>OBJ8_AIRCRAFT</code> line) </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <a id="a6d9c8cc0f8358515ec615a13793e76cc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6d9c8cc0f8358515ec615a13793e76cc">&#9670;&nbsp;</a></span>Plane() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d9c8cc0f8358515ec615a13793e76cc">&#9670;&nbsp;</a></span>Plane()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -264,6 +201,33 @@ Static Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Determine ground altitude of a given location. </p>
+
+</div>
+</div>
+<a id="af43454f69c73a35fbf3210fbef14692c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af43454f69c73a35fbf3210fbef14692c">&#9670;&nbsp;</a></span>GetLift()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Plane::GetLift </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Lift produced. Either given in <code>wake.lift</code> or simple defaults apply. </p>
 
 </div>
 </div>
@@ -476,8 +440,30 @@ Static Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
 <p>the to-position in XP speak </p>
+
+</div>
+</div>
+<a id="a8c2b525a797822d6e522df0e0b6643b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c2b525a797822d6e522df0e0b6643b4">&#9670;&nbsp;</a></span>f</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Plane::f = 0.5f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p><em>The</em> factor: increases from 0 to 1 while <code>now</code> is between <code>from</code> and <code>to</code> (-&gt;interpolation), and becomes larger than 1 if <code>now</code> increases even beyond <code>to</code> (-&gt; extrapolation) </p>
 
 </div>
 </div>

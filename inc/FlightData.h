@@ -54,7 +54,9 @@ public:
     float       roll        = NAN;  ///< Roll to rotate the object
     
     /// Wake turbulence calculation data: wing span, wing area, aircraft mass
-    XPMP2::Aircraft::wakeTy wake;
+    struct wakeTy : public XPMP2::Aircraft::wakeTy {
+        float   lift        = NAN;  ///< current lift produced
+    } wake;
     
     // Configuration
     float       gear        = NAN;  ///< gear down = 1.0, gear up = 0.0
@@ -64,12 +66,13 @@ public:
 
     /// Aircraft lights
     struct lightsTy {
+        bool defined    : 1;        ///< are lights values valid, ie. defined?
         bool taxi       : 1;        ///< taxi lights
         bool landing    : 1;        ///< landing lights
         bool beacon     : 1;        ///< beacon lights
         bool strobe     : 1;        ///< strobe lights
         bool nav        : 1;        ///< navigation lights
-    } lights = { false, false, false, false, false };
+    } lights = { false, false, false, false, false, false };
     
     // TODO: Reasonable approach to engine, rotor, wheels
 
@@ -94,7 +97,15 @@ public:
     FlightData (const std::string& csv);
     
     /// Constructor: Creates a FlightData object from a JSON object
-    FlightData (const JSON_Object& obj);
+    FlightData (const JSON_Object* obj);
+    
+    /// @brief Set timestamp from input value
+    /// @details Can be one out of three:
+    ///          - If larger than 1577836800000 -> absolute Java timestamp in milliseconds
+    ///          - If larger than 1577836800.0  -> absolute Unix timestamp in seconds, supports decimals
+    ///          - otherwise relative timestamp
+    ///          NAN is handled as 0.0, ie. "now"
+    void SetTimestamp (double tsIn);
 
     /// Order is solely by timestamp
     bool operator< (const FlightData& o) const { return ts < o.ts; }
@@ -117,7 +128,7 @@ protected:
     bool FillFromRTTFC (const std::string& csv);
     
     /// Converts the purpose-desgined XPPTraffic JSON format
-    bool FillFromXPPTraffic (const JSON_Object& obj);
+    bool FillFromXPPTraffic (const JSON_Object* obj);
     /// Helper to convert one plane object
 };
 

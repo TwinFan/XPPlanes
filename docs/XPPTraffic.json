@@ -14,7 +14,8 @@
     "lat" : 51.406292,
     "lon" : 6.939847,
     "alt_geo" : 407,
-    "gnd" : true
+    "gnd" : true,
+    "timestamp" : -0.7
   },
   "attitude" : {
     "roll" : -0.2,
@@ -34,6 +35,6 @@
     "landing" : false,
     "beacon" : true,
     "strobe" : false,
-    "nac" : true
+    "nav" : true
   }
 }

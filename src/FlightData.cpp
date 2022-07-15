@@ -34,17 +34,53 @@ bool FlightData::ProcessNetworkData (const std::string& s)
         LOG_MSG(logDEBUG, "Not identified as either JSON or CSV");
         return false;
     }
+    const bool bJson = (s[p] != ',');       // is probably JSON?
+    
+    // If JSON then we try to parse it right here already
+    JsonRoot jsonRoot (bJson ? s.c_str() : nullptr);
+    if (bJson && !jsonRoot) {
+        LOG_MSG(logWARN, "Looks like JSON but couldn't be parsed:\n%.80s", s.c_str());
+        return false;
+    }
     
     // Act according to type of data
     try {
         switch (s[p]) {
             // Array-style JSON data, so this is multiple records that we need to loop over
             case '[':
-                break;
+            {
+                // Find the array
+                JSON_Array* pArr = json_array(jsonRoot);
+                if (!pArr) {
+                    LOG_MSG(logWARN, "Couldn't find array object in parsed JSON data:\n%.80s", s.c_str());
+                    return false;
+                }
+                // Loop over all array values and interpret them as flight data
+                bool bRet = true;
+                for (size_t i = 0; i < json_array_get_count(pArr); ++i)
+                {
+                    JSON_Object* pObj = json_array_get_object(pArr, i);
+                    if (!pObj) {
+                        LOG_MSG(logWARN, "Couldn't find root object in parsed JSON array, index %lu:\n%.80s", (unsigned long)i, s.c_str());
+                        bRet = false;
+                    } else {
+                        if (!AddNew(std::make_shared<FlightData>(pObj)))
+                            bRet = false;
+                    }
+                }
+                return bRet;
+            }
                 
             // Single-record-style JSON data
             case '{':
-                break;
+            {
+                JSON_Object* pObj = json_object(jsonRoot);
+                if (!pObj) {
+                    LOG_MSG(logWARN, "Couldn't find root object in parsed JSON data:\n%.80s", s.c_str());
+                    return false;
+                }
+                return AddNew(std::make_shared<FlightData>(pObj));
+            }
                 
             // Single-record-style CSV data, calls constructor with std::string parameter
             case ',':
@@ -101,8 +137,8 @@ bool FlightData::AddNew (std::shared_ptr<FlightData>&& pFD)
         listFD.back()->ts + MIN_TS_DIFF <= pFD->ts)  // only add if data is newer, this way it stays sorted
         listFD.emplace_back(std::move(pFD));
     else {
-        LOG_MSG(logDEBUG, "Ignoring out of sequence data for %06X, ts = %lld", pFD->_modeS_id,
-                pFD->ts.time_since_epoch().count());
+        LOG_MSG(logDEBUG, "Ignoring out of sequence data for %06X, ts = %ld", pFD->_modeS_id,
+                (long)pFD->ts.time_since_epoch().count());
         pFD = nullptr;
     }
     
@@ -113,7 +149,40 @@ bool FlightData::AddNew (std::shared_ptr<FlightData>&& pFD)
 FlightData::FlightData (const std::string& csv)
 {
     if (!FillFromRTTFC(csv)) {
-        throw(FlightData_error("Couldn't interpret network data as FlightData"));
+        throw(FlightData_error("Couldn't interpret network data as RTTFC"));
+    }
+}
+
+// Constructor: Creates a FlightData object from a JSON object
+FlightData::FlightData (const JSON_Object* obj)
+{
+    if (!FillFromXPPTraffic(obj)) {
+        throw(FlightData_error("Couldn't interpret network data as XPPTraffic"));
+    }
+}
+
+// Set timestamp from input value
+void FlightData::SetTimestamp (double tsIn)
+{
+    // Consider NAN = 0.0 = "now"
+    if (std::isnan(tsIn))
+        tsIn = 0.0;
+    // Considered a Java timestamp in milliseconds?
+    if (tsIn >= 1577836800000.0)
+        tsIn /= 1000.0;                 // turn it into a Unix timestamp with decimals
+    // Absolute Unix timestamp?
+    if (tsIn >= 1577836800.0) {
+        // convert to system clock, truncating the decimals
+        ts = std::chrono::system_clock::from_time_t(time_t(tsIn));
+        // now add the fractional part back in
+        tsIn -= floor(tsIn);
+        tsIn *= 1000.0;
+        ts += std::chrono::milliseconds(long(tsIn));
+    }
+    // Relative Timestamp
+    else {
+        ts = std::chrono::system_clock::now();
+        ts += std::chrono::milliseconds(long(tsIn*1000.0));
     }
 }
 
@@ -153,6 +222,7 @@ void FlightData::NANtoZero ()
     NAN2Z(nws);
     NAN2Z(flaps);
     NAN2Z(spoilers);
+    // we specifically do not touch `wake`, ie. NAN can remain there as they are handled by XPMP2
 }
 
 /// Replace any remaining `NAN`s with values from the other object
@@ -166,6 +236,12 @@ void FlightData::NANtoCopy (const FlightData& o)
     NAN2CPY(nws);
     NAN2CPY(flaps);
     NAN2CPY(spoilers);
+    // but unlike in FlightData::NANtoZero() we do copy wake information from previous;
+    // this might copy NAN...but that's OK, but once given from outside we keep copying those values
+    NAN2CPY(wake.wingSpan_m);
+    NAN2CPY(wake.wingArea_m2);
+    NAN2CPY(wake.mass_kg);
+    // we do specifically _not_ copy wake.lift, ie. if list is no longer given then we return to defaults
 }
 
 //

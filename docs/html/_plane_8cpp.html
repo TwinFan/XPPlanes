@@ -57,7 +57,7 @@ $(function() {
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
-<tr class="memitem:a5477eda149f94cd4ccff9de8d728b2eb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_plane_8cpp.html#a5477eda149f94cd4ccff9de8d728b2eb">IP_01</a>(fct,  v)</td></tr>
+<tr class="memitem:a5477eda149f94cd4ccff9de8d728b2eb"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_plane_8cpp.html#a5477eda149f94cd4ccff9de8d728b2eb">IP_01</a>(fct,  v)&#160;&#160;&#160;fct(std::clamp&lt;float&gt;(std::fmaf(f, fdTo-&gt;v - fdFrom-&gt;v, fdFrom-&gt;v), 0.0f,1.0f));</td></tr>
 <tr class="memdesc:a5477eda149f94cd4ccff9de8d728b2eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate interpolation between 0 and 1 from the <a class="el" href="class_flight_data.html" title="Transports flight data for location, attitude, configuration between the network and the main thread.">FlightData</a> objects.  <a href="_plane_8cpp.html#a5477eda149f94cd4ccff9de8d728b2eb">More...</a><br /></td></tr>
 <tr class="separator:a5477eda149f94cd4ccff9de8d728b2eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -103,16 +103,11 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
         <tr>
           <td></td>
           <td>)</td>
-          <td></td><td></td>
+          <td></td><td>&#160;&#160;&#160;fct(std::clamp&lt;float&gt;(std::fmaf(f, fdTo-&gt;v - fdFrom-&gt;v, fdFrom-&gt;v), 0.0f,1.0f));</td>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Value:</b><div class="fragment"><div class="line"><span class="keywordflow">if</span> (!std::isnan(fdTo-&gt;v)) {                                                     \</div>
-<div class="line">    fct(std::clamp&lt;float&gt;(std::isnan(fdFrom-&gt;v) ?                               \</div>
-<div class="line">                          fdTo-&gt;v :                                             \</div>
-<div class="line">                          fdFrom-&gt;v + f * (fdTo-&gt;v - fdFrom-&gt;v),0.0f,1.0f));    \</div>
-<div class="line">}</div>
-</div><!-- fragment -->
+
 <p>Calculate interpolation between 0 and 1 from the <a class="el" href="class_flight_data.html" title="Transports flight data for location, attitude, configuration between the network and the main thread.">FlightData</a> objects. </p>
 <p>If <code>to</code> is <code>NAN</code> then does nothing, does not change the existing value, else if <code>from</code> is <code>NAN</code> sets just the <code>to</code> value, otherwise interpolates between <code>from</code> and <code>to</code> using <code>f</code> </p>
 

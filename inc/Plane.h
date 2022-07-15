@@ -27,19 +27,6 @@
 class Plane : public XPMP2::Aircraft
 {
 public:
-    /// @brief Constructor creates a new aircraft object, which will be managed and displayed
-    /// @exception XPMP2::XPMP2Error Mode S id invalid or duplicate, no model found during model matching
-    /// @param _icaoType ICAO aircraft type designator, like 'A320', 'B738', 'C172'
-    /// @param _icaoAirline ICAO airline code, like 'BAW', 'DLH', can be an empty string
-    /// @param _livery Special livery designator, can be an empty string
-    /// @param _modeS_id (optional) **Unique** identification of the plane [0x01..0xFFFFFF], e.g. the 24bit mode S transponder code. XPMP2 assigns an arbitrary unique number of not given
-    /// @param _cslId (optional) specific unique model id to be used (package name/short id, as defined in the `OBJ8_AIRCRAFT` line)
-    Plane (const std::string& _icaoType,
-           const std::string& _icaoAirline,
-           const std::string& _livery,
-           XPMPPlaneID _modeS_id = 0,
-           const std::string& _cslId = "");
-    
     /// @brief Create a new plane from two flight data objects
     Plane (ptrFlightDataTy&& from, ptrFlightDataTy&& to);
     
@@ -49,11 +36,17 @@ public:
     /// Called by XPMP2 right before updating the aircraft's placement in the world
     void UpdatePosition (float _elapsedSinceLastCall, int _flCounter) override;
 
+    /// Lift produced. Either given in `wake.lift` or simple defaults apply
+    float GetLift() const override;
+
 protected:
     ptrFlightDataTy fdFrom;         ///< the from-position for interpolation
     ptrFlightDataTy fdTo;           ///< the to-position for interpolation
     XPLMDrawInfo_t  diFrom;         ///< the from-position in XP speak
     XPLMDrawInfo_t  diTo;           ///< the to-position in XP speak
+    /// _The_ factor: increases from 0 to 1 while `now` is between `from` and `to` (->interpolation),
+    /// and becomes larger than 1 if `now` increases even beyond `to` (-> extrapolation)
+    float           f = 0.5f;
     XPLMProbeRef hProbe = NULL;     ///< probe reference needed to determine
     
     /// @brief Prepare given position for usage after taking over from passed-in smart pointer

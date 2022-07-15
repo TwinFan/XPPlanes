@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "FlightData::SetTimestamp(double):FlightData.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "long(tsIn*1000.0)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "FlightData::AddNew(std::__1::shared_ptr&lt;FlightData&gt;&amp;&amp;):FlightData.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "FlightData::FillFromXPPTraffic(json_object_t const*):FD_XPPTraffic.cpp">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

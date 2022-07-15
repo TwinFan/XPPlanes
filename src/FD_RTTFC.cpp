@@ -130,22 +130,8 @@ bool FlightData::FillFromRTTFC (const std::string& csv)
                 case RT_RTTFC_AC_TYPE:      TO_STR(icaoType);
                 case RT_RTTFC_AC_TAILNO:    TO_STR(livery);
                 case RT_RTTFC_TIMESTAMP:
-                {
-                    double tsIn = std::stod(tok);       // timestamp, including decimals
-                    if (tsIn > 0.5) {                   // a positive timestamp is assumed to be ABSOLUTE time
-                        // convert to system clock, truncating the decimals
-                        ts = std::chrono::system_clock::from_time_t(time_t(tsIn));
-                        // now add the fractional part back in
-                        tsIn -= floor(tsIn);
-                        tsIn *= 1000.0;
-                        ts += std::chrono::milliseconds(long(tsIn));
-                    }
-                    else {                              // negative/zero timestamp is age from now
-                        ts = std::chrono::system_clock::now();
-                        ts -= std::chrono::milliseconds(long(tsIn*1000.0));
-                    }
+                    SetTimestamp(std::stod(tok));
                     break;
-                }
                 case RT_RTTFC_ALT_GEOM:                 // altitude is given in feet, convert to meter
                     alt_m = std::stod(tok) * XPMP2::M_per_FT;
                     break;
@@ -169,6 +155,14 @@ bool FlightData::FillFromRTTFC (const std::string& csv)
             alt_baro_ft = WeatherAltCorr_ft(alt_baro_ft, qnh);
         alt_m = alt_baro_ft * XPMP2::M_per_FT;
     }
+    
+    // Lights: We just assume most on, landing lights below 10,000ft
+    lights.defined  = true;
+    lights.taxi     = bGnd;
+    lights.beacon   = true;
+    lights.landing  = alt_m < 10000.0 * XPMP2::M_per_FT;
+    lights.nav      = true;
+    lights.strobe   = true;
     
     return true;
 }

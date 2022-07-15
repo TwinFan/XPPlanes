@@ -21,7 +21,7 @@
 #include "XPPlanes.h"
 
 //
-// MARK: Globally before XPMP2-triggered updates
+// MARK: Process Flight Data
 //
 
 void PlaneMaintenance ()
@@ -151,123 +151,6 @@ void Plane::UpdateFromFlightData (listFlightDataTy& listFD,
     }
 }
 
-// Should this plane be removed?
-bool Plane::ShallBeRemoved (const tsTy& cutOff) const
-{
-    return
-    // not updated for too long?
-    fdTo->ts < cutOff;
-}
-
-//
-// MARK: Once per Cycle
-//
-
-// This data is updated once per cycle, then reused by other Update... calls
-int Plane::flCounter = -1;          ///< flight loop counter of last update
-tsTy::rep Plane::ticksNow = 0;      ///< 'now' timestamp
-
-// Once per cycle activities
-void Plane::OncePerCycle (int _flCounter)
-{
-    if (_flCounter <= flCounter) return;
-    ticksNow = std::chrono::system_clock::now().time_since_epoch().count();
-}
-
-//
-// MARK: XPMP2 Interface
-//
-
-// Constructor
-Plane::Plane (const std::string& _icaoType,
-              const std::string& _icaoAirline,
-              const std::string& _livery,
-              XPMPPlaneID _modeS_id,
-              const std::string& _cslId) :
-XPMP2::Aircraft(_icaoType, _icaoAirline, _livery, _modeS_id, _cslId)
-{}
-
-// Constructor from two flight data objects
-Plane::Plane (ptrFlightDataTy&& from, ptrFlightDataTy&& to) :
-XPMP2::Aircraft(from->icaoType, from->icaoAirline, from->livery,
-                from->_modeS_id)
-{
-    // Take over the flight data
-    TakeOverData(true,  std::move(from));
-    TakeOverData(false, std::move(to));
-    
-    // as we have take care of terrain already we don't need clamping
-    bClampToGround = false;
-}
-
-// Destructor
-Plane::~Plane ()
-{}
-
-/// @brief Calculate interpolation between 0 and 1 from the FlightData objects
-/// @details If `to` is `NAN` then does nothing, does not change the existing value,
-///          else if `from` is `NAN` sets just the `to` value,
-///          otherwise interpolates between `from` and `to` using `f`
-#define IP_01(fct,v)                                                            \
-if (!std::isnan(fdTo->v)) {                                                     \
-    fct(std::clamp<float>(std::isnan(fdFrom->v) ?                               \
-                          fdTo->v :                                             \
-                          fdFrom->v + f * (fdTo->v - fdFrom->v),0.0f,1.0f));    \
-}
-                   
-
-// Called by XPMP2 right before updating the aircraft's placement in the world
-void Plane::UpdatePosition (float /*_elapsedSinceLastCall*/, int _flCounter)
-{
-    try {
-        // Once per cycle
-        OncePerCycle(_flCounter);
-        
-        // Interpolation between fdFrom and fdTo
-        const tsTy::rep tsFrom = fdFrom->ts.time_since_epoch().count();
-        const tsTy::rep tsTo   = fdTo->ts.time_since_epoch().count();
-        // _the_ factor: increases from 0 to 1 while `now` is between `from` and `to` (->interpolation),
-        // and becomes larger than 1 if `now` increases even beyond `to` (-> extrapolation)
-        float f = float(ticksNow - tsFrom) / float(tsTo - tsFrom);
-        LOG_ASSERT(!std::isnan(f));
-        
-        // Update the drawInfo with interpolated values
-        // Location
-        drawInfo.x      = diFrom.x     + f * (diTo.x     - diFrom.x);
-        drawInfo.y      = diFrom.y     + f * (diTo.y     - diFrom.y);
-        drawInfo.z      = diFrom.z     + f * (diTo.z     - diFrom.z);
-        
-        // for all the following values we cap `f` at 1.25 so we don't do too much of spinning etc in case we are missing future updates
-        if (f > MAX_F) f = MAX_F;
-        
-        // Attitude
-        drawInfo.pitch  = diFrom.pitch + f * (diTo.pitch - diFrom.pitch);
-        drawInfo.roll   = diFrom.roll  + f * (diTo.roll  - diFrom.roll);
-        drawInfo.heading= diFrom.heading + f * HeadDiff(diFrom.heading, diTo.heading);
-        
-        // Configuration
-        IP_01(SetGearRatio, gear);
-        if (!std::isnan(fdTo->nws))                 // nose wheel angle
-            SetNoseWheelAngle(std::isnan(fdFrom->nws)   ?
-                              fdTo->nws                 :
-                              HeadDiff(fdFrom->nws, fdTo->nws));
-        IP_01(SetFlapRatio, flaps);
-        IP_01(SetSpoilerRatio, spoilers);
-        
-        // Lights
-        const FlightData::lightsTy& lights = (f >= 0.5) ? fdTo->lights : fdFrom->lights;
-        SetLightsTaxi(lights.taxi);
-        SetLightsLanding(lights.landing);
-        SetLightsBeacon(lights.beacon);
-        SetLightsStrobe(lights.strobe);
-        SetLightsNav(lights.nav);
-    }
-    catch (const std::exception& e) {
-        LOG_MSG(logWARN, "Updating 0x%06X failed: %s", modeS_id, e.what());
-    }
-}
-
-
 // Prepare given position for usage after taking over from passed-in smart pointer
 void Plane::TakeOverData (bool bFrom, ptrFlightDataTy&& source)
 {
@@ -336,6 +219,122 @@ void Plane::DetermineGndAlt (ptrFlightDataTy& fd)
         fd->alt_m = 0.0;
     }
 }
+// Should this plane be removed?
+bool Plane::ShallBeRemoved (const tsTy& cutOff) const
+{
+    return
+    // not updated for too long?
+    fdTo->ts < cutOff;
+}
+
+//
+// MARK: Once per Cycle
+//
+
+// This data is updated once per cycle, then reused by other Update... calls
+int Plane::flCounter = -1;          ///< flight loop counter of last update
+tsTy::rep Plane::ticksNow = 0;      ///< 'now' timestamp
+
+// Once per cycle activities
+void Plane::OncePerCycle (int _flCounter)
+{
+    if (_flCounter <= flCounter) return;
+    ticksNow = std::chrono::system_clock::now().time_since_epoch().count();
+}
+
+//
+// MARK: XPMP2 Interface
+//
+
+// Constructor from two flight data objects
+Plane::Plane (ptrFlightDataTy&& from, ptrFlightDataTy&& to) :
+XPMP2::Aircraft(from->icaoType, from->icaoAirline, from->livery,
+                from->_modeS_id)
+{
+    // Take over the flight data
+    TakeOverData(true,  std::move(from));
+    TakeOverData(false, std::move(to));
+    
+    // as we have take care of terrain already we don't need clamping
+    bClampToGround = false;
+}
+
+// Destructor
+Plane::~Plane ()
+{}
+
+/// @brief Calculate interpolation between 0 and 1 from the FlightData objects
+/// @details If `to` is `NAN` then does nothing, does not change the existing value,
+///          else if `from` is `NAN` sets just the `to` value,
+///          otherwise interpolates between `from` and `to` using `f`
+#define IP_01(fct,v)                                                            \
+fct(std::clamp<float>(std::fmaf(f, fdTo->v - fdFrom->v, fdFrom->v), 0.0f,1.0f));
+// fmaf(x,y,z) = x*y + z
+
+// Called by XPMP2 right before updating the aircraft's placement in the world
+void Plane::UpdatePosition (float /*_elapsedSinceLastCall*/, int _flCounter)
+{
+    try {
+        // Once per cycle
+        OncePerCycle(_flCounter);
+        
+        // Interpolation between fdFrom and fdTo
+        const tsTy::rep tsFrom = fdFrom->ts.time_since_epoch().count();
+        const tsTy::rep tsTo   = fdTo->ts.time_since_epoch().count();
+        // _the_ factor: increases from 0 to 1 while `now` is between `from` and `to` (->interpolation),
+        // and becomes larger than 1 if `now` increases even beyond `to` (-> extrapolation)
+        f = float(ticksNow - tsFrom) / float(tsTo - tsFrom);
+        LOG_ASSERT(!std::isnan(f));
+        
+        // Update the drawInfo with interpolated values
+        // Location [ fmaf(x,y,z) = x*y + z ]
+        drawInfo.x      = std::fmaf(f, diTo.x - diFrom.x, diFrom.x);
+        drawInfo.y      = std::fmaf(f, diTo.y - diFrom.y, diFrom.y);
+        drawInfo.z      = std::fmaf(f, diTo.z - diFrom.z, diFrom.z);
+        
+        // for all the following values we cap `f` at 1.25 so we don't do too much of spinning etc in case we are missing future updates
+        if (f > MAX_F) f = MAX_F;
+        
+        // Attitude
+        drawInfo.pitch  = std::fmaf(f, diTo.pitch - diFrom.pitch,              diFrom.pitch);
+        drawInfo.roll   = std::fmaf(f, diTo.roll  - diFrom.roll,               diFrom.roll);
+        drawInfo.heading= std::fmaf(f, HeadDiff(diFrom.heading, diTo.heading), diFrom.heading);
+        
+        // Configuration
+        IP_01(SetGearRatio, gear);
+        SetNoseWheelAngle(std::fmaf(f, HeadDiff(fdFrom->nws, fdTo->nws), fdFrom->nws));
+        IP_01(SetFlapRatio, flaps);
+        IP_01(SetSpoilerRatio, spoilers);
+        
+        // Lights
+        const FlightData::lightsTy& lights = (f >= 0.5) ? fdTo->lights : fdFrom->lights;
+        if (lights.defined) {
+            SetLightsTaxi(lights.taxi);
+            SetLightsLanding(lights.landing);
+            SetLightsBeacon(lights.beacon);
+            SetLightsStrobe(lights.strobe);
+            SetLightsNav(lights.nav);
+        }
+    }
+    catch (const std::exception& e) {
+        LOG_MSG(logWARN, "Updating 0x%06X failed: %s", modeS_id, e.what());
+    }
+}
+
+
+/// Lift produced. Either given in `wake.lift` or simple defaults apply
+float Plane::GetLift() const
+{
+    // replace any missing value with default, then just interpolate
+    if (std::isnan(fdFrom->wake.lift))
+        fdFrom->wake.lift = XPMP2::Aircraft::GetLift();
+    if (std::isnan(fdTo->wake.lift))
+        fdTo->wake.lift = XPMP2::Aircraft::GetLift();
+
+    // return interpolation between these two
+    return std::fmaf(f, fdTo->wake.lift - fdFrom->wake.lift, fdFrom->wake.lift);
+}
+
 
 //
 // MARK: Global Functions
