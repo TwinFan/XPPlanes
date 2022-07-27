@@ -162,7 +162,7 @@ will be removed.
 ### XPPTraffic
 
 `XPPTraffic` is a custom purpose-built JSON format that supports all
-features of XPPlanes. One traffic data records looks like this
+features of XPPlanes. One traffic data record looks like this
 (see file `docs/XPPTraffic.json`):
 
 ```
@@ -211,7 +211,7 @@ features of XPPlanes. One traffic data records looks like this
 
 Field           | Description
 ----------------| ------------------------------
-id              | **Mandatory** numeric identification of the plane. Can be a numeric integer value like `4711` or a string value. A string value is interpreted as a hex number, like `00c01abc`.
+id              | **Mandatory** numeric identification of the plane. Can be a numeric integer value like `4711` or a string value. A string value is interpreted as a hex number, like `"00c01abc"`.
 ` `             | ` `
 **ident/**      | Optional object with plane identifiers, recommended to be sent at least with the first record, but can be updated any time
 /airline        | String used as _operator code_ in [CSL model matching](https://twinfan.gitbook.io/livetraffic/reference/faq#matching)
@@ -234,14 +234,14 @@ id              | **Mandatory** numeric identification of the plane. Can be a nu
 ` `             | ` `
 **attitude/**   | Optional object with plane attitude information
 /roll           | roll in degrees, float, negative is left
-/heading        | heading in degress, integer `0 .. 359`
+/heading        | heading in degrees, integer `0 .. 359`
 /pitch          | pitch in degrees, float, negative is down
 ` `             | ` `
 **config/**     | Optional object with plane configuration data (unlike `type/` this is data which is likely to change throughout a flight)
 /mass           | mass of the plane in `kg`, used for [wake turbulence configuration](https://developer.x-plane.com/article/plugin-traffic-wake-turbulence/)
 /lift           | current lift in Newton, optional, defaults to `mass * earth gravity`, used for [wake turbulence configuration](https://developer.x-plane.com/article/plugin-traffic-wake-turbulence/)
 /gear           | gear extension, float `0.0 .. 1.0` with `1.0` fully extended
-/noseWheel      | direction of nose wheel in degrees, float, negative left, `0.0` straight ahead
+/noseWheel      | direction of nose wheel in degrees, float, negative is left, `0.0` straight ahead
 /flaps          | flap extension, float `0.0 .. 1.0` with `1.0` fully extended
 /spoiler        | spoiler extension, float `0.0 .. 1.0` with `1.0` fully extended
 ` `             | ` `
@@ -280,3 +280,11 @@ can send such data to any UDP port, ie. also to the port defined for XPPlanes in
 
 `RTTFC` does not include fields for configuration or light information and also misses other
 attributes like pitch or any attributes required for detailed [wake turbulence configuration](https://developer.x-plane.com/article/plugin-traffic-wake-turbulence/).
+
+If you own a [RealTraffic licence](https://rtweb.flyrealtraffic.com),
+then you could define `NetBcstPort 49005` in the [configuration](#configuration),
+run the RealTraffic app in Spotter mode, and have those planes displayed with XPPlanes directly.
+(This displays RealTraffic data pretty much diretly,
+ie. all differences to how the same data would look like displayed with LiveTraffic
+are due to all the optimizations included in
+[LiveTraffic](https://forums.x-plane.org/index.php?/files/file/49749-livetraffic/).)

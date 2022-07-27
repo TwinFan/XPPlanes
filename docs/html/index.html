@@ -151,7 +151,7 @@ Network Message Formats</h1>
 <p><code>PlanesBufferPeriod = 0</code> is only recommended if you can feed high-speed data (like updates every one or two seconds) with current positions.</p>
 <p>Planes, for which the youngest timestamp is older than <code>PlanesGracePeriod</code> seconds, will be removed.</p>
 <h2>XPPTraffic</h2>
-<p><code>XPPTraffic</code> is a custom purpose-built JSON format that supports all features of XPPlanes. One traffic data records looks like this (see file <code>docs/XPPTraffic.json</code>):</p>
+<p><code>XPPTraffic</code> is a custom purpose-built JSON format that supports all features of XPPlanes. One traffic data record looks like this (see file <code>docs/XPPTraffic.json</code>):</p>
 <div class="fragment"><div class="line">{</div>
 <div class="line">  &quot;id&quot; : 4711,</div>
 <div class="line">  &quot;ident&quot; : {</div>
@@ -197,7 +197,7 @@ Network Message Formats</h1>
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Field   </th><th class="markdownTableHeadNone">Description    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">id   </td><td class="markdownTableBodyNone"><b>Mandatory</b> numeric identification of the plane. Can be a numeric integer value like <code>4711</code> or a string value. A string value is interpreted as a hex number, like <code>00c01abc</code>.    </td></tr>
+<td class="markdownTableBodyNone">id   </td><td class="markdownTableBodyNone"><b>Mandatory</b> numeric identification of the plane. Can be a numeric integer value like <code>4711</code> or a string value. A string value is interpreted as a hex number, like <code>"00c01abc"</code>.    </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
 <tr class="markdownTableRowOdd">
@@ -243,7 +243,7 @@ Network Message Formats</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">/roll   </td><td class="markdownTableBodyNone">roll in degrees, float, negative is left    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">/heading   </td><td class="markdownTableBodyNone">heading in degress, integer <code>0 .. 359</code>    </td></tr>
+<td class="markdownTableBodyNone">/heading   </td><td class="markdownTableBodyNone">heading in degrees, integer <code>0 .. 359</code>    </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">/pitch   </td><td class="markdownTableBodyNone">pitch in degrees, float, negative is down    </td></tr>
 <tr class="markdownTableRowEven">
@@ -257,7 +257,7 @@ Network Message Formats</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">/gear   </td><td class="markdownTableBodyNone">gear extension, float <code>0.0 .. 1.0</code> with <code>1.0</code> fully extended    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">/noseWheel   </td><td class="markdownTableBodyNone">direction of nose wheel in degrees, float, negative left, <code>0.0</code> straight ahead    </td></tr>
+<td class="markdownTableBodyNone">/noseWheel   </td><td class="markdownTableBodyNone">direction of nose wheel in degrees, float, negative is left, <code>0.0</code> straight ahead    </td></tr>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">/flaps   </td><td class="markdownTableBodyNone">flap extension, float <code>0.0 .. 1.0</code> with <code>1.0</code> fully extended    </td></tr>
 <tr class="markdownTableRowOdd">
@@ -288,7 +288,8 @@ Network Message Formats</h1>
 </div><!-- fragment --><p> See <code>docs/XPPTraffic_Array.json</code> for an example.</p>
 <h2>RTTFC</h2>
 <p><code>RTTFC</code> is a comparibly simple CSV-style format defined by RealTraffic. See <code>docs/RTTFC.csv</code> for an example. See <a href="https://www.flyrealtraffic.com/RTdev2.0.pdf">RealTraffic's documentation</a> for details, section "RTTFC/RTDEST format". <a href="https://github.com/TwinFan/LiveTraffic/blob/master/Resources/SendTraffic.py">LiveTraffic's <code>SendTraffic.py</code></a> script can send such data to any UDP port, ie. also to the port defined for XPPlanes in <code>NetBcstPort</code>.</p>
-<p><code>RTTFC</code> does not include fields for configuration or light information and also misses other attributes like pitch or any attributes required for detailed <a href="https://developer.x-plane.com/article/plugin-traffic-wake-turbulence/">wake turbulence configuration</a>. </p>
+<p><code>RTTFC</code> does not include fields for configuration or light information and also misses other attributes like pitch or any attributes required for detailed <a href="https://developer.x-plane.com/article/plugin-traffic-wake-turbulence/">wake turbulence configuration</a>.</p>
+<p>If you own a <a href="https://rtweb.flyrealtraffic.com">RealTraffic licence</a>, then you could define <code>NetBcstPort 49005</code> in the <a href="#configuration">configuration</a>, run the RealTraffic app in Spotter mode, and have those planes displayed with XPPlanes directly. (This displays RealTraffic data pretty much diretly, ie. all differences to how the same data would look like displayed with LiveTraffic are due to all the optimizations included in <a href="https://forums.x-plane.org/index.php?/files/file/49749-livetraffic/">LiveTraffic</a>.) </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
