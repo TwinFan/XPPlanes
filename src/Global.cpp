@@ -112,9 +112,11 @@ bool GlobVars::ConfigFileLoad ()
     // open a config file
     std::ifstream fIn (CFG_FILE_NAME);
     if (!fIn) {
-        // if there is no config file just return...that's no problem, we use defaults
-        if (errno == ENOENT)
-            return true;
+        // if there is no config file
+        if (errno == ENOENT) {
+            ConfigFileSave();                           // Write an initial version for human beings to change
+            return true;                                // but otherwise that's fine, we just use the defaults
+        }
         
         // something else happened
         char sErr[SERR_LEN];

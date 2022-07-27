@@ -168,16 +168,23 @@ void Plane::TakeOverData (bool bFrom, ptrFlightDataTy&& source)
     di.y += GetVertOfs();                       // vertical offset to make plane move on wheels
     
     // Calculate the aircraft label
-    if (fd->callSign.empty()) {                 // Id is callsign or hex id
-        char sId[10];
-        snprintf(sId, sizeof(sId), "0x%06X", modeS_id);
-        label = sId;
-    } else
-        label = fd->callSign;
-    if (!fd->icaoType.empty()) {                // Add a/c type
-        label += " (";
-        label += fd->icaoType;
-        label += ')';
+    if (!fd->label.empty()) {                   // label is passed in
+        label = fd->label;
+    }
+    else
+    {
+        if (fd->callSign.empty()) {             // Id is callsign or hex id
+            char sId[10];
+            snprintf(sId, sizeof(sId), "0x%06X", modeS_id);
+            label = sId;
+        } else
+            label = fd->callSign;
+
+        if (!fd->icaoType.empty()) {            // Add a/c type
+            label += " (";
+            label += fd->icaoType;
+            label += ')';
+        }
     }
 }
 

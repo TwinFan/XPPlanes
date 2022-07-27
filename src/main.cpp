@@ -337,9 +337,6 @@ PLUGIN_API void XPluginDisable(void)
     FlightDataShutdown();
     PlaneShutdown();
     
-    // Write config file
-    glob.ConfigFileSave();
-
     // Update the menus
     MenuUpdateCheckmarks();
 

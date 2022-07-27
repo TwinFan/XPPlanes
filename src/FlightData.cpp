@@ -137,7 +137,10 @@ bool FlightData::AddNew (std::shared_ptr<FlightData>&& pFD)
         listFD.back()->ts + MIN_TS_DIFF <= pFD->ts)  // only add if data is newer, this way it stays sorted
         listFD.emplace_back(std::move(pFD));
     else {
-        LOG_MSG(logDEBUG, "Ignoring out of sequence data for %06X, ts = %ld", pFD->_modeS_id,
+        LOG_MSG(logDEBUG,
+                listFD.back()->ts == pFD->ts ?
+                "Ignoring same-timstamp data for %06X, ts = %ld" :
+                "Ignoring out of sequence data for %06X, ts = %ld", pFD->_modeS_id,
                 (long)pFD->ts.time_since_epoch().count());
         pFD = nullptr;
     }
@@ -242,6 +245,9 @@ void FlightData::NANtoCopy (const FlightData& o)
     NAN2CPY(wake.wingArea_m2);
     NAN2CPY(wake.mass_kg);
     // we do specifically _not_ copy wake.lift, ie. if list is no longer given then we return to defaults
+    
+    // We do copy the label as it receives special treatment when processing the data
+    if (label.empty()) label = o.label;
 }
 
 //

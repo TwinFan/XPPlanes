@@ -38,6 +38,7 @@ public:
     std::string icaoAirline;        ///< ICAO airline code (for model matching)
     std::string livery;             ///< special livery code (optional, for model matching)
     std::string callSign;           ///< call sign
+    std::string label;              ///< label text
     
     // Validity
     tsTy        ts;                 ///< timestamp

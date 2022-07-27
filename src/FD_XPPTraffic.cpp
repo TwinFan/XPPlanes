@@ -7,7 +7,8 @@
 ///                  "ident" : {
 ///                    "airline" : "DLH",
 ///                    "reg" : "D-EVEL",
-///                    "call" : "DLH1234"
+///                    "call" : "DLH1234",
+///                    "label" : "Test Flight"
 ///                  },
 ///                  "type" : {
 ///                    "icao" : "C172",
@@ -76,7 +77,28 @@
 bool FlightData::FillFromXPPTraffic (const JSON_Object* obj)
 {
     // `id` is mandatory, otherwise I wouldn't know for which plane
-    _modeS_id = XPMPPlaneID(jog_l(obj, "id"));
+    _modeS_id = 0;
+    JSON_Value* objId = json_object_get_value(obj, "id");
+    if (objId) {
+        // We allow numerical values as well as hex strings
+        switch (json_value_get_type(objId)) {
+            case JSONNumber:
+                _modeS_id = XPMPPlaneID(jog_l(obj, "id"));
+                break;
+                
+            case JSONString:
+                // convert from hex string
+                _modeS_id = XPMPPlaneID(std::strtoul(json_value_get_string(objId), nullptr, 16));
+                break;
+                
+            default:
+                LOG_MSG(logDEBUG, "Field 'id' has neither number nor string type!");
+        }
+    } else {
+        LOG_MSG(logDEBUG, "Field 'id' is missing!");
+    }
+    
+    // Also, the 'position' object is needed
     JSON_Object* pSub = json_object_get_object(obj, "position");
     if (!_modeS_id || !pSub) {
         LOG_MSG(logWARN, "JSON record is missing the `id` attribute or the `position` object");
@@ -95,6 +117,7 @@ bool FlightData::FillFromXPPTraffic (const JSON_Object* obj)
         icaoAirline     = jog_s     (pSub, "airline");
         livery          = jog_s     (pSub, "reg");
         callSign        = jog_s     (pSub, "call");
+        label           = jog_s     (pSub, "label");
     }
 
     // type

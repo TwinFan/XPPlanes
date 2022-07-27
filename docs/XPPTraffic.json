@@ -3,7 +3,8 @@
   "ident" : {
     "airline" : "DLH",
     "reg" : "D-EVEL",
-    "call" : "DLH1234"
+    "call" : "DLH1234",
+    "label" : "Test Flight"
   },
   "type" : {
     "icao" : "C172",

@@ -31,7 +31,7 @@ constexpr double PA_per_M       = 11.3;
 constexpr double FT_per_HPA     = (100/PA_per_M)/XPMP2::M_per_FT;
 
 /// Minimum time expected between two position to allow for meaningful interpolation
-constexpr auto MIN_TS_DIFF = std::chrono::milliseconds(200);
+constexpr auto MIN_TS_DIFF = std::chrono::milliseconds(100);
 
 /// Maximum `f` factor for non-location values during interpolation, like attitude, config
 constexpr float MAX_F = 1.25f;
