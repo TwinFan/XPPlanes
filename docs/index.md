@@ -48,7 +48,7 @@ For **MacOS**, the plugin can be **signed and notarized**, provided that the req
 
 ### Documentation
 
-[Doxygen-generated code documentation](https://twinfan.github.io/XPPlanes/html/index.html)
+See [Doxygen-generated code documentation](https://twinfan.github.io/XPPlanes/html/index.html).
 
 ## Installation
 
@@ -66,7 +66,7 @@ Alternatively, if you have a CSL installation somewhere, you can create a symbol
 
 ## Configuration
 
-Currently, there is no user interface available for configuring the plugin. But the plugin writes a configuration file during shutdown, that you can modify while X-Plane/the plugin is not running. Find it in
+Currently, there is no user interface available for configuring the plugin. But the plugin writes a configuration file, if there was none during startup, that you can modify. It will be read during next plugin start only, though. Find the config file in
 ```
 <X-Plane>/Output/preferences/XPPlanes.prf
 ```
@@ -120,8 +120,8 @@ to retract the gear, at which point your send `gear = 0.0`.
 
 Mass, wing span and area, as well as lift are used for [wake turbulence configuration](https://developer.x-plane.com/article/plugin-traffic-wake-turbulence/).
 If not provided, then the [XPMP2 library](https://github.com/TwinFan/XPMP2) provides defaults,
-which base on the wake turbulence category,
-which in turn is derived from the ICAO aircraft type designator:
+which base on the [wake turbulence category](https://en.wikipedia.org/wiki/Wake_turbulence#Wake_turbulence_category) (WTC: `L`, `M`, `H`, ...)
+which in turn is derived from the [ICAO aircraft type designator](https://www.icao.int/publications/DOC8643/Pages/Search.aspx) of the plane. The defaults per WTC base on the following aircraft types:
 - L: C172
 - L/M: B350
 - M: A320

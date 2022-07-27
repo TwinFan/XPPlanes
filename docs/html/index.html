@@ -72,7 +72,7 @@ Build</h1>
 <li><code>NOTARIZATION_PASSWORD</code>: <a href="https://support.apple.com/en-gb/HT204397">App-specific password</a> for notarization service</li>
 </ul>
 <h2>Documentation</h2>
-<p><a href="https://twinfan.github.io/XPPlanes/html/index.html">Doxygen-generated code documentation</a></p>
+<p>See <a href="https://twinfan.github.io/XPPlanes/html/index.html">Doxygen-generated code documentation</a>.</p>
 <h1><a class="anchor" id="autotoc_md3"></a>
 Installation</h1>
 <p>The plugin itself is to be placed under <code>&lt;X-Plane&gt;/Resources/plugins/</code> as usual with the following folder structure: </p><div class="fragment"><div class="line">.../XPPlanes/</div>
@@ -84,7 +84,7 @@ Installation</h1>
 <p>Alternatively, if you have a CSL installation somewhere, you can create a symbolic link to an existing <code>Resources</code> folder. Even <a href="https://www.maketecheasier.com/create-symbolic-links-windows10/">Windows supports symbolic links</a> for folders by the <code>mklink /D</code> command, Linux and Mac users will know the <code>ln -s</code> command already (or will find <a href="https://osxdaily.com/2015/08/06/make-symbolic-links-command-line-mac-os-x/">help on the net</a>).</p>
 <h1><a class="anchor" id="autotoc_md4"></a>
 Configuration</h1>
-<p>Currently, there is no user interface available for configuring the plugin. But the plugin writes a configuration file during shutdown, that you can modify while X-Plane/the plugin is not running. Find it in </p><div class="fragment"><div class="line">&lt;X-Plane&gt;/Output/preferences/XPPlanes.prf</div>
+<p>Currently, there is no user interface available for configuring the plugin. But the plugin writes a configuration file, if there was none during startup, that you can modify. It will be read during next plugin start only, though. Find the config file in </p><div class="fragment"><div class="line">&lt;X-Plane&gt;/Output/preferences/XPPlanes.prf</div>
 </div><!-- fragment --><p> It includes the following config entries: </p><table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadNone">Item   </th><th class="markdownTableHeadNone">Description    </th></tr>
@@ -134,7 +134,7 @@ Network Message Formats</h1>
 <p>Each traffic data record adds position information for one plane. There is no expectation as to how often updates are received. There is no need to update all planes in one go at the same time; depending on your feeding application it may be more reasonable to send updates based on individual assessment (like more frequently for turning or fast moving planes, less often for stationary planes).</p>
 <p>Each traffic data record <em>must</em> include a numeric identifier for the plane it represents, and position information. Everything else is optional.</p>
 <p>Not provided data will not change. E.g., if you want to extend the gear you can send <code>gear = 1.0</code> at the time of gear extension, then you could leave out this attribute until you want to retract the gear, at which point your send <code>gear = 0.0</code>.</p>
-<p>Mass, wing span and area, as well as lift are used for <a href="https://developer.x-plane.com/article/plugin-traffic-wake-turbulence/">wake turbulence configuration</a>. If not provided, then the <a href="https://github.com/TwinFan/XPMP2">XPMP2 library</a> provides defaults, which base on the wake turbulence category, which in turn is derived from the ICAO aircraft type designator:</p><ul>
+<p>Mass, wing span and area, as well as lift are used for <a href="https://developer.x-plane.com/article/plugin-traffic-wake-turbulence/">wake turbulence configuration</a>. If not provided, then the <a href="https://github.com/TwinFan/XPMP2">XPMP2 library</a> provides defaults, which base on the <a href="https://en.wikipedia.org/wiki/Wake_turbulence#Wake_turbulence_category">wake turbulence category</a> (WTC: <code>L</code>, <code>M</code>, <code>H</code>, ...) which in turn is derived from the <a href="https://www.icao.int/publications/DOC8643/Pages/Search.aspx">ICAO aircraft type designator</a> of the plane. The defaults per WTC base on the following aircraft types:</p><ul>
 <li>L: C172</li>
 <li>L/M: B350</li>
 <li>M: A320</li>

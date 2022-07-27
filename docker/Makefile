@@ -25,6 +25,7 @@ lin win mac: .image_focal
 	docker run -i --rm -v "$(realpath ..):/build" --entrypoint docker/build.sh $(container_focal) $@
 
 doc:
+	cp ../README.md ../docs/index.md
 	cd .. && /Applications/Doxygen.app/Contents/Resources/doxygen docs/XPPlanes.doxygen
 
 .PHONY: doc $(platforms) bash_bionic bash_focal
