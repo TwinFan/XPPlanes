@@ -167,6 +167,15 @@ void Plane::TakeOverData (bool bFrom, ptrFlightDataTy&& source)
     di = *fd;                                   // convert to XP's draw info
     di.y += GetVertOfs();                       // vertical offset to make plane move on wheels
     
+    // Test for a change in model-defining data, need a new CSL model match?
+    if (!bFrom &&
+        (fd->icaoType       != acIcaoType       ||
+         fd->icaoAirline    != acIcaoAirline    ||
+         fd->livery         != acLivery))
+    {
+        ChangeModel(fd->icaoType, fd->icaoAirline, fd->livery);
+    }
+    
     // Calculate the aircraft label
     if (!fd->label.empty()) {                   // label is passed in
         label = fd->label;
