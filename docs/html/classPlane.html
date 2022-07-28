@@ -112,9 +112,10 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a10f467caef5529a4cb47e235dc334022"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c2b525a797822d6e522df0e0b6643b4"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlane.html#a8c2b525a797822d6e522df0e0b6643b4">f</a> = 0.5f</td></tr>
 <tr class="separator:a8c2b525a797822d6e522df0e0b6643b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a355c0323ad649c60815d2896b5f6c621"><td class="memItemLeft" align="right" valign="top">XPLMProbeRef&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlane.html#a355c0323ad649c60815d2896b5f6c621">hProbe</a> = NULL</td></tr>
-<tr class="memdesc:a355c0323ad649c60815d2896b5f6c621"><td class="mdescLeft">&#160;</td><td class="mdescRight">probe reference needed to determine  <a href="classPlane.html#a355c0323ad649c60815d2896b5f6c621">More...</a><br /></td></tr>
-<tr class="separator:a355c0323ad649c60815d2896b5f6c621"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84d8afb00e2941cf5befce254c7d6dec"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlane.html#a84d8afb00e2941cf5befce254c7d6dec">tTouchDown</a> = NAN</td></tr>
+<tr class="memdesc:a84d8afb00e2941cf5befce254c7d6dec"><td class="mdescLeft">&#160;</td><td class="mdescRight">time since touch down <br  />
+  <a href="classPlane.html#a84d8afb00e2941cf5befce254c7d6dec">More...</a><br /></td></tr>
+<tr class="separator:a84d8afb00e2941cf5befce254c7d6dec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-static-attribs"></a>
 Static Protected Attributes</h2></td></tr>
@@ -539,30 +540,6 @@ Static Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a355c0323ad649c60815d2896b5f6c621"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a355c0323ad649c60815d2896b5f6c621">&#9670;&nbsp;</a></span>hProbe</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">XPLMProbeRef Plane::hProbe = NULL</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>probe reference needed to determine </p>
-
-</div>
-</div>
 <a id="a718de9bb1cd96ffe2ea862fae2816e7c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a718de9bb1cd96ffe2ea862fae2816e7c">&#9670;&nbsp;</a></span>ticksNow</h2>
 
@@ -585,6 +562,31 @@ Static Protected Attributes</h2></td></tr>
 
 <p>'now' timestamp </p>
 <p>'now' timestamp in ticks since epoch </p>
+
+</div>
+</div>
+<a id="a84d8afb00e2941cf5befce254c7d6dec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84d8afb00e2941cf5befce254c7d6dec">&#9670;&nbsp;</a></span>tTouchDown</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float Plane::tTouchDown = NAN</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>time since touch down <br  />
+ </p>
 
 </div>
 </div>

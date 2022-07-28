@@ -61,6 +61,13 @@ inline double WeatherAltCorr_ft (double pressureAlt_ft, double hPa)
 /// Return shortest turn from one heading to the other
 float HeadDiff (float from, float to);
 
+/// @brief Rotation: Computes new rotation angle based on current + revolution in a (small) amount of time
+/// @param angle Last rotation angle as basis
+/// @param rpm Rotation speed in revolutions per minute
+/// @param s Timeframe to consider in seconds
+/// @return new rotation angle, normalized to [0.0; 360.0)
+float RpmToAngle (float angle, float rpm, float s);
+
 /// Replace NAN with 0.0
 template<typename T>
 inline T NZ (T v)

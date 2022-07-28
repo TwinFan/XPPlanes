@@ -64,6 +64,10 @@ public:
     float       nws         = NAN;  ///< nose wheel steering degree, 0.0 = straight ahead, negative = left
     float       flaps       = NAN;  ///< flaps deployed = 1.0, flaps up = 0.0
     float       spoilers    = NAN;  ///< spoilers (speedbrakes) up = 1.0, down = 0.0
+    float       reversers   = NAN;  ///< deployment of reversers, 1.0 = fully open
+
+    float       thrust      = NAN;  ///< thrust ratio, -1.0 .. 0.0 .. 1.0
+    float       engineRpm   = NAN;  ///< revolutions per minute of engine/rotor/prop
 
     /// Aircraft lights
     struct lightsTy {
@@ -75,8 +79,6 @@ public:
         bool nav        : 1;        ///< navigation lights
     } lights = { false, false, false, false, false, false };
     
-    // TODO: Reasonable approach to engine, rotor, wheels
-
 public:
     /// @brief Main function to interpret network data
     /// @details Needs to distinguish between

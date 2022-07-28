@@ -263,18 +263,24 @@ Network Message Formats</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">/spoiler   </td><td class="markdownTableBodyNone">spoiler extension, float <code>0.0 .. 1.0</code> with <code>1.0</code> fully extended    </td></tr>
 <tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">/reversers   </td><td class="markdownTableBodyNone">deployment of reversers, float <code>0.0 .. 1.0</code> with <code>1.0</code> fully deployed    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">/thrust   </td><td class="markdownTableBodyNone">thrust, float <code>0.0 .. 1.0</code>, with <code>1.0</code> full thrust, passed through to CSL models    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">/engineRpm   </td><td class="markdownTableBodyNone">revolutions per minute of engine, rotor, props; used to calculate angular positions and make them turn    </td></tr>
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td></tr>
-<tr class="markdownTableRowOdd">
+<tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone"><b>light/</b>   </td><td class="markdownTableBodyNone">Optional object with a set of boolean values for the plane's lights    </td></tr>
-<tr class="markdownTableRowEven">
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">/taxi   </td><td class="markdownTableBodyNone">taxi light    </td></tr>
-<tr class="markdownTableRowOdd">
+<tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">/landing   </td><td class="markdownTableBodyNone">landing lights    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">/beacon   </td><td class="markdownTableBodyNone">beacon light    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">/strobe   </td><td class="markdownTableBodyNone">strobe lights    </td></tr>
+<td class="markdownTableBodyNone">/beacon   </td><td class="markdownTableBodyNone">beacon light    </td></tr>
 <tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">/strobe   </td><td class="markdownTableBodyNone">strobe lights    </td></tr>
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">/nav   </td><td class="markdownTableBodyNone">navigation lights   </td></tr>
 </table>
 <h3>Data Array</h3>

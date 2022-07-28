@@ -225,6 +225,9 @@ void FlightData::NANtoZero ()
     NAN2Z(nws);
     NAN2Z(flaps);
     NAN2Z(spoilers);
+    NAN2Z(reversers);
+    NAN2Z(thrust);
+    NAN2Z(engineRpm);
     // we specifically do not touch `wake`, ie. NAN can remain there as they are handled by XPMP2
 }
 
@@ -239,6 +242,9 @@ void FlightData::NANtoCopy (const FlightData& o)
     NAN2CPY(nws);
     NAN2CPY(flaps);
     NAN2CPY(spoilers);
+    NAN2CPY(reversers);
+    NAN2CPY(thrust);
+    NAN2CPY(engineRpm);
     // but unlike in FlightData::NANtoZero() we do copy wake information from previous;
     // this might copy NAN...but that's OK, but once given from outside we keep copying those values
     NAN2CPY(wake.wingSpan_m);

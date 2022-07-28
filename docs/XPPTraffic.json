@@ -29,7 +29,10 @@
     "gear" : 1,
     "noseWheel" : -2.5,
     "flaps" : 0.5,
-    "spoiler" : 0
+    "spoiler" : 0,
+    "reversers" : 0,
+    "thrust" : 0.8,
+    "engineRpm" : 2000
   },
   "light" : {
     "taxi" : true,

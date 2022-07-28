@@ -244,6 +244,9 @@ id              | **Mandatory** numeric identification of the plane. Can be a nu
 /noseWheel      | direction of nose wheel in degrees, float, negative is left, `0.0` straight ahead
 /flaps          | flap extension, float `0.0 .. 1.0` with `1.0` fully extended
 /spoiler        | spoiler extension, float `0.0 .. 1.0` with `1.0` fully extended
+/reversers      | deployment of reversers, float `0.0 .. 1.0` with `1.0` fully deployed
+/thrust         | thrust, float `0.0 .. 1.0`, with `1.0` full thrust, passed through to CSL models
+/engineRpm      | revolutions per minute of engine, rotor, props; used to calculate angular positions and make them turn
 ` `             | ` `
 **light/**      | Optional object with a set of boolean values for the plane's lights
 /taxi           | taxi light

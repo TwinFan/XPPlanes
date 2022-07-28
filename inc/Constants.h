@@ -35,3 +35,6 @@ constexpr auto MIN_TS_DIFF = std::chrono::milliseconds(100);
 
 /// Maximum `f` factor for non-location values during interpolation, like attitude, config
 constexpr float MAX_F = 1.25f;
+
+/// How long does the moment of touch down last? [seconds]
+constexpr float TOUCH_DOWN_TIME = 0.5f;

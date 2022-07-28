@@ -142,6 +142,9 @@ bool FlightData::FillFromXPPTraffic (const JSON_Object* obj)
         nws             = float(jog_n_nan (pSub, "noseWheel"));
         flaps           = float(jog_n_nan (pSub, "flaps"));
         spoilers        = float(jog_n_nan (pSub, "spoiler"));
+        reversers       = float(jog_n_nan (pSub, "reversers"));
+        thrust          = float(jog_n_nan (pSub, "thrust"));
+        engineRpm       = float(jog_n_nan (pSub, "engineRpm"));
     }
 
     // light

@@ -270,9 +270,6 @@ XPMP2::Aircraft(from->icaoType, from->icaoAirline, from->livery,
     // Take over the flight data
     TakeOverData(true,  std::move(from));
     TakeOverData(false, std::move(to));
-    
-    // as we have take care of terrain already we don't need clamping
-    bClampToGround = false;
 }
 
 // Destructor
@@ -288,7 +285,7 @@ fct(std::clamp<float>(std::fmaf(f, fdTo->v - fdFrom->v, fdFrom->v), 0.0f,1.0f));
 // fmaf(x,y,z) = x*y + z
 
 // Called by XPMP2 right before updating the aircraft's placement in the world
-void Plane::UpdatePosition (float /*_elapsedSinceLastCall*/, int _flCounter)
+void Plane::UpdatePosition (float _elapsedSinceLastCall, int _flCounter)
 {
     try {
         // Once per cycle
@@ -308,6 +305,10 @@ void Plane::UpdatePosition (float /*_elapsedSinceLastCall*/, int _flCounter)
         drawInfo.y      = std::fmaf(f, diTo.y - diFrom.y, diFrom.y);
         drawInfo.z      = std::fmaf(f, diTo.z - diFrom.z, diFrom.z);
         
+        // if we are extrapolating on the ground we run into danger of running into ground,
+        // so have XPMP2 clamp us to the ground while extrapolating (only)
+        bClampToGround = (fdFrom->bGnd || fdTo->bGnd) && f > 1.0f;
+        
         // for all the following values we cap `f` at 1.25 so we don't do too much of spinning etc in case we are missing future updates
         if (f > MAX_F) f = MAX_F;
         
@@ -319,9 +320,40 @@ void Plane::UpdatePosition (float /*_elapsedSinceLastCall*/, int _flCounter)
         // Configuration
         IP_01(SetGearRatio, gear);
         SetNoseWheelAngle(std::fmaf(f, HeadDiff(fdFrom->nws, fdTo->nws), fdFrom->nws));
-        IP_01(SetFlapRatio, flaps);
-        IP_01(SetSpoilerRatio, spoilers);
+        IP_01(SetFlapRatio, flaps);                 // flaps and slats the same
+        SetSlatRatio(GetFlapRatio());
+        IP_01(SetSpoilerRatio, spoilers);           // spoilers and speed brakes the same
+        SetSpeedbrakeRatio(GetSpoilerRatio());
+        IP_01(SetReversDeployRatio, reversers);     // reversers
+
+        // thrust ration (goes from -1 to 1)
+        SetThrustRatio(std::clamp<float>(std::fmaf(f, fdTo->thrust - fdFrom->thrust, fdFrom->thrust), -1.0f, 1.0f));
         
+        // we keep engine and rotor RPM the same for simplicity
+        SetEngineRotRpm(std::fmaf(f, fdTo->engineRpm - fdFrom->engineRpm, fdFrom->engineRpm));
+        SetPropRotRpm(GetEngineRotRpm());
+
+        // Rotor/Engine angle is _computed_ here:
+        // Make props and rotors move based on rotation speed and time passed since last cycle
+        SetEngineRotAngle(RpmToAngle(GetEngineRotAngle(), GetEngineRotRpm(), _elapsedSinceLastCall));
+        SetPropRotAngle(GetEngineRotAngle());
+
+        // 'Moment' of touch down is computed here, too
+        if (std::isnan(tTouchDown)) {
+            // Touch-down is only at f=1.0 when transitioning from not ground to ground
+            if (!fdFrom->bGnd && fdTo->bGnd && f >= 0.98) {
+                SetTouchDown(true);
+                tTouchDown = 0.0f;
+            }
+        } else {
+            // we are in a "touching down" phase, keep track of time passed
+            tTouchDown += _elapsedSinceLastCall;
+            if (tTouchDown >= TOUCH_DOWN_TIME) {
+                SetTouchDown(false);
+                tTouchDown = NAN;
+            }
+        }
+
         // Lights
         const FlightData::lightsTy& lights = (f >= 0.5) ? fdTo->lights : fdFrom->lights;
         if (lights.defined) {

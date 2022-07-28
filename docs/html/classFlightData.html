@@ -157,6 +157,15 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:acc74b9ba9b5e9ac6edddfd19fa2d6c89"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlightData.html#acc74b9ba9b5e9ac6edddfd19fa2d6c89">spoilers</a> = NAN</td></tr>
 <tr class="memdesc:acc74b9ba9b5e9ac6edddfd19fa2d6c89"><td class="mdescLeft">&#160;</td><td class="mdescRight">spoilers (speedbrakes) up = 1.0, down = 0.0  <a href="classFlightData.html#acc74b9ba9b5e9ac6edddfd19fa2d6c89">More...</a><br /></td></tr>
 <tr class="separator:acc74b9ba9b5e9ac6edddfd19fa2d6c89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4279917d861b31842e3d364c37628918"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlightData.html#a4279917d861b31842e3d364c37628918">reversers</a> = NAN</td></tr>
+<tr class="memdesc:a4279917d861b31842e3d364c37628918"><td class="mdescLeft">&#160;</td><td class="mdescRight">deployment of reversers, 1.0 = fully open  <a href="classFlightData.html#a4279917d861b31842e3d364c37628918">More...</a><br /></td></tr>
+<tr class="separator:a4279917d861b31842e3d364c37628918"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a738850cf8998fd4678531a667bda38e3"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlightData.html#a738850cf8998fd4678531a667bda38e3">thrust</a> = NAN</td></tr>
+<tr class="memdesc:a738850cf8998fd4678531a667bda38e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">thrust ratio, -1.0 .. 0.0 .. 1.0  <a href="classFlightData.html#a738850cf8998fd4678531a667bda38e3">More...</a><br /></td></tr>
+<tr class="separator:a738850cf8998fd4678531a667bda38e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9d8e4e8ba666881bdc8fb42a9867d91"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlightData.html#ae9d8e4e8ba666881bdc8fb42a9867d91">engineRpm</a> = NAN</td></tr>
+<tr class="memdesc:ae9d8e4e8ba666881bdc8fb42a9867d91"><td class="mdescLeft">&#160;</td><td class="mdescRight">revolutions per minute of engine/rotor/prop  <a href="classFlightData.html#ae9d8e4e8ba666881bdc8fb42a9867d91">More...</a><br /></td></tr>
+<tr class="separator:ae9d8e4e8ba666881bdc8fb42a9867d91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adcbe3a0a13b33477e153ce48a5744c60"><td class="memItemLeft" align="right" valign="top">struct <a class="el" href="classFlightData.html#structFlightData_1_1lightsTy">FlightData::lightsTy</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFlightData.html#adcbe3a0a13b33477e153ce48a5744c60">lights</a> = { false, false, false, false, false, false }</td></tr>
 <tr class="separator:adcbe3a0a13b33477e153ce48a5744c60"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -587,6 +596,22 @@ taxi lights </td></tr>
 
 </div>
 </div>
+<a id="ae9d8e4e8ba666881bdc8fb42a9867d91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9d8e4e8ba666881bdc8fb42a9867d91">&#9670;&nbsp;</a></span>engineRpm</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float FlightData::engineRpm = NAN</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>revolutions per minute of engine/rotor/prop </p>
+
+</div>
+</div>
 <a id="a43a70d146a324a07cd389f58cc012dee"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a43a70d146a324a07cd389f58cc012dee">&#9670;&nbsp;</a></span>flaps</h2>
 
@@ -777,6 +802,22 @@ taxi lights </td></tr>
 
 </div>
 </div>
+<a id="a4279917d861b31842e3d364c37628918"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4279917d861b31842e3d364c37628918">&#9670;&nbsp;</a></span>reversers</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float FlightData::reversers = NAN</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>deployment of reversers, 1.0 = fully open </p>
+
+</div>
+</div>
 <a id="aa2a91122bf734477e8f20d9a72f072dc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa2a91122bf734477e8f20d9a72f072dc">&#9670;&nbsp;</a></span>roll</h2>
 
@@ -806,6 +847,22 @@ taxi lights </td></tr>
 </div><div class="memdoc">
 
 <p>spoilers (speedbrakes) up = 1.0, down = 0.0 </p>
+
+</div>
+</div>
+<a id="a738850cf8998fd4678531a667bda38e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a738850cf8998fd4678531a667bda38e3">&#9670;&nbsp;</a></span>thrust</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float FlightData::thrust = NAN</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>thrust ratio, -1.0 .. 0.0 .. 1.0 </p>
 
 </div>
 </div>

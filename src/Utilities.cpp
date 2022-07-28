@@ -80,6 +80,22 @@ float HeadDiff (float from, float to)
     return degDif;
 }
 
+
+// Rotation: Computes new rotation angle based on current + revolution in a (small) amount of time
+float RpmToAngle (float angle, float rpm, float s)
+{
+    // How much turn angle to add?
+    const float addAngle = rpm/60.0f        // revolutions per second
+                         * s                // multiplied by seconds gives revolutions
+                         * 360.0f;          // multiplied by 360 degrees per revolution gives degrees
+    angle += addAngle;                      // add to the existing angle
+    while (angle >= 360.0f)                 // normalize to < 360.0
+        angle -= 360.0f;
+    return angle;
+}
+
+
+
 //
 // MARK: String functions
 //

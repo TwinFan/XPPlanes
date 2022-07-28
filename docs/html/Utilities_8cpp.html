@@ -78,6 +78,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a0326c56601a1bf63e40369e54c500a3b"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Utilities_8cpp.html#a0326c56601a1bf63e40369e54c500a3b">HeadDiff</a> (float from, float to)</td></tr>
 <tr class="memdesc:a0326c56601a1bf63e40369e54c500a3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return shortest turn from one heading to the other.  <a href="Utilities_8cpp.html#a0326c56601a1bf63e40369e54c500a3b">More...</a><br /></td></tr>
 <tr class="separator:a0326c56601a1bf63e40369e54c500a3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0943dcc5a495e9e2e44a30c045ba84f3"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Utilities_8cpp.html#a0943dcc5a495e9e2e44a30c045ba84f3">RpmToAngle</a> (float angle, float rpm, float s)</td></tr>
+<tr class="memdesc:a0943dcc5a495e9e2e44a30c045ba84f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotation: Computes new rotation angle based on current + revolution in a (small) amount of time.  <a href="Utilities_8cpp.html#a0943dcc5a495e9e2e44a30c045ba84f3">More...</a><br /></td></tr>
+<tr class="separator:a0943dcc5a495e9e2e44a30c045ba84f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9fd1c9062a6a78adb1a395e9a629227"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Utilities_8cpp.html#ad9fd1c9062a6a78adb1a395e9a629227">str_n</a> (const char *s, size_t max)</td></tr>
 <tr class="memdesc:ad9fd1c9062a6a78adb1a395e9a629227"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy <em>at most</em> <code>n</code> chars from location, or less if zero-terminated.  <a href="Utilities_8cpp.html#ad9fd1c9062a6a78adb1a395e9a629227">More...</a><br /></td></tr>
 <tr class="separator:ad9fd1c9062a6a78adb1a395e9a629227"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -342,6 +345,51 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 </div><div class="memdoc">
 
 <p>Log Text to log file. </p>
+
+</div>
+</div>
+<a id="a0943dcc5a495e9e2e44a30c045ba84f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0943dcc5a495e9e2e44a30c045ba84f3">&#9670;&nbsp;</a></span>RpmToAngle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float RpmToAngle </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>angle</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>rpm</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>s</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Rotation: Computes new rotation angle based on current + revolution in a (small) amount of time. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">angle</td><td>Last rotation angle as basis </td></tr>
+    <tr><td class="paramname">rpm</td><td>Rotation speed in revolutions per minute </td></tr>
+    <tr><td class="paramname">s</td><td>Timeframe to consider in seconds </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>new rotation angle, normalized to [0.0; 360.0) </dd></dl>
 
 </div>
 </div>

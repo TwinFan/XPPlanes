@@ -47,8 +47,9 @@ protected:
     /// _The_ factor: increases from 0 to 1 while `now` is between `from` and `to` (->interpolation),
     /// and becomes larger than 1 if `now` increases even beyond `to` (-> extrapolation)
     float           f = 0.5f;
-    XPLMProbeRef hProbe = NULL;     ///< probe reference needed to determine
-    
+
+    float       tTouchDown  = NAN;  ///< time since touch down    
+
     /// @brief Prepare given position for usage after taking over from passed-in smart pointer
     /// @param bFrom Store into `from` variables? Otherwise into `to`
     /// @param source From where to take over the data

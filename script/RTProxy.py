@@ -70,6 +70,16 @@ def Convert(d: bytes, s: socket):
         fd['attitude']['heading'] = float(fields[25])
     elif fields[24] != "-1.00":
         fd['attitude']['heading'] = float(fields[24])
+        
+    # config object (this is faked here, RTTFC has no config info)
+    fd['config'] = {}
+    fd['config']['gear'] = 1 if fd['position']['gnd'] else 0
+    # reversers on the ground while faster than 80kn
+    fd['config']['reversers'] = 1 if fd['position']['gnd'] and float(fields[8]) > 80 else 0
+    fd['config']['spoilers'] = fd['config']['reversers']
+    # Engines fast in the air, slow on the ground
+    fd['config']['thrust'] = 0.8 if not fd['position']['gnd'] or float(fields[8]) > 50 else 0.1
+    fd['config']['engineRpm'] = 2000 if not fd['position']['gnd'] or float(fields[8]) > 50 else 50
 
     # Send it out if in single-record mode
     if args.single:
