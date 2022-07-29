@@ -617,7 +617,7 @@
 				VALID_ARCHS = x86_64;
 				XPLANE11_ROOT = "/Users/birger/Applications/X-Plane/Release";
 				XPPLANES_VER_MAJOR = 0;
-				XPPLANES_VER_MINOR = 1;
+				XPPLANES_VER_MINOR = 2;
 				XPPLANES_VER_PATCH = 0;
 			};
 			name = Debug;
@@ -659,7 +659,7 @@
 				VALID_ARCHS = x86_64;
 				XPLANE11_ROOT = "/Users/birger/Applications/X-Plane/Release";
 				XPPLANES_VER_MAJOR = 0;
-				XPPLANES_VER_MINOR = 1;
+				XPPLANES_VER_MINOR = 2;
 				XPPLANES_VER_PATCH = 0;
 			};
 			name = Release;
