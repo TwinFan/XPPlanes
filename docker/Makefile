@@ -21,8 +21,11 @@ bash_focal: .image_focal
 lin-bionic: .image_bionic
 	docker run -i --rm -v "$(realpath ..):/build" --entrypoint docker/build.sh $(container_bionic) $@
 
-lin win mac: .image_focal
+lin win mac-arm mac-x86: .image_focal
 	docker run -i --rm -v "$(realpath ..):/build" --entrypoint docker/build.sh $(container_focal) $@
+
+mac: mac-arm mac-x86
+	docker run -i --rm -v "$(realpath ..):/build" --entrypoint bash $(container_focal) -c 'mkdir -p build-mac/mac_x64 ; lipo -create -output build-mac/mac_x64/XPPlanes.xpl build-mac-x86/mac_x64/XPPlanes.xpl build-mac-arm/mac_x64/XPPlanes.xpl'
 
 doc:
 	cp ../README.md ../docs/index.md

@@ -39,12 +39,14 @@ each coming with its own `README.md`.
 The workflow builds Linux, MacOS, and Windows plugin binaries and provides them as artifacts,
 so you can download the result from the _Actions_ tab on GitHub.
 
-For **MacOS**, the plugin can be **signed and notarized**, provided that the required secrets are defined in the GitHub repositry (Settings > Secrets > Actions):
+For **MacOS**, the plugin can be **signed and notarized**, provided that the required _Repository Secrets_ are defined in the repository's settings
+(Settings > Secrets > Actions):
 - `MACOS_CERTIFICATE`: Base64-encoded .p12 certificate as
   [explained here](https://localazy.com/blog/how-to-automatically-sign-macos-apps-using-github-actions#lets-get-started)
 - `MACOS_CERT_PWD`: The password for the above .p12 certificate file export
-- `NOTARIZATION_USERNAME`: Username for login at notarization service, typically your Apple Developer ID EMail.
-- `NOTARIZATION_PASSWORD`: [App-specific password](https://support.apple.com/en-gb/HT204397) for notarization service
+- `NOTARIZATION_USERNAME`: Apple ID for notarization service (parameter `--apple-id` to `notarytool`)
+- `NOTARIZATION_TEAM`: Team ID for notarization service (parameter `--team-id` to `notarytool`)
+- `NOTARIZATION_PASSWORD`: [App-specific password](https://support.apple.com/en-gb/HT204397) for notarization service (parameter `--password` to `notarytool`)
 
 ### Documentation
 
