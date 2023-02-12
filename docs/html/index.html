@@ -54,26 +54,18 @@ Credits</h1>
 </ul>
 <h1><a class="anchor" id="autotoc_md2"></a>
 Build</h1>
-<h2>IDE</h2>
-<ul>
-<li>MacOS: Just open <code>XPPlanes.xcodeproj</code> in Xcode.</li>
-<li>MS Visual Studio: Do "File &gt; Open &gt; Folder..." on the project's main folder. VS will initialize based on <code>CMakeList.txt</code> and <code>CMakeSettings.json</code>.</li>
+<p>XPPlanes can be build</p><ul>
+<li>in Visual Studio or XCode IDEs,</li>
+<li>from the command line with <code>CMake</code>/<code>ninja</code>,</li>
+<li>cross-platform in a Docker environment,</li>
+<li>via GitHub Actions.</li>
 </ul>
-<h2>Docker Cross Compile</h2>
-<p>For Cross Compile in a Docker environment for Linux, Mac, and Windows see <code>docker/README.md</code>. Essentially this boils down to installing <a href="https://www.docker.com/products/docker-desktop">Docker Desktop</a>, then: </p><div class="fragment"><div class="line">cd docker</div>
-<div class="line">make</div>
-</div><!-- fragment --><h2>GitHub Actions</h2>
-<p>The GitHub workflow <code>.github/workflows/build.yml</code> builds the plugin in GitHubs CD/CI environment. <code>build.yml</code> calls a number of custom composite actions available in <code>.github/actions</code>, each coming with its own <code>README.md</code>.</p>
-<p>The workflow builds Linux, MacOS, and Windows plugin binaries and provides them as artifacts, so you can download the result from the <em>Actions</em> tab on GitHub.</p>
-<p>For <b>MacOS</b>, the plugin can be <b>signed and notarized</b>, provided that the required secrets are defined in the GitHub repositry (Settings &gt; Secrets &gt; Actions):</p><ul>
-<li><code>MACOS_CERTIFICATE</code>: Base64-encoded .p12 certificate as <a href="https://localazy.com/blog/how-to-automatically-sign-macos-apps-using-github-actions#lets-get-started">explained here</a></li>
-<li><code>MACOS_CERT_PWD</code>: The password for the above .p12 certificate file export</li>
-<li><code>NOTARIZATION_USERNAME</code>: Username for login at notarization service, typically your Apple Developer ID EMail.</li>
-<li><code>NOTARIZATION_PASSWORD</code>: <a href="https://support.apple.com/en-gb/HT204397">App-specific password</a> for notarization service</li>
-</ul>
-<h2>Documentation</h2>
-<p>See <a href="https://twinfan.github.io/XPPlanes/html/index.html">Doxygen-generated code documentation</a>.</p>
+<p>Please refer to <a href="https://twinfan.github.io/XPMP2/Building.html">XPMP2's Build documentation on GitHub</a> for details; it is the same build process as for XPMP2-Sample.</p>
+<p>The project is prepared to be built with FMOD sound support. <a href="https://twinfan.github.io/XPMP2/Sound.html#building-xpmp2-with-fmod-sound-support">See here</a> how to build with sound support.</p>
 <h1><a class="anchor" id="autotoc_md3"></a>
+Documentation</h1>
+<p>See <a href="https://twinfan.github.io/XPPlanes/html/index.html">Doxygen-generated code documentation</a>.</p>
+<h1><a class="anchor" id="autotoc_md4"></a>
 Installation</h1>
 <p>The plugin itself is to be placed under <code>&lt;X-Plane&gt;/Resources/plugins/</code> as usual with the following folder structure: </p><div class="fragment"><div class="line">.../XPPlanes/</div>
 <div class="line">             mac_x64/XPPlanes.xpl</div>
@@ -82,7 +74,7 @@ Installation</h1>
 <div class="line">             Resources/...</div>
 </div><!-- fragment --><p> The <code>Resources</code> folder needs to hold the CSL model installation, similar to <a href="https://twinfan.gitbook.io/livetraffic/setup/installation/step-by-step#csl-model-installation">LiveTraffic</a> or <a href="https://twinfan.gitbook.io/livetraffic/setup/installation/xpmp2-remote-client#standard-setup-with-external-visuals">XPMP2 Remote Client</a>.</p>
 <p>Alternatively, if you have a CSL installation somewhere, you can create a symbolic link to an existing <code>Resources</code> folder. Even <a href="https://www.maketecheasier.com/create-symbolic-links-windows10/">Windows supports symbolic links</a> for folders by the <code>mklink /D</code> command, Linux and Mac users will know the <code>ln -s</code> command already (or will find <a href="https://osxdaily.com/2015/08/06/make-symbolic-links-command-line-mac-os-x/">help on the net</a>).</p>
-<h1><a class="anchor" id="autotoc_md4"></a>
+<h1><a class="anchor" id="autotoc_md5"></a>
 Configuration</h1>
 <p>Currently, there is no user interface available for configuring the plugin. But the plugin writes a configuration file, if there was none during startup, that you can modify. It will be read during next plugin start only, though. Find the config file in </p><div class="fragment"><div class="line">&lt;X-Plane&gt;/Output/preferences/XPPlanes.prf</div>
 </div><!-- fragment --><p> It includes the following config entries: </p><table class="markdownTable">
@@ -125,7 +117,7 @@ Configuration</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">NetBufSize 8192   </td><td class="markdownTableBodyNone">(Max) network buffer size in bytes   </td></tr>
 </table>
-<h1><a class="anchor" id="autotoc_md5"></a>
+<h1><a class="anchor" id="autotoc_md6"></a>
 Network Message Formats</h1>
 <p>XPPlanes processes traffic data that is received from UDP network datagrams.</p>
 <h2>General Principles Applicable to All Formats</h2>

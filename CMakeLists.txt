@@ -1,4 +1,12 @@
 # XPPlanes - Display additional planes in XP based on network input
+# - Set up to be used in the provided docker environment to build lin and mac
+# - Set up to be used in a Visual Studio environment to build win (File > Open > Folder, then VS recognized the CMAKE configuration)
+#
+# If you want to build with FMOD sound support,
+# 1. Make sure to understand the FMOD license and attribution requirements:
+#    https://www.fmod.com/licensing
+#    https://www.fmod.com/attribution
+# 2. Define INCLUDE_FMOD_SOUND cache entry, e.g. using `cmake -G Ninja -D INCLUDE_FMOD_SOUND=1 ..`
 
 cmake_minimum_required(VERSION 3.16)
 
@@ -18,16 +26,28 @@ else()
 endif()
 
 project(XPPlanes
-        VERSION 0.2.1
+        VERSION 0.3.0
         DESCRIPTION "XPPlanes X-Plane plugin")
 
 # Provide compile macros from the above project version definition
 add_compile_definitions(
-    XPPLANES_VERSION_BETA=1
+    XPPLANES_VERSION_BETA=0
     XPPLANES_VER_MAJOR=${PROJECT_VERSION_MAJOR}
     XPPLANES_VER_MINOR=${PROJECT_VERSION_MINOR}
     XPPLANES_VER_PATCH=${PROJECT_VERSION_PATCH}
 )
+
+message ("== Building: ${PROJECT_NAME} ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH} ==")
+message ("Compiler Info:")
+message ("CMAKE_CXX_COMPILER_ID         = ${CMAKE_CXX_COMPILER_ID}")
+message ("CMAKE_CXX_COMPILER_VERSION    = ${CMAKE_CXX_COMPILER_VERSION}")
+message ("CMAKE_CXX_COMPILER            = ${CMAKE_CXX_COMPILER}")
+message ("WIN32 / MSVC / MINGW          = ${WIN32} / ${MSVC} / ${MINGW}")
+message ("UNIX / APPLE                  = ${UNIX} / ${APPLE}")
+if (APPLE)
+    message ("OSX_SDK_PATH                  = $ENV{OSX_SDK_PATH}")
+    message ("CMAKE_OSX_ARCHITECTURES       = ${CMAKE_OSX_ARCHITECTURES}")
+endif()
 
 ################################################################################
 # Target Systems
@@ -64,9 +84,10 @@ add_compile_definitions(XPLM200=1 XPLM210=1 XPLM300=1 XPLM301=1 XPLM303=1)
 add_compile_definitions(APL=$<BOOL:${APPLE}> IBM=$<BOOL:${WIN32}> LIN=$<AND:$<BOOL:${UNIX}>,$<NOT:$<BOOL:${APPLE}>>>)
 
 # Enable stricter warnings and then disable some we are not interested in.
+# For XPMP2 compile, we don't need to be warned about our self-defined depreciations
 if (MSVC)
-    # Deprecation warning: once is enough
-    add_compile_options(/wo4996)
+    add_compile_options(/wd4996 /wd4068)
+    add_compile_definitions(_CRT_SECURE_NO_WARNINGS)
 else()
     add_compile_options(-Wall -Wshadow -Wfloat-equal -Wextra)
     if (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER_EQUAL 9.0 AND NOT APPLE)
@@ -89,7 +110,7 @@ if(CMAKE_BUILD_TYPE MATCHES "Debug")
     if (MSVC)
         add_compile_options(/Zi)
     else()
-        add_compile_options(-O0 -g)
+        add_compile_options(-O0 -g -fPIC)
     endif()
 else()
     add_compile_definitions(NDEBUG=1)
@@ -120,7 +141,7 @@ endif()
 include_directories("${CMAKE_SOURCE_DIR}/inc")
 include_directories("${CMAKE_SOURCE_DIR}/lib")
 include_directories("${CMAKE_SOURCE_DIR}/lib/SDK/CHeaders/XPLM")
-include_directories("${CMAKE_SOURCE_DIR}/lib/XPMP2/XPMP2.framework/Versions/2.50/Headers")
+include_directories("${CMAKE_SOURCE_DIR}/lib/XPMP2/inc")
 include_directories("${CMAKE_SOURCE_DIR}/lib/OpenGL")
 
 ################################################################################
@@ -171,13 +192,9 @@ PROPERTIES
 
 # Specify library search locations.
 if (APPLE)
-    list(APPEND CMAKE_FRAMEWORK_PATH "${CMAKE_CURRENT_SOURCE_DIR}/lib/XPMP2")
     list(APPEND CMAKE_FRAMEWORK_PATH "${CMAKE_CURRENT_SOURCE_DIR}/lib/SDK/Libraries/Mac")
-elseif (UNIX)
-    list(APPEND CMAKE_LIBRARY_PATH "${CMAKE_CURRENT_SOURCE_DIR}/lib/XPMP2/$ENV{platform}")
 elseif (WIN32)
     list(APPEND CMAKE_LIBRARY_PATH "${CMAKE_CURRENT_SOURCE_DIR}/lib/CURL")
-    list(APPEND CMAKE_LIBRARY_PATH "${CMAKE_CURRENT_SOURCE_DIR}/lib/XPMP2/win")
     list(APPEND CMAKE_LIBRARY_PATH "${CMAKE_CURRENT_SOURCE_DIR}/lib/SDK/Libraries/Win")
 endif ()
 
@@ -187,22 +204,35 @@ find_package(OpenGL REQUIRED)  # apt install freeglut3-dev
 include_directories( ${OpenGL_INCLUDE_DIRS} )
 target_link_libraries( XPPlanes ${OpenGL_LIBRARIES} )
 
-# Link the XPMP2 library
-find_library(XPMP2_LIBRARY XPMP2 REQUIRED)
-message ("   XPMP2_LIBRARY = ${XPMP2_LIBRARY}")
-target_link_libraries(XPPlanes ${XPMP2_LIBRARY})
+# FMOD Library only if requested
+if(INCLUDE_FMOD_SOUND)
+    # Compile options
+    add_compile_definitions(INCLUDE_FMOD_SOUND)
+
+    # Link Options (only for Win/Mac)
+    if(WIN32 OR APPLE)
+        list(APPEND CMAKE_LIBRARY_PATH "${CMAKE_CURRENT_SOURCE_DIR}/lib/fmod")
+        find_library(FMOD_LIBRARY NAMES fmod_vc.lib libfmod.dylib REQUIRED)
+        message ("   FMOD_LIBRARY               = ${FMOD_LIBRARY}")
+    endif()
+endif()
 
 # Link X-Plane plugin system libraries. They are only provided for OS X and Windows.
 if (WIN32 OR APPLE)
     # XPLM is needed for any X-Plane plugin
     find_library(XPLM_LIBRARY NAMES XPLM XPLM_64.lib REQUIRED)
-    message ("   XPLM_LIBRARY  = ${XPLM_LIBRARY}")
+    message ("   XPLM_LIBRARY               = ${XPLM_LIBRARY}")
     target_link_libraries(XPPlanes ${XPLM_LIBRARY} )
 endif ()
 
+# Incude building/linking XPMP2
+add_subdirectory(lib/XPMP2)
+add_dependencies(XPPlanes XPMP2)
+target_link_libraries(XPPlanes XPMP2)
+
 if (WIN32)
     # Link platform-specific libraries especially for networking
-    target_link_libraries(XPPlanes ws2_32.lib iphlpapi wldap32.lib advapi32.lib crypt32.lib)
+    target_link_libraries(XPPlanes ${XPLM_LIBRARY} ${FMOD_LIBRARY} ws2_32.lib iphlpapi wldap32.lib advapi32.lib crypt32.lib)
     if (MINGW)
         # Include MingW threads
         target_link_libraries(XPPlanes mingw_stdthreads)
@@ -222,6 +252,8 @@ elseif (APPLE)
         ${Security_LIBRARY}
         ${GSS_LIBRARY}
         ${OpenGL_LIBRARY}
+        ${FMOD_LIBRARY}
+        ${XPLM_LIBRARY}  
     )
 
     # Restrict set of symbols exported from the plugin to the ones required by XPLM:

@@ -8,6 +8,7 @@ Parameter|Requied|Default|Description
 ---------|-------|-------|------------
 `pluginName`|yes||Plugin's name, used both as top-level folder name and as file name as required by X-Plane
 `archFolder`|yes|`mac_x64`|Subfolder in which the executable is placed, is based on architecture like 'mac_x64'
+`flags`|No||Flags to be passed to `cmake`
 
 ## What it does
 

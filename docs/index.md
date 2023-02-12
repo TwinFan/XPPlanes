@@ -15,38 +15,21 @@ The project is based on
 
 ## Build
 
-### IDE
+XPPlanes can be build
+- in Visual Studio or XCode IDEs,
+- from the command line with `CMake`/`ninja`,
+- cross-platform in a Docker environment,
+- via GitHub Actions.
 
-- MacOS: Just open `XPPlanes.xcodeproj` in Xcode.
-- MS Visual Studio: Do "File > Open > Folder..." on the project's main folder.
-  VS will initialize based on `CMakeList.txt` and `CMakeSettings.json`.
+Please refer to
+[XPMP2's Build documentation on GitHub](https://twinfan.github.io/XPMP2/Building.html)
+for details; it is the same build process as for XPMP2-Sample.
 
-### Docker Cross Compile
+The project is prepared to be built with FMOD sound support.
+[See here](https://twinfan.github.io/XPMP2/Sound.html#building-xpmp2-with-fmod-sound-support)
+how to build with sound support.
 
-For Cross Compile in a Docker environment for Linux, Mac, and Windows see `docker/README.md`.
-Essentially this boils down to installing [Docker Desktop](https://www.docker.com/products/docker-desktop), then:
-```
-cd docker
-make
-```
-
-### GitHub Actions
-
-The GitHub workflow `.github/workflows/build.yml` builds the plugin in GitHubs CD/CI environment.
-`build.yml` calls a number of custom composite actions available in `.github/actions`,
-each coming with its own `README.md`.
-
-The workflow builds Linux, MacOS, and Windows plugin binaries and provides them as artifacts,
-so you can download the result from the _Actions_ tab on GitHub.
-
-For **MacOS**, the plugin can be **signed and notarized**, provided that the required secrets are defined in the GitHub repositry (Settings > Secrets > Actions):
-- `MACOS_CERTIFICATE`: Base64-encoded .p12 certificate as
-  [explained here](https://localazy.com/blog/how-to-automatically-sign-macos-apps-using-github-actions#lets-get-started)
-- `MACOS_CERT_PWD`: The password for the above .p12 certificate file export
-- `NOTARIZATION_USERNAME`: Username for login at notarization service, typically your Apple Developer ID EMail.
-- `NOTARIZATION_PASSWORD`: [App-specific password](https://support.apple.com/en-gb/HT204397) for notarization service
-
-### Documentation
+## Documentation
 
 See [Doxygen-generated code documentation](https://twinfan.github.io/XPPlanes/html/index.html).
 
