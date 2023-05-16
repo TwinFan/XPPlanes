@@ -207,7 +207,7 @@ id              | **Mandatory** numeric identification of the plane. Can be a nu
 /wingSpan       | Wing span in meters, used for [wake turbulence configuration](https://developer.x-plane.com/article/plugin-traffic-wake-turbulence/)
 /wingArea       | Wing area in square meters, used for [wake turbulence configuration](https://developer.x-plane.com/article/plugin-traffic-wake-turbulence/)
 ` `             | ` `
-**positions/**  | **Mandatory** object with position information
+**position/**   | **Mandatory** object with position information
 /lat            | latitude, float with decimal coordinates
 /lon            | longitude, float with decimal coordinates
 /alt_geo        | geometric altitude in feet, integer, optional/ignored if `gnd = true`.
