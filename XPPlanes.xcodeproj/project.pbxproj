@@ -654,7 +654,7 @@
 				);
 				XPLANE11_ROOT = "/Users/birger/Applications/X-Plane/Release";
 				XPPLANES_VER_MAJOR = 0;
-				XPPLANES_VER_MINOR = 3;
+				XPPLANES_VER_MINOR = 4;
 				XPPLANES_VER_PATCH = 0;
 			};
 			name = Debug;
@@ -669,7 +669,7 @@
 				);
 				XPLANE11_ROOT = "/Users/birger/Applications/X-Plane/Release";
 				XPPLANES_VER_MAJOR = 0;
-				XPPLANES_VER_MINOR = 3;
+				XPPLANES_VER_MINOR = 4;
 				XPPLANES_VER_PATCH = 0;
 			};
 			name = Release;

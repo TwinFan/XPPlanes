@@ -32,7 +32,8 @@
     "spoiler" : 0,
     "reversers" : 0,
     "thrust" : 0.8,
-    "engineRpm" : 2000
+    "engineRpm" : 2000,
+    "visible" : true
   },
   "light" : {
     "taxi" : true,

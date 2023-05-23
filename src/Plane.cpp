@@ -354,6 +354,15 @@ void Plane::UpdatePosition (float _elapsedSinceLastCall, int _flCounter)
             }
         }
 
+        // Visibility
+        if (f <= 0.5f) {
+            if (fdFrom->bVisDefined)
+                SetVisible(fdFrom->bVisible);
+        } else {
+            if (fdTo->bVisDefined)
+                SetVisible(fdTo->bVisible);
+        }
+        
         // Lights
         const FlightData::lightsTy& lights = (f >= 0.5) ? fdTo->lights : fdFrom->lights;
         if (lights.defined) {

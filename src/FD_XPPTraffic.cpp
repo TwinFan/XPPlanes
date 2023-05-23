@@ -32,7 +32,11 @@
 ///                    "gear" : 1,
 ///                    "noseWheel" : -2.5,
 ///                    "flaps" : 0.5,
-///                    "spoiler" : 0
+///                    "spoiler" : 0,
+///                    "reversers" : 0,
+///                    "thrust" : 0.8,
+///                    "engineRpm" : 2000,
+///                    "visible" : true
 ///                  },
 ///                  "light" : {
 ///                    "taxi" : true,
@@ -145,6 +149,8 @@ bool FlightData::FillFromXPPTraffic (const JSON_Object* obj)
         reversers       = float(jog_n_nan (pSub, "reversers"));
         thrust          = float(jog_n_nan (pSub, "thrust"));
         engineRpm       = float(jog_n_nan (pSub, "engineRpm"));
+        if ((bVisDefined = json_object_has_value_of_type(pSub, "visible", JSONBoolean)))
+            bVisible    = json_object_get_boolean(pSub, "visible");
     }
 
     // light

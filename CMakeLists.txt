@@ -26,7 +26,7 @@ else()
 endif()
 
 project(XPPlanes
-        VERSION 0.3.0
+        VERSION 0.4.0
         DESCRIPTION "XPPlanes X-Plane plugin")
 
 # Provide compile macros from the above project version definition

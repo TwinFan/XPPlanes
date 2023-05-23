@@ -180,7 +180,11 @@ features of XPPlanes. One traffic data record looks like this
     "gear" : 1,
     "noseWheel" : -2.5,
     "flaps" : 0.5,
-    "spoiler" : 0
+    "spoiler" : 0,
+    "reversers" : 0,
+    "thrust" : 0.8,
+    "engineRpm" : 2000,
+    "visible" : true
   },
   "light" : {
     "taxi" : true,
@@ -230,6 +234,7 @@ id              | **Mandatory** numeric identification of the plane. Can be a nu
 /reversers      | deployment of reversers, float `0.0 .. 1.0` with `1.0` fully deployed
 /thrust         | thrust, float `0.0 .. 1.0`, with `1.0` full thrust, passed through to CSL models
 /engineRpm      | revolutions per minute of engine, rotor, props; used to calculate angular positions and make them turn
+/visible        | Boolean: Shall the plane be drawn?
 ` `             | ` `
 **light/**      | Optional object with a set of boolean values for the plane's lights
 /taxi           | taxi light

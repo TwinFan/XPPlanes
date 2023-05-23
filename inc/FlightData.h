@@ -69,6 +69,10 @@ public:
     float       thrust      = NAN;  ///< thrust ratio, -1.0 .. 0.0 .. 1.0
     float       engineRpm   = NAN;  ///< revolutions per minute of engine/rotor/prop
 
+    // Visibility
+    bool        bVisDefined = false;///< Has visibility been set in the data?
+    bool        bVisible    = true; ///< Shall plane be drawn?
+    
     /// Aircraft lights
     struct lightsTy {
         bool defined    : 1;        ///< are lights values valid, ie. defined?
