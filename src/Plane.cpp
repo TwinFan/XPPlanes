@@ -26,6 +26,22 @@
 
 void PlaneMaintenance ()
 {
+    // *** Prepare for filtering ownship data ***
+    static XPLMDataRef drModeSId = XPLMFindDataRef("sim/aircraft/view/acf_modeS_id");
+    static XPLMDataRef drTailNum = XPLMFindDataRef("sim/aircraft/view/acf_tailnum");
+    XPMPPlaneID osId = 0;
+    char osTail[41] = "";
+    // ID of the plane that has "our" tail number: Tail number is optional, so not always send in.
+    // We store the ID of the plane once we have a matching tail so we can match against later data again.
+    static XPMPPlaneID osIdFromTail = 0;
+    
+    if (drModeSId && glob.ShallHideOsById())                        // compare by ADS-B hex id?
+        osId = (XPMPPlaneID)XPLMGetDatai(drModeSId);                // read ownship's hex id
+    if (drTailNum && glob.ShallHideOsByReg()) {                     // compare by tail number / regsitration?
+        XPLMGetDatab(drTailNum, osTail, 0, sizeof(osTail)-1);       // read ownship tail number
+        osTail[sizeof(osTail)-1] = 0;                               // ensure zero-termination
+    }
+    
     // *** Update from FlightData lists***
     tsTy now = std::chrono::system_clock::now();
     tsTy cutOff = now - std::chrono::seconds(glob.gracePeriod);
@@ -51,6 +67,26 @@ void PlaneMaintenance ()
             
             // if there is no data then remove the plane's entry
             if (iPlaneFD->second.empty()) {
+                iPlaneFD = glob.mapListFD.erase(iPlaneFD);
+                continue;
+            }
+            
+            // Scan for tail number if we hide ownship based on tail
+            if (osTail[0]) for (const ptrFlightDataTy& fd: iPlaneFD->second) {
+                if (fd->tailNum == osTail) {
+                    if (osIdFromTail != iPlaneFD->first) {      // is this a change?
+                        LOG_MSG(logDEBUG, "Identified ownship by tail '%s' to be id 0x%06X",
+                                osTail, iPlaneFD->first);
+                    }
+                    osIdFromTail = iPlaneFD->first;
+                    break;
+                }
+            }
+            
+            // Ignore ownship data? (either based on modeS_id or based on tail
+            if ((osId &&         iPlaneFD->first == osId) ||
+                (osIdFromTail && iPlaneFD->first == osIdFromTail)) {
+                // remove plane's data and continue with next plane
                 iPlaneFD = glob.mapListFD.erase(iPlaneFD);
                 continue;
             }
@@ -171,9 +207,9 @@ void Plane::TakeOverData (bool bFrom, ptrFlightDataTy&& source)
     if (!bFrom &&
         (fd->icaoType       != acIcaoType       ||
          fd->icaoAirline    != acIcaoAirline    ||
-         fd->livery         != acLivery))
+         fd->tailNum        != acLivery))
     {
-        ChangeModel(fd->icaoType, fd->icaoAirline, fd->livery);
+        ChangeModel(fd->icaoType, fd->icaoAirline, fd->tailNum);
     }
     
     // Calculate the aircraft label
@@ -264,7 +300,7 @@ void Plane::OncePerCycle (int _flCounter)
 
 // Constructor from two flight data objects
 Plane::Plane (ptrFlightDataTy&& from, ptrFlightDataTy&& to) :
-XPMP2::Aircraft(from->icaoType, from->icaoAirline, from->livery,
+XPMP2::Aircraft(from->icaoType, from->icaoAirline, from->tailNum,
                 from->_modeS_id)
 {
     // Take over the flight data

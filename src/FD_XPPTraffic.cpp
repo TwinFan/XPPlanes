@@ -119,7 +119,7 @@ bool FlightData::FillFromXPPTraffic (const JSON_Object* obj)
     // ident
     if ((pSub = json_object_get_object(obj, "ident"))) {
         icaoAirline     = jog_s     (pSub, "airline");
-        livery          = jog_s     (pSub, "reg");
+        tailNum         = jog_s     (pSub, "reg");
         callSign        = jog_s     (pSub, "call");
         label           = jog_s     (pSub, "label");
     }

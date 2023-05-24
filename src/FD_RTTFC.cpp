@@ -128,7 +128,7 @@ bool FlightData::FillFromRTTFC (const std::string& csv)
                     if (callSign.empty()) callSign = tok;
                     break;
                 case RT_RTTFC_AC_TYPE:      TO_STR(icaoType);
-                case RT_RTTFC_AC_TAILNO:    TO_STR(livery);
+                case RT_RTTFC_AC_TAILNO:    TO_STR(tailNum);
                 case RT_RTTFC_TIMESTAMP:
                     SetTimestamp(std::stod(tok));
                     break;

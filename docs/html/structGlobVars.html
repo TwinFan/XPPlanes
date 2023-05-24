@@ -68,6 +68,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a7aa7c1c1518dc96ae7f834447e384d5e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGlobVars.html#a7aa7c1c1518dc96ae7f834447e384d5e">GlobVars</a> (<a class="el" href="Utilities_8h.html#af9756fb0e490680af11a06052249b86a">logLevelTy</a> _logLvl=<a class="el" href="Utilities_8h.html#af9756fb0e490680af11a06052249b86aa36b07a7dde9e15628d5c9711fe00bee9">logINFO</a>, bool _logMdlMatch=false)</td></tr>
 <tr class="memdesc:a7aa7c1c1518dc96ae7f834447e384d5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="structGlobVars.html#a7aa7c1c1518dc96ae7f834447e384d5e">More...</a><br /></td></tr>
 <tr class="separator:a7aa7c1c1518dc96ae7f834447e384d5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aafdedb71a84ceb722e0ca9e5d7781e73"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGlobVars.html#aafdedb71a84ceb722e0ca9e5d7781e73">ShallHideOsById</a> () const</td></tr>
+<tr class="memdesc:aafdedb71a84ceb722e0ca9e5d7781e73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hide ownship data based on id?  <a href="structGlobVars.html#aafdedb71a84ceb722e0ca9e5d7781e73">More...</a><br /></td></tr>
+<tr class="separator:aafdedb71a84ceb722e0ca9e5d7781e73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5dd04dcffb64bcb1eb8e69de77c3052"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGlobVars.html#ac5dd04dcffb64bcb1eb8e69de77c3052">ShallHideOsByReg</a> () const</td></tr>
+<tr class="memdesc:ac5dd04dcffb64bcb1eb8e69de77c3052"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hide ownship data based on registration?  <a href="structGlobVars.html#ac5dd04dcffb64bcb1eb8e69de77c3052">More...</a><br /></td></tr>
+<tr class="separator:ac5dd04dcffb64bcb1eb8e69de77c3052"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac60a3dbbc0420dce04a803de94ea5437"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGlobVars.html#ac60a3dbbc0420dce04a803de94ea5437">ConfigFileLoad</a> ()</td></tr>
 <tr class="memdesc:ac60a3dbbc0420dce04a803de94ea5437"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read from a config file.  <a href="structGlobVars.html#ac60a3dbbc0420dce04a803de94ea5437">More...</a><br /></td></tr>
 <tr class="separator:ac60a3dbbc0420dce04a803de94ea5437"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -104,6 +110,9 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:ae76b7749f8c5a12960b0c777c7abf13a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGlobVars.html#ae76b7749f8c5a12960b0c777c7abf13a">gracePeriod</a> = 30</td></tr>
 <tr class="memdesc:ae76b7749f8c5a12960b0c777c7abf13a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remove a plane after how many seconds without fresh data?  <a href="structGlobVars.html#ae76b7749f8c5a12960b0c777c7abf13a">More...</a><br /></td></tr>
 <tr class="separator:ae76b7749f8c5a12960b0c777c7abf13a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cbefea69b5493616e52325f2bb99a0d"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGlobVars.html#a3cbefea69b5493616e52325f2bb99a0d">iHideOwnship</a> = <a class="el" href="Global_8h.html#a9d0700678b519b3880a9ae1510d6a705">HIDEOS_BY_ID</a> | <a class="el" href="Global_8h.html#a864ac27ef0667c2ed8a3408a88f51097">HIDEOS_BY_REG</a></td></tr>
+<tr class="memdesc:a3cbefea69b5493616e52325f2bb99a0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Hide ownship data? (bitfield, see HIDEOS_BY_ID and HIDEOS_BY_REG)  <a href="structGlobVars.html#a3cbefea69b5493616e52325f2bb99a0d">More...</a><br /></td></tr>
+<tr class="separator:a3cbefea69b5493616e52325f2bb99a0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5d36990da7b156479096340716547dea"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structGlobVars.html#a5d36990da7b156479096340716547dea">bDrawLabels</a> = true</td></tr>
 <tr class="memdesc:a5d36990da7b156479096340716547dea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shall we draw aircraft labels?  <a href="structGlobVars.html#a5d36990da7b156479096340716547dea">More...</a><br /></td></tr>
 <tr class="separator:a5d36990da7b156479096340716547dea"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -291,6 +300,60 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Is this thread XP's main thread? </p>
+
+</div>
+</div>
+<a id="aafdedb71a84ceb722e0ca9e5d7781e73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafdedb71a84ceb722e0ca9e5d7781e73">&#9670;&nbsp;</a></span>ShallHideOsById()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GlobVars::ShallHideOsById </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Hide ownship data based on id? </p>
+
+</div>
+</div>
+<a id="ac5dd04dcffb64bcb1eb8e69de77c3052"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5dd04dcffb64bcb1eb8e69de77c3052">&#9670;&nbsp;</a></span>ShallHideOsByReg()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GlobVars::ShallHideOsByReg </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Hide ownship data based on registration? </p>
 
 </div>
 </div>
@@ -527,6 +590,22 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>plugin's menu handle </p>
+
+</div>
+</div>
+<a id="a3cbefea69b5493616e52325f2bb99a0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cbefea69b5493616e52325f2bb99a0d">&#9670;&nbsp;</a></span>iHideOwnship</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GlobVars::iHideOwnship = <a class="el" href="Global_8h.html#a9d0700678b519b3880a9ae1510d6a705">HIDEOS_BY_ID</a> | <a class="el" href="Global_8h.html#a864ac27ef0667c2ed8a3408a88f51097">HIDEOS_BY_REG</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Hide ownship data? (bitfield, see HIDEOS_BY_ID and HIDEOS_BY_REG) </p>
 
 </div>
 </div>

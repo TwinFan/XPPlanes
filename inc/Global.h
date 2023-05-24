@@ -20,6 +20,11 @@
 
 #pragma once
 
+/// Hide ownship data based on comparing `id` with `acf_modeS_id`?
+constexpr int   HIDEOS_BY_ID = 0x01;
+/// Hide ownship data based on comparing `reg` with `acf_tailnum`?
+constexpr int   HIDEOS_BY_REG = 0x02;
+
 /// All global config settings and variables are kept in one structure for convenient access and central definition
 struct GlobVars {
 public:
@@ -46,6 +51,8 @@ public:
     int             bufferPeriod = 5;
     /// Remove a plane after how many seconds without fresh data?
     int             gracePeriod = 30;
+    /// Hide ownship data? (bitfield, see HIDEOS_BY_ID and HIDEOS_BY_REG)
+    int             iHideOwnship = HIDEOS_BY_ID | HIDEOS_BY_REG;
     /// Shall we draw aircraft labels?
     bool            bDrawLabels = true;
     /// Maximum distance for drawing labels? [m], defaults to 3nm
@@ -105,6 +112,11 @@ public:
     GlobVars (logLevelTy _logLvl = logINFO, bool _logMdlMatch = false) :
     logLvl(_logLvl), bLogMdlMatch(_logMdlMatch) {}
     
+    /// Hide ownship data based on id?
+    bool ShallHideOsById () const { return iHideOwnship & HIDEOS_BY_ID; }
+    /// Hide ownship data based on registration?
+    bool ShallHideOsByReg () const { return iHideOwnship & HIDEOS_BY_REG; }
+
     /// Read from a config file
     bool ConfigFileLoad ();
     /// Write to a config file

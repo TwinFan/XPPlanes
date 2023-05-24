@@ -140,7 +140,7 @@ bool FlightData::AddNew (std::shared_ptr<FlightData>&& pFD)
         LOG_MSG(logDEBUG,
                 listFD.back()->ts == pFD->ts ?
                 "Ignoring same-timstamp data for %06X, ts = %ld" :
-                "Ignoring out of sequence data for %06X, ts = %ld", pFD->_modeS_id,
+                "Ignoring similar-timestamp or out-of-sequence data for %06X, ts = %ld", pFD->_modeS_id,
                 (long)pFD->ts.time_since_epoch().count());
         pFD = nullptr;
     }

@@ -36,7 +36,7 @@ public:
     XPMPPlaneID _modeS_id = 0;      ///< key
     std::string icaoType;           ///< ICAO aircraft type according to doc8643
     std::string icaoAirline;        ///< ICAO airline code (for model matching)
-    std::string livery;             ///< special livery code (optional, for model matching)
+    std::string tailNum;            ///< tail number / registration, also used as special livery code (optional, for model matching)
     std::string callSign;           ///< call sign
     std::string label;              ///< label text
     

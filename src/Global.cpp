@@ -84,6 +84,7 @@ static CfgInfoTy CFGINFO[] = {
     { "PlanesBufferPeriod",     glob.bufferPeriod               },
     { "PlanesGracePeriod",      glob.gracePeriod                },
     { "PlanesClampAll",         glob.bClampAll                  },
+    { "PlanesHideOwnship",      glob.iHideOwnship               },
     { "LabelsDraw",             glob.bDrawLabels                },
     { "LabelsMaxDist",          glob.maxLabelDist               },
     { "LabelsCutMaxVisible",    glob.bLabelCutOffAtVisibility   },

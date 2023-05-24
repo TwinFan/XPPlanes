@@ -11,6 +11,7 @@ The supported network message formats are explained below in the [Network Messag
 ## Credits
 The project is based on
 - [X-Plane SDK](https://developer.x-plane.com/sdk/plugin-sdk-documents/) to integrate with X-Plane
+- [XPMP2](https://github.com/TwinFan/XPMP2), a library for plane display
 - [GitHub Actions](https://docs.github.com/en/actions)
 
 ## Build
@@ -64,6 +65,7 @@ TCAS_Control 1          | Acquire control over TCAS/AI planes upon startup?
 PlanesBufferPeriod 5    | Buffering period in seconds
 PlanesGracePeriod 30    | Seconds after which a plane without fresh data is removed
 PlanesClampAll 0        | Enforce clamping of all planes above ground?
+PlanesHideOwnship 3     | Filters out incoming ownship data, see below
 LabelsDraw 1            | Draw plane labels
 LabelsMaxDist 5556      | Max distance in meter to draw labels
 LabelsCutMaxVisible 1   | Don't draw labels for planes father away than visibility
@@ -74,6 +76,26 @@ NetMCPort 49900         | UDP Multicast port the plugin listens to for flight da
 NetBcstPort 49800       | UDP Broadcast port the plugin listens to for flight data, `0` switches off, e.g. `49005` would listen to RealTraffic's RTTFC data
 NetTTL 8                | Time-to-live of network multicast messages
 NetBufSize 8192         | (Max) network buffer size in bytes
+
+### Ownship data
+
+Traffic simulations may include [ownship](https://en.wiktionary.org/wiki/ownship)
+data, ie. positional information of the user's plane.
+If such data is fed back through the simulaton to XPPlanes,
+then the actual user plane would be overlaid by a plane driven by XPPlanes.
+To avoid that duplication, XPPlanes by default filters ownship data from the
+incoming data stream.
+
+Incoming data can be compared with two values in X-Plane to identify the data
+as ownship data. The bit-mask of the configuration key `PlanesHideOwnship`
+defines, which of the comparisons shall be performed:
+
+`PlanesHideOwnship` | XP dataref                       | XPPlanes data field | Comment
+--------------------|----------------------------------|---------------------|-----------------
+0                   |                                  |                     | No filtering takes place.
+1                   | `sim/aircraft/view/acf_modeS_id` | `id`                | Incoming ADS-B hex id is compared to a random id XP assigns upon loading a user plane.
+2                   | `sim/aircraft/view/acf_tailnum`  | `ident/reg`         | Incoming Registration is compared to the user plane's tail number, which is part of the plane definition (PlaneMaker: Aircraft Author window)
+3                   | both                             | both                | Both: If either comparison matches incoming data is ignored.
 
 ## Network Message Formats
 

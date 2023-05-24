@@ -50,6 +50,7 @@ $(function() {
 Credits</h1>
 <p>The project is based on</p><ul>
 <li><a href="https://developer.x-plane.com/sdk/plugin-sdk-documents/">X-Plane SDK</a> to integrate with X-Plane</li>
+<li><a href="https://github.com/TwinFan/XPMP2">XPMP2</a>, a library for plane display</li>
 <li><a href="https://docs.github.com/en/actions">GitHub Actions</a></li>
 </ul>
 <h1><a class="anchor" id="autotoc_md2"></a>
@@ -97,25 +98,42 @@ Configuration</h1>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">PlanesClampAll 0   </td><td class="markdownTableBodyNone">Enforce clamping of all planes above ground?    </td></tr>
 <tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">PlanesHideOwnship 3   </td><td class="markdownTableBodyNone">Filters out incoming ownship data, see below    </td></tr>
+<tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">LabelsDraw 1   </td><td class="markdownTableBodyNone">Draw plane labels    </td></tr>
-<tr class="markdownTableRowEven">
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">LabelsMaxDist 5556   </td><td class="markdownTableBodyNone">Max distance in meter to draw labels    </td></tr>
-<tr class="markdownTableRowOdd">
+<tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">LabelsCutMaxVisible 1   </td><td class="markdownTableBodyNone">Don't draw labels for planes father away than visibility    </td></tr>
-<tr class="markdownTableRowEven">
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">MapEnable 1   </td><td class="markdownTableBodyNone">Support display of planes in X-Plane's map?    </td></tr>
-<tr class="markdownTableRowOdd">
+<tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">MapLabels 1   </td><td class="markdownTableBodyNone">Add labels to planes in X-Plane's map?    </td></tr>
-<tr class="markdownTableRowEven">
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">NetMCGroup 239.255.1.1   </td><td class="markdownTableBodyNone">Multicast group the plugin listens to for flight data    </td></tr>
-<tr class="markdownTableRowOdd">
+<tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">NetMCPort 49900   </td><td class="markdownTableBodyNone">UDP Multicast port the plugin listens to for flight data, <code>0</code> switches off    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">NetBcstPort 49800   </td><td class="markdownTableBodyNone">UDP Broadcast port the plugin listens to for flight data, <code>0</code> switches off, e.g. <code>49005</code> would listen to RealTraffic's RTTFC data    </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">NetTTL 8   </td><td class="markdownTableBodyNone">Time-to-live of network multicast messages    </td></tr>
+<td class="markdownTableBodyNone">NetBcstPort 49800   </td><td class="markdownTableBodyNone">UDP Broadcast port the plugin listens to for flight data, <code>0</code> switches off, e.g. <code>49005</code> would listen to RealTraffic's RTTFC data    </td></tr>
 <tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">NetTTL 8   </td><td class="markdownTableBodyNone">Time-to-live of network multicast messages    </td></tr>
+<tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">NetBufSize 8192   </td><td class="markdownTableBodyNone">(Max) network buffer size in bytes   </td></tr>
+</table>
+<h2>Ownship data</h2>
+<p>Traffic simulations may include <a href="https://en.wiktionary.org/wiki/ownship">ownship</a> data, ie. positional information of the user's plane. If such data is fed back through the simulaton to XPPlanes, then the actual user plane would be overlaid by a plane driven by XPPlanes. To avoid that duplication, XPPlanes by default filters ownship data from the incoming data stream.</p>
+<p>Incoming data can be compared with two values in X-Plane to identify the data as ownship data. The bit-mask of the configuration key <code>PlanesHideOwnship</code> defines, which of the comparisons shall be performed:</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone"><code>PlanesHideOwnship</code>   </th><th class="markdownTableHeadNone">XP dataref   </th><th class="markdownTableHeadNone">XPPlanes data field   </th><th class="markdownTableHeadNone">Comment    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">0   </td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone"></td><td class="markdownTableBodyNone">No filtering takes place.    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">1   </td><td class="markdownTableBodyNone"><code>sim/aircraft/view/acf_modeS_id</code>   </td><td class="markdownTableBodyNone"><code>id</code>   </td><td class="markdownTableBodyNone">Incoming ADS-B hex id is compared to a random id XP assigns upon loading a user plane.    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">2   </td><td class="markdownTableBodyNone"><code>sim/aircraft/view/acf_tailnum</code>   </td><td class="markdownTableBodyNone"><code>ident/reg</code>   </td><td class="markdownTableBodyNone">Incoming Registration is compared to the user plane's tail number, which is part of the plane definition (PlaneMaker: Aircraft Author window)    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">3   </td><td class="markdownTableBodyNone">both   </td><td class="markdownTableBodyNone">both   </td><td class="markdownTableBodyNone">Both: If either comparison matches incoming data is ignored.   </td></tr>
 </table>
 <h1><a class="anchor" id="autotoc_md6"></a>
 Network Message Formats</h1>
