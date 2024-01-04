@@ -26,9 +26,25 @@ Please refer to
 [XPMP2's Build documentation on GitHub](https://twinfan.github.io/XPMP2/Building.html)
 for details; it is the same build process as for XPMP2-Sample.
 
+XPMP2 is included as a submodule, so clone with `--recurse-submodules` option.
+
 The project is prepared to be built with FMOD sound support.
 [See here](https://twinfan.github.io/XPMP2/Sound.html#building-xpmp2-with-fmod-sound-support)
 how to build with sound support.
+
+### Minimal Build Instruction
+
+This works on Mac and probably on Linux:
+
+```
+git clone --recurse-submodules https://github.com/TwinFan/XPPlanes
+cd XPPlanes
+mkdir build
+cd build
+cmake -G "Ninja" ..   
+ninja
+```
+Result are in `build/mac_x64` resp. `build/lin_x64`.
 
 ## Documentation
 
