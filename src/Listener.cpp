@@ -130,8 +130,8 @@ void ListenMain()
                 // loop over both multicast and broadcast sockets
                 for (XPMP2::SocketNetworking* pNet: { (XPMP2::SocketNetworking*)gpMc, (XPMP2::SocketNetworking*)gpUDP })
                 {
-                    // No message waiting? -> skip
-                    if (!FD_ISSET(pNet->getSocket(), &sRead))
+                    // Not open or no message waiting? -> skip
+                    if (!pNet || !pNet->isOpen() || !FD_ISSET(pNet->getSocket(), &sRead))
                         continue;
                     
                     // Receive the data

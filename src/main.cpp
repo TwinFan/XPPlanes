@@ -37,7 +37,6 @@ int CBIntPrefsFunc (const char *, [[maybe_unused]] const char * item, int defaul
     if (!strcmp(item, XPMP_CFG_ITM_REPLTEXTURE))    return glob.bObjReplTextures;           // replace textures in object files=
     if (!strcmp(item, XPMP_CFG_ITM_CLAMPALL))       return glob.bClampAll;                  // never hide planes below the ground?
     if (!strcmp(item, XPMP_CFG_ITM_HANDLE_DUP_ID))  return 0;                               // don't expect duplicate ids
-    if (!strcmp(item, XPMP_CFG_ITM_SUPPORT_REMOTE)) return -1;                              // We don't want this plugin to ever _send_ traffic!
     if (!strcmp(item, XPMP_CFG_ITM_LOGLEVEL))       return (int)glob.logLvl;                // logging level
     if (!strcmp(item, XPMP_CFG_ITM_MODELMATCHING))  return glob.bLogMdlMatch;               // log model matching
     // Otherwise we just accept defaults
