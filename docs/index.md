@@ -71,6 +71,7 @@ Currently, there is no user interface available for configuring the plugin. But 
 <X-Plane>/Output/preferences/XPPlanes.prf
 ```
 It includes the following config entries:
+
 Item                    | Description
 ------------------------|-----------------------------------
 LogLevel 0              | Logging level: 0 - Debug (most output) ... 4 - Fatal (least output)
