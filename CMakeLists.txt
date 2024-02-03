@@ -155,7 +155,6 @@ add_library(XPPlanes MODULE
     inc/FlightData.h
     inc/Global.h
     inc/Listener.h
-    inc/Network.h
     inc/Plane.h
     inc/Utilities.h
     inc/XPPlanes.h
@@ -167,7 +166,6 @@ add_library(XPPlanes MODULE
     src/Global.cpp
     src/Listener.cpp
     src/main.cpp
-    src/Network.cpp
     src/Plane.cpp
     src/Utilities.cpp
 )

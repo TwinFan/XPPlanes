@@ -44,7 +44,7 @@ static XPMP2::UDPReceiver* gpUDP = nullptr;     ///< UDP receiver socket (destru
 
 #if APL == 1 || LIN == 1
 /// the self-pipe to shut down the APRS thread gracefully
-static XPMP2::SOCKET gSelfPipe[2] = { XPMP2::INVALID_SOCKET, XPMP2::INVALID_SOCKET };
+static SOCKET gSelfPipe[2] = { INVALID_SOCKET, INVALID_SOCKET };
 #endif
 
 /// Conditions for continued receive operation
@@ -73,7 +73,9 @@ void ListenMain()
         // Create a multicast socket, if so configured
         int maxSock = 0;
         if (glob.listenMCPort > 0) {
-            gpMc->Join(glob.listenMCGroup, glob.listenMCPort, glob.remoteTTL,
+            gpMc->Join(glob.listenMCGroup, glob.listenMCPort,
+                       "",                  // Connect on all interfaces
+                       glob.remoteTTL,
                        size_t(glob.remoteBufSize));
             maxSock = std::max(maxSock, (int)gpMc->getSocket() + 1);
         }
@@ -157,9 +159,9 @@ void ListenMain()
 
 #if APL == 1 || LIN == 1
     // close the self-pipe sockets
-    for (XPMP2::SOCKET &s: gSelfPipe) {
-        if (s != XPMP2::INVALID_SOCKET) close(s);
-        s = XPMP2::INVALID_SOCKET;
+    for (SOCKET &s: gSelfPipe) {
+        if (s != INVALID_SOCKET) close(s);
+        s = INVALID_SOCKET;
     }
 #endif
     
@@ -213,7 +215,7 @@ void ListenShutdown ()
         glob.eStatus = GlobVars::STATUS_INACTIVE;
 #if APL == 1 || LIN == 1
         // Mac/Lin: Try writing something to the self-pipe to stop gracefully
-        if (gSelfPipe[1] == XPMP2::INVALID_SOCKET ||
+        if (gSelfPipe[1] == INVALID_SOCKET ||
             write(gSelfPipe[1], "STOP", 4) < 0)
             // if the self-pipe didn't work:
 #endif

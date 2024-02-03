@@ -18,7 +18,6 @@
 		2585D84728709E28007BED82 /* FD_RTTFC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2585D84628709E28007BED82 /* FD_RTTFC.cpp */; };
 		25DFEC1F286CE52C0082D4F2 /* Plane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25DFEC1D286CE52C0082D4F2 /* Plane.cpp */; };
 		25DFEC23286E2D230082D4F2 /* FlightData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25DFEC21286E2D230082D4F2 /* FlightData.cpp */; };
-		25DFEC26286F96A30082D4F2 /* Network.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25DFEC25286F96A30082D4F2 /* Network.cpp */; };
 		25DFEC29286F99F10082D4F2 /* Listener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25DFEC27286F99F10082D4F2 /* Listener.cpp */; };
 		25DFEC2C28705CA70082D4F2 /* Global.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25DFEC2A28705CA70082D4F2 /* Global.cpp */; };
 		D6A7BDC116A1DEC000D1426A /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6A7BDC016A1DEC000D1426A /* CoreFoundation.framework */; };
@@ -100,8 +99,6 @@
 		25DFEC1E286CE52C0082D4F2 /* Plane.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Plane.h; sourceTree = "<group>"; };
 		25DFEC21286E2D230082D4F2 /* FlightData.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FlightData.cpp; sourceTree = "<group>"; };
 		25DFEC22286E2D230082D4F2 /* FlightData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlightData.h; sourceTree = "<group>"; };
-		25DFEC24286F96950082D4F2 /* Network.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Network.h; sourceTree = "<group>"; };
-		25DFEC25286F96A30082D4F2 /* Network.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Network.cpp; sourceTree = "<group>"; };
 		25DFEC27286F99F10082D4F2 /* Listener.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Listener.cpp; sourceTree = "<group>"; };
 		25DFEC28286F99F10082D4F2 /* Listener.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Listener.h; sourceTree = "<group>"; };
 		25DFEC2A28705CA70082D4F2 /* Global.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Global.cpp; sourceTree = "<group>"; };
@@ -209,7 +206,6 @@
 				25DFEC22286E2D230082D4F2 /* FlightData.h */,
 				25DFEC2B28705CA70082D4F2 /* Global.h */,
 				25DFEC28286F99F10082D4F2 /* Listener.h */,
-				25DFEC24286F96950082D4F2 /* Network.h */,
 				25DFEC1E286CE52C0082D4F2 /* Plane.h */,
 				2519AE332867AE4C007F922C /* Utilities.h */,
 				2519AE342867AE4C007F922C /* XPPlanes.h */,
@@ -281,7 +277,6 @@
 				25DFEC2A28705CA70082D4F2 /* Global.cpp */,
 				25DFEC27286F99F10082D4F2 /* Listener.cpp */,
 				257127A227A56C380098F594 /* main.cpp */,
-				25DFEC25286F96A30082D4F2 /* Network.cpp */,
 				25DFEC1D286CE52C0082D4F2 /* Plane.cpp */,
 				2519AE2D28671C2E007F922C /* Utilities.cpp */,
 			);
@@ -419,7 +414,6 @@
 				25DFEC1F286CE52C0082D4F2 /* Plane.cpp in Sources */,
 				25DFEC2C28705CA70082D4F2 /* Global.cpp in Sources */,
 				2519AE2E28671C2E007F922C /* Utilities.cpp in Sources */,
-				25DFEC26286F96A30082D4F2 /* Network.cpp in Sources */,
 				25DFEC29286F99F10082D4F2 /* Listener.cpp in Sources */,
 				2585D84728709E28007BED82 /* FD_RTTFC.cpp in Sources */,
 				2552F98F287E0C9600146182 /* FD_XPPTraffic.cpp in Sources */,
@@ -653,8 +647,8 @@
 					"$(PROJECT_DIR)/lib/fmod",
 				);
 				XPLANE11_ROOT = "/Users/birger/Applications/X-Plane/Release";
-				XPPLANES_VER_MAJOR = 0;
-				XPPLANES_VER_MINOR = 4;
+				XPPLANES_VER_MAJOR = 1;
+				XPPLANES_VER_MINOR = 0;
 				XPPLANES_VER_PATCH = 0;
 			};
 			name = Debug;
@@ -668,8 +662,8 @@
 					"$(PROJECT_DIR)/lib/fmod",
 				);
 				XPLANE11_ROOT = "/Users/birger/Applications/X-Plane/Release";
-				XPPLANES_VER_MAJOR = 0;
-				XPPLANES_VER_MINOR = 4;
+				XPPLANES_VER_MAJOR = 1;
+				XPPLANES_VER_MINOR = 0;
 				XPPLANES_VER_PATCH = 0;
 			};
 			name = Release;

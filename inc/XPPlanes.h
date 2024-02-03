@@ -68,11 +68,11 @@
 // XPMP2 - Public Header Files
 #include "XPMPMultiplayer.h"
 #include "XPMPAircraft.h"
+#include "../lib/XPMP2/src/Network.h"
 
 // XPPlanes
 #include "Constants.h"
 #include "Utilities.h"
-#include "Network.h"
 #include "Listener.h"
 #include "FlightData.h"
 #include "Plane.h"
