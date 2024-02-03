@@ -62,7 +62,17 @@ Build</h1>
 <li>via GitHub Actions.</li>
 </ul>
 <p>Please refer to <a href="https://twinfan.github.io/XPMP2/Building.html">XPMP2's Build documentation on GitHub</a> for details; it is the same build process as for XPMP2-Sample.</p>
+<p>XPMP2 is included as a submodule, so clone with <code>--recurse-submodules</code> option.</p>
 <p>The project is prepared to be built with FMOD sound support. <a href="https://twinfan.github.io/XPMP2/Sound.html#building-xpmp2-with-fmod-sound-support">See here</a> how to build with sound support.</p>
+<h2>Minimal Build Instruction</h2>
+<p>This works on Mac and probably on Linux:</p>
+<div class="fragment"><div class="line">git clone --recurse-submodules https://github.com/TwinFan/XPPlanes</div>
+<div class="line">cd XPPlanes</div>
+<div class="line">mkdir build</div>
+<div class="line">cd build</div>
+<div class="line">cmake -G &quot;Ninja&quot; ..   </div>
+<div class="line">ninja</div>
+</div><!-- fragment --><p> Result are in <code>build/mac_x64</code> resp. <code>build/lin_x64</code>.</p>
 <h1><a class="anchor" id="autotoc_md3"></a>
 Documentation</h1>
 <p>See <a href="https://twinfan.github.io/XPPlanes/html/index.html">Doxygen-generated code documentation</a>.</p>
